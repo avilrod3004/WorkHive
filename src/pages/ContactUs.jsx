@@ -34,7 +34,7 @@ const ContactUs = () => {
                     ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="name">
-                                Your name:
+                                Nombre:
                                 <input
                                     type="text"
                                     name="name"
@@ -60,7 +60,7 @@ const ContactUs = () => {
                             </label>
 
                             <label htmlFor="subject">
-                                Subject:
+                                Asunto:
                                 <input
                                     type="text"
                                     name="subject"
@@ -73,7 +73,7 @@ const ContactUs = () => {
                             </label>
 
                             <label htmlFor="message">
-                                Body:
+                                Mensaje:
                                 <textarea
                                     name="message"
                                     id="message"
@@ -93,8 +93,7 @@ const ContactUs = () => {
                                     name="accept"
                                     checked={values.accept}
                                     onBlur={handleBlur}
-                                    onChange={handleChange}/>I accept the legal terms, the privacy policy, and the
-                                conditions od this website.
+                                    onChange={handleChange}/>Acepto los términos legales, la política de privacidad y las condiciones de este sitio web.
                                 {
                                     errors.accept && touched.accept && errors.accept
                                 }
