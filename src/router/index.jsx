@@ -12,6 +12,9 @@ import { lazy } from 'react'
 // Lazy loading
 
 const contactUs = lazy(() => import("../pages/ContactUs"));
+const register = lazy(() => import("../pages/Register"));
+const login = lazy(() => import("../pages/Login"));
+const User = lazy(() => import("../pages/Usuario"));
 
 
 /**
