@@ -38,11 +38,11 @@ export const router = createBrowserRouter([
         },
         {
           path: "/login",
-          element: <Login />,
+          element: <login />,
         },
         {
             path: "/register",
-            element: <Register />,
+            element: <register />,
         },
         {
           path: "/usuario",
@@ -50,13 +50,13 @@ export const router = createBrowserRouter([
           children: [
               {
                   index: true,
-                  element: <Usuario />,
+                  element: <User/>,
               },
           ],
         },
         {
           path: "/contactUs",
-          element: <ContactUs />,
+          element: <contactUs/>,
         },
         {
           path: "*", 
