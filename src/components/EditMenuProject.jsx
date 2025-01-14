@@ -9,19 +9,19 @@ const EditMenuProject = ({ id, onAddProject, onAddPerson, onEditProject, onDelet
     <div className="edit__menu">
       <button className="menu__button" onClick={() => onAddProject(id)}>
         <AddIcon />
-        <span>Añadir Proyecto</span>
+        <span className='menu__text'>Añadir Proyecto</span>
       </button>
       <button className="menu__button" onClick={() => onAddPerson(id)}>
         <PersonAddAlt1Icon />
-        <span>Añadir Persona</span>
+        <span className='menu__text'>Añadir Persona</span>
       </button>
       <button className="menu__button" onClick={() => onEditProject(id)}>
         <BorderColorIcon />
-        <span>Editar Proyecto</span>
+        <span className='menu__text'>Editar Proyecto</span>
       </button>
       <button className="menu__button" onClick={() => onDeleteProject(id)}>
         <DeleteForeverIcon />
-        <span>Eliminar Proyecto</span>
+        <span className='menu__text'>Eliminar Proyecto</span>
       </button>
     </div>
   )
