@@ -2,18 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import LayoutPublic from "../layouts/LayoutPublic";
 import LayoutPrivate from "../layouts/LayoutPrivate";
-import Usuario from "../pages/Usuario.jsx";
-import ContactUs from "../pages/ContactUs";
 import NotFound from "../pages/NotFound";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
 import { lazy } from 'react'
 
 // Lazy loading
 
-const contactUs = lazy(() => import("../pages/ContactUs"));
-const register = lazy(() => import("../pages/Register"));
-const login = lazy(() => import("../pages/Login"));
+const ContactUs = lazy(() => import("../pages/ContactUs"));
+const Register = lazy(() => import("../pages/Register"));
+const Login = lazy(() => import("../pages/Login"));
 const User = lazy(() => import("../pages/Usuario"));
 
 
@@ -38,11 +34,11 @@ export const router = createBrowserRouter([
         },
         {
           path: "/login",
-          element: <login />,
+          element: <Login />,
         },
         {
             path: "/register",
-            element: <register />,
+            element: <Register />,
         },
         {
           path: "/usuario",
@@ -56,7 +52,7 @@ export const router = createBrowserRouter([
         },
         {
           path: "/contactUs",
-          element: <contactUs/>,
+          element: <ContactUs/>,
         },
         {
           path: "*", 
