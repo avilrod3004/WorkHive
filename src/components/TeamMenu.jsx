@@ -1,5 +1,13 @@
 import React from 'react'
 
+/**
+ * Componente que muestra un menú con los miembros del equipo.
+ * 
+ * @component
+ * @param {Object} props - Propiedades del componente
+ * @param {Array[String]} props.teamMembers - Array con los nombres de los miembros del equipo
+ * @returns {JSX.Element} Componente TeamMenu renderizado
+ */
 const TeamMenu = ({ teamMembers }) => {
   return (
     <div className="team__menu">

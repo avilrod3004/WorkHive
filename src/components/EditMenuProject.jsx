@@ -4,6 +4,19 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
+/**
+ * Componente de menú de edición para proyectos.
+ * Proporciona botones para añadir, editar y eliminar proyectos, así como para añadir personas.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente
+ * @param {string} props.id - Identificador único del proyecto
+ * @param {function} props.onAddProject - Función para añadir un nuevo proyecto
+ * @param {function} props.onAddPerson - Función para añadir una persona al proyecto
+ * @param {function} props.onEditProject - Función para editar el proyecto
+ * @param {function} props.onDeleteProject - Función para eliminar el proyecto
+ * @returns {JSX.Element} Componente EditMenuProject renderizado
+ */
 const EditMenuProject = ({ id, onAddProject, onAddPerson, onEditProject, onDeleteProject }) => {
   return (
     <div className="edit__menu">
@@ -29,43 +42,45 @@ const EditMenuProject = ({ id, onAddProject, onAddPerson, onEditProject, onDelet
 
 export default EditMenuProject
 
-
-// EJEMPLO DE USO, HAY QUE PASARLES LOS METODOS PARA Q ME ENTEDAIS 
-// import React from 'react'
-// import EditMenu from './EditMenu'
-
-// const App = () => {
-//   const handleAdd = (id) => {
-//     console.log(`Añadir a ${id}`);
-//     // Lógica para añadir
-//   }
-
-//   const handleAddPerson = (id) => {
-//     console.log(`Añadir persona a ${id}`);
-//     // Lógica para añadir persona
-//   }
-
-//   const handleEdit = (id) => {
-//     console.log(`Editar ${id}`);
-//     // Lógica para editar
-//   }
-
-//   const handleDelete = (id) => {
-//     console.log(`Eliminar ${id}`);
-//     // Lógica para eliminar
-//   }
-
-//   return (
-//     <div>
-//       <EditMenu 
-//         id="tarea1"
-//         onAdd={handleAdd}
-//         onAddPerson={handleAddPerson}
-//         onEdit={handleEdit}
-//         onDelete={handleDelete}
-//       />
-//     </div>
-//   )
-// }
-
-// export default App
+/**
+ * Ejemplo de uso del componente EditMenuProject:
+ *
+ * import React from 'react'
+ * import EditMenuProject from './EditMenuProject'
+ *
+ * const App = () => {
+ *   const handleAddProject = (id) => {
+ *     console.log(`Añadir proyecto ${id}`);
+ *     // Lógica para añadir proyecto
+ *   }
+ *
+ *   const handleAddPerson = (id) => {
+ *     console.log(`Añadir persona al proyecto ${id}`);
+ *     // Lógica para añadir persona
+ *   }
+ *
+ *   const handleEditProject = (id) => {
+ *     console.log(`Editar proyecto ${id}`);
+ *     // Lógica para editar proyecto
+ *   }
+ *
+ *   const handleDeleteProject = (id) => {
+ *     console.log(`Eliminar proyecto ${id}`);
+ *     // Lógica para eliminar proyecto
+ *   }
+ *
+ *   return (
+ *     <div>
+ *       <EditMenuProject 
+ *         id="proyecto1"
+ *         onAddProject={handleAddProject}
+ *         onAddPerson={handleAddPerson}
+ *         onEditProject={handleEditProject}
+ *         onDeleteProject={handleDeleteProject}
+ *       />
+ *     </div>
+ *   )
+ * }
+ *
+ * export default App
+ */
