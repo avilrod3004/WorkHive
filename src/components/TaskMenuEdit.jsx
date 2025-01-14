@@ -5,11 +5,11 @@ const TaskMenuEdit = ({onEditTask, onDeleteTask }) => {
     <div className='edit__menu'>
         <button className="menu__button" onClick={() => onEditTask(id)}>
         <BorderColorIcon />
-        <span>Editar Tarea</span>
+        <span className='menu__text'>Editar Tarea</span>
       </button>
       <button className="menu__button" onClick={() => onDeleteTask(id)}>
         <DeleteForeverIcon />
-        <span>Eliminar Tarea</span>
+        <span className='menu__text'>Eliminar Tarea</span>
       </button>
     </div>
   )
