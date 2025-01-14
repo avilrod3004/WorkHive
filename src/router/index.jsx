@@ -10,7 +10,7 @@ import { lazy } from 'react'
 const ContactUs = lazy(() => import("../pages/ContactUs"));
 const Register = lazy(() => import("../pages/Register"));
 const Login = lazy(() => import("../pages/Login"));
-const User = lazy(() => import("../pages/Usuario"));
+const User = lazy(() => import("../pages/UserProfile"));
 
 
 /**
