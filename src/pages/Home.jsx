@@ -8,7 +8,7 @@ import exito from './assets/home/exito.png';
  * Home Component
  * 
  * Este componente representa la página de inicio de la aplicación WorkHive.
- * Muestra el logo, el nombre de la aplicación, botones de navegación y
+ * Muestra el menu de navegación, logo y eslogan y
  * una sección con tres artículos que describen las características principales.
  */
 const Home = () => {
