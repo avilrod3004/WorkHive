@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 /**
  * Componente que muestra un menú con los miembros del equipo.
