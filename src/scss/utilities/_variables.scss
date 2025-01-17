@@ -1,26 +1,69 @@
-// Color
-$primary-color: #FFDE81;
-$secundary-color: #CFA97E;
-$black-color: #212121;
+/**********MODO LIGHT**********/
+:root {
+    // Color
+    --primary-color: #FFDE81;
+    --secondary-color: #CFA97E;
+    --black-color: #212121;
+    --fondo-color: #fff;
 
-// Color-texto
-$black-text: #212121;
-$white-text: #fff;
+    // Color-Header-Footer
+    --fondo-header: #FFDE81;
+    --fondo-footer: #fff;
 
-// Color-paneles
-$todo-panel: #CFCFCF;
-$inprogress-panel: #9D6F3A;
-$toreview-panel: #C49300;
-$done-panel: #FFD145;
+    // Color-texto
+    --black-text: #212121;
+    --white-text: #fff;
 
-// Color-menu
-$fondo-menu: #F3F2F2;
-$icono-menu: #7E592E;
+    // Color-paneles
+    --todo-panel: #CFCFCF;
+    --inprogress-panel: #9D6F3A;
+    --toreview-panel: #C49300;
+    --done-panel: #FFD145;
 
-// Color-formularios
-$input-color: #666;
+    // Color-menu
+    --fondo-menu: #F3F2F2;
+    --icono-menu: #7E592E;
 
-// Color-boton
-$back-confirm: #FFDE81;
-$back-cancel: #CFA97E;
-$stroke-button: #6E6E6E;
+    // Color-formularios
+    --input-color: #666;
+
+    // Color-boton
+    --back-confirm: #FFDE81;
+    --back-cancel: #CFA97E;
+    --stroke-button: #6E6E6E;
+}
+
+/**********MODO DARK**********/
+[data-theme="dark"] {
+    // Color
+    --primary-color: #3D3D3D;
+    --secondary-color: #212121;
+    --black-color: #212121;
+    --fondo-color: #000;
+
+    // Color-Header-Footer
+    --fondo-header: #212121;
+    --fondo-footer: #212121;
+    
+    // Color-texto
+    --black-text: #fff;
+    --white-text: #fff;
+
+    // Color-paneles
+    --todo-panel: #CFCFCF;
+    --inprogress-panel: #AA9883;
+    --toreview-panel: #CBB46F;
+    --done-panel: #FFDF80;
+
+    // Color-menu
+    --fondo-menu: #494949;
+    --icono-menu: #fff;
+
+    // Color-formularios
+    --input-color: #666;
+
+    // Color-boton
+    --back-confirm: #9E9E9E;
+    --back-cancel: #494949;
+    --stroke-button: #6E6E6E;
+}
