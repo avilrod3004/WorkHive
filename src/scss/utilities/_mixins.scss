@@ -1,0 +1,34 @@
+@import '../utilities/variables';
+@import '../base/typo';
+
+// Mixins para estilos de texto
+@mixin description-text {
+    font-family: $font; 
+    font-size: $font-size-description; 
+    letter-spacing: $letter-spacing-description; 
+}
+  
+@mixin title-text($weight: 300) {
+  font-family: $font;
+  font-weight: $weight;
+  font-size: $font-size-title;
+}
+
+@mixin middle-text($weight: 200) {
+  font-family: $font; 
+  font-weight: $weight;
+  font-size: $font-size-titleMiddle;
+}
+
+// Ejemplos de uso
+// .description {
+//   @include description-text;
+// }
+
+// h1, h2, h3 {
+//   @include title-text(700);
+// }
+
+// a {
+//   @include middle-text(600);
+// }
