@@ -15,9 +15,18 @@
 @import './components/_taskMenu'; 
 @import './components/_teamMenu'; 
 
-// Views
-@import './views/_contactUs'; 
-@import './views/_home';
-@import './views/_forms'; 
-@import './views/_userProfile'; 
-@import './views/_notFound';
+// Modals
+@import './modals/confirm';
+@import './modals/formModal';
+@import './modals/modal';
+
+
+// Pages
+@import './pages/_contactUs'; 
+@import './pages/_home';
+@import './pages/_forms'; 
+@import './pages/_userProfile'; 
+@import './pages/_notFound';
+@import './pages/_projectInfo';
+@import './pages/_taskInfo';
+
