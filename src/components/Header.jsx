@@ -3,36 +3,15 @@ import { NavLink } from 'react-router-dom'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 
-/**
- * Componente de Encabezado para la aplicación.
- * Muestra el título de la aplicación, menú de navegación y botón de cambio de tema.
- *
- * @component
- * @returns {JSX.Element} Componente de Encabezado renderizado
- */
 const Header = () => {
-    /**
-     * Estado para controlar si el modo oscuro está activo.
-     * Se inicializa verificando la presencia de la clase 'dark-theme' en el body.
-     *
-     * @type {[boolean, function]} isDarkMode y setIsDarkMode
-     */
     const [isDarkMode, setIsDarkMode] = useState(() => {
-        return document.body.classList.contains('dark-theme');
+        return document.documentElement.getAttribute('data-theme') === 'dark';
     });
 
-    /**
-     * Efecto para alternar la clase 'dark-theme' en el elemento body
-     * cuando cambia el estado isDarkMode.
-     */
     useEffect(() => {
-        document.body.classList.toggle('dark-theme', isDarkMode);
+        document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     }, [isDarkMode]);
 
-    /**
-     * Cambia el tema entre modo claro y oscuro.
-     * Invierte el estado actual de isDarkMode.
-     */
     const toggleTheme = () => {
         setIsDarkMode(prevMode => !prevMode);
     };

@@ -1,0 +1,32 @@
+// Utilities
+@import './utilities/_mixins'; 
+@import './utilities/_variables'; 
+
+// Base
+@import './base/_reset'; 
+@import './base/_typo';
+
+// Components
+@import './components/_button'; 
+@import './components/_footer'; 
+@import './components/_header'; 
+@import './components/_panel'; 
+@import './components/_projectMenu'; 
+@import './components/_taskMenu'; 
+@import './components/_teamMenu'; 
+
+// Modals
+@import './modals/confirm';
+@import './modals/formModal';
+@import './modals/modal';
+
+
+// Pages
+@import './pages/_contactUs'; 
+@import './pages/_home';
+@import './pages/_forms'; 
+@import './pages/_userProfile'; 
+@import './pages/_notFound';
+@import './pages/_projectInfo';
+@import './pages/_taskInfo';
+
