@@ -18,9 +18,8 @@ const Header = () => {
     
     return (
         <header className='header'>
-            <h1 className='header__titulo'>WORKHIVE</h1>
-            <nav className='header__menu'>
-                <ul>
+            <NavLink to="/" className='header__titulo'>WORKHIVE</NavLink>
+                <ul className='header__menu'>
                     <li className='menu__opcion'><NavLink to="/login">Iniciar sesión</NavLink></li>
                     <li className='menu__opcion'><NavLink to="/usuario">Usuario</NavLink></li>
                     <li className='menu__opcion'><NavLink to="/register">Registrarse</NavLink></li>
@@ -31,7 +30,6 @@ const Header = () => {
                 >
                     {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
                 </div>
-            </nav>
         </header>
     )
 }
