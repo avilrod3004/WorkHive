@@ -1,5 +1,6 @@
 import React from 'react';
 import bee from "../assets/bee.png"
+import Menu from "../components/EditMenuProject"
 
 const ProyectInfo = () => {
     return (
@@ -78,14 +79,15 @@ const ProyectInfo = () => {
                 </div>
             </section>
 
-            <nav className='contenedor__menu'>
+            {/* <nav className='contenedor__menu'>
                 <ul className='menu__lista'>
                     <li className='lista__opcion'><a href=""><img src="" alt="Agregar tarea"/></a></li>
                     <li className='lista__opcion'><a href=""><img src="" alt="Añadir colaborador"/></a></li>
                     <li className='lista__opcion'><a href=""><img src="" alt="Editar proyecto"/></a></li>
                     <li className='lista__opcion'><a href=""><img src="" alt="Borrar proyecto"/></a></li>
                 </ul>
-            </nav>
+            </nav> */}
+            <Menu />
         </div>
     );
 };
