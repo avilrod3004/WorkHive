@@ -45,25 +45,25 @@
     display: flex;
     align-items: center;
     background-color: var(--black-color);
-
 }
 
 .frases__eslogan1 {
     display: flex;
     flex-direction: row-reverse;
     align-items:center;
-
+    background-color: var(--primary-color);
 }
 
 .eslogan__imagen {
     width: 30%;
     height: auto;
+    margin: 0 4rem;
 }
 
 .eslogan__frase {
     display: flex;
     flex-direction: column;
-    padding-right: 12rem;
+    padding: 8rem;
 }
 
 .frase__titulo {
@@ -79,13 +79,12 @@
     color: var(--black-text);
     font-size: 1.2rem;
     color: var(--white-text);
-
 }
 
 .eslogan__frase1 {
     display: flex;
     flex-direction: column;
-    padding-left: 12rem;
+    padding: 6rem;
 }
 
 .frase__titulo1 {
@@ -93,7 +92,6 @@
     color: var(--black-text);
     font-size: 2rem;
     margin-bottom: 10px;
-    
 }
 
 .frase__parrafo1 {

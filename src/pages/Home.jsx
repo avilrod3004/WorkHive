@@ -2,7 +2,7 @@ import logo from "../assets/logo.png";
 import hive from "../assets/hive.png";
 import organiza from "../assets/home/4.png";
 import colabora from "../assets/home/5.png";
-import exito from "../assets/home/exito.jpg";
+import exito from "../assets/home/exito.png";
 
 /**
  * Home Component

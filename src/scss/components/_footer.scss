@@ -5,16 +5,16 @@
     display: flex;
     justify-content: flex-end;
     background-color: var(--fondo-footer);
-    border: 2px solid #CFA97E;
+    /*border: 6px solid #CFA97E;*/
 }
 
 .footer__menu{
     display: flex;
     justify-content: space-between;
-    
 }
 
 .menu__opcion {
     @include middle-text();
     color: var(--black-text);
+    
 }
