@@ -1,20 +1,33 @@
-@import '../utilities/variables';
-@import '../utilities/mixins';
+@import "../utilities/variables";
+@import "../utilities/mixins";
 
 .footer {
+ WH-54-msanlub
     display: flex;
     justify-content: flex-end;
     background-color: var(--fondo-footer);
     /*border: 6px solid #CFA97E;*/
+
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--fondo-footer);
+ main
 }
 
 .footer__menu{
     display: flex;
+ WH-54-msanlub
     justify-content: space-between;
+    justify-content: space-between; 
+ main
 }
 
 .menu__opcion {
     @include middle-text();
     color: var(--black-text);
+ WH-54-msanlub
     
 }
+
+}
+ main
