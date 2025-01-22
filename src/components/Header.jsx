@@ -16,28 +16,6 @@ const Header = () => {
       isDarkMode ? "dark" : "light"
     );
   }, [isDarkMode]);
-    const toggleTheme = () => {
-        setIsDarkMode(prevMode => !prevMode);
-    };
-    
-    return (
-        <header className='header'>
-            <NavLink to="/" className='header__titulo'>WORKHIVE</NavLink>
-                <ul className='header__menu'>
-                    <li className='menu__opcion'><NavLink to="/login">Iniciar sesión</NavLink></li>
-                    <li className='menu__opcion'><NavLink to="/usuario">Usuario</NavLink></li>
-                    <li className='menu__opcion'><NavLink to="/register">Registrarse</NavLink></li>
-                </ul>
-                <div 
-                    onClick={toggleTheme} 
-                    className={`theme-icon ${isDarkMode ? 'theme-icon--dark' : 'theme-icon--light'}`}
-                >
-                    {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-                </div>
-        </header>
-    )
-}
-
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
@@ -49,33 +27,33 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1 className="header__titulo">WORKHIVE</h1>
-      <nav className="header__menu">
-        <ul>
-          <li className="menu__opcion">
-            <NavLink to="/login">Iniciar sesión</NavLink>
-          </li>
-          <li className="menu__opcion">
-            <NavLink to="/usuario">Usuario</NavLink>
-          </li>
-          <li className="menu__opcion">
-            <NavLink to="/register">Registrarse</NavLink>
-          </li>
-          <li className="menu__opcion">
-            <NavLink onClick={handleLogout} to="/login">
-              Cerrar sesión
-            </NavLink>
-          </li>
-        </ul>
-        <div
-          onClick={toggleTheme}
-          className={`theme-icon ${
-            isDarkMode ? "theme-icon--dark" : "theme-icon--light"
-          }`}
-        >
-          {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-        </div>
-      </nav>
+      <NavLink to="/" className="header__titulo">
+        WORKHIVE
+      </NavLink>
+      <ul className="header__menu">
+        <li className="menu__opcion">
+          <NavLink to="/login">Iniciar sesión</NavLink>
+        </li>
+        <li className="menu__opcion">
+          <NavLink to="/usuario">Usuario</NavLink>
+        </li>
+        <li className="menu__opcion">
+          <NavLink to="/register">Registrarse</NavLink>
+        </li>
+        <li className="menu__opcion">
+          <NavLink onClick={handleLogout} to="/login">
+            Cerrar sesión
+          </NavLink>
+        </li>
+      </ul>
+      <div
+        onClick={toggleTheme}
+        className={`theme-icon ${
+          isDarkMode ? "theme-icon--dark" : "theme-icon--light"
+        }`}
+      >
+        {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+      </div>
     </header>
   );
 };
