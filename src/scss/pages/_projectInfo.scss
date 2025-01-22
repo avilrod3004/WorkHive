@@ -1,6 +1,11 @@
 @import '../utilities/mixins';
 @import '../utilities/variables';
 
+.contenedor__info {
+    display: flex;
+    flex-direction: column;
+}
+
 /* HEADER */
 .info__header {
     display:flex;

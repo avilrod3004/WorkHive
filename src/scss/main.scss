@@ -9,10 +9,12 @@
 // Components
 @import './components/_button'; 
 @import './components/_footer'; 
-@import './components/_header'; 
+@import './components/header'; 
 @import './components/_panel'; 
 @import './components/_projectMenu'; 
 @import './components/_teamMenu'; 
+@import './components/_board';
+
 
 // Modals
 @import './modals/confirm';
