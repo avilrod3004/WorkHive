@@ -1,0 +1,34 @@
+.formulario-cuenta {
+  display: flex;
+
+  height: 97vh;
+}
+
+
+/* LATERAL */
+
+.formulario-cuenta__lateral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+
+  background-color: var(--secondary-color);
+
+  width: 25vw;
+}
+
+.lateral__logo {
+  width: 200px;
+}
+
+.lateral__nombre {
+  font-family: $font;
+  font-size: $font-size-title;
+  font-weight: bold;
+}
+
+
+/* FORMULARIO */
+
