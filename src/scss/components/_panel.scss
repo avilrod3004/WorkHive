@@ -21,3 +21,7 @@
 }
 
   
+.panel__content {
+      @include description-text;
+      color: var(--black-text);
+}
