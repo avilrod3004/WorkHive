@@ -1,9 +1,15 @@
 import React from 'react';
 import bee from "../assets/bee.png"
+import Board from "../components/Board"
 
 const UserProfile = () => {
+    const mockPanels = [
+        { name: "Panel 1" },
+        { name: "Panel 2" },
+        { name: "Panel 3" },
+      ];
     return (
-        <>
+        <div className='contenedor__usuario'>
             <nav className='menu__usuario'>
                 <ul className='usuario__lista'>
                     <li className='lista__opcion'><a href="">CREAR NUEVO PROYECTO</a></li>
@@ -14,39 +20,22 @@ const UserProfile = () => {
             <section className='info__usuario'>
                 <div className='usuario__images'>
                     {/* Foto de perfil del usuario */}
-                    <img className='images__user' src="" alt=""/>
-
-                    {/* Logo WorkHive */}
-                    <img className='images__logo' src={bee} alt="Logo de WorkHive"/>
+                    <img className='images__user' src="https://cdn-icons-png.flaticon.com/512/6326/6326055.png" alt=""/>
+                    <div className='user__bee'>
+                         {/* Logo WorkHive */}
+                        <img className='images__logo' src={bee} alt="Logo de WorkHive"/>
+                    </div>  
                 </div>
 
                     {/* Nombre completo del usuario */}
-                <h1 className='usuario__nombre'></h1>
+                <h1 className='usuario__nombre'>PAqiuto</h1>
             </section>
 
             <section className='contenedor__proyectos'>
-                <div>
-                    <h1>PROYECTOS ACTUALES</h1>
-                    <ul>
-                        <li>Nombre proyecto</li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h1>PROYECTOS FINALIZADOS</h1>
-                    <ul>
-                        <li>Nombre proyecto</li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
+                <Board name="PROYECTOS ACTUALES" type="inprogress" panels={mockPanels} />
+                <Board name="PROYECTOS FINALIZADOS" type="done" panels={mockPanels} />
             </section>
-        </>
+        </div>
     );
 };
 
