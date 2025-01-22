@@ -1,6 +1,7 @@
 import React from 'react';
 import bee from "../assets/bee.png"
 import Menu from "../components/EditMenuProject"
+import TeamMenu from '../components/TeamMenu';
 
 const ProyectInfo = () => {
     return (
@@ -8,12 +9,7 @@ const ProyectInfo = () => {
             <header className='info__header'>
                 <img className='header__image' src={bee} alt="Logo de WorkHive"/>
                 <h1 className='header__titulo'>Nombre proyecto</h1>
-
-                <ul className='header__lista'>
-                    <li className='lista__titulo'>Listado miembros del equipo</li>
-                    <li></li>
-                    <li></li>
-                </ul>
+                <TeamMenu />
             </header>
 
             <section className='info__proyecto'>
@@ -24,11 +20,11 @@ const ProyectInfo = () => {
 
                 <div className='proyecto__fechas'>
                     <div className='fechas__descripcion'>
-                        <p className='inicio__parrafo'><span>Fecha de inicio: </span>30/12/2024</p>
+                        <p className='fechas__parrafo'><span>Fecha de inicio: </span>30/12/2024</p>
                     </div>
 
                     <div className='fechas__descripcion'>
-                        <p className='inicio__parrafo'><span>Fecha de fin: </span>05/01/2025</p>
+                        <p className='fechas__parrafo'><span>Fecha de fin: </span>05/01/2025</p>
                     </div>
                 </div>
 

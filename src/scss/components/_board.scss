@@ -4,19 +4,19 @@
 
 // Estilos borde del panel
   
-.panel__todo {
+.tablero__todo {
       border-color: var(--todo-panel);
 }
   
-.panel__inprogress {
+.tablero__inprogress {
       border-color: var(--inprogress-panel);
 }
   
-.panel__toreview {
+.tablero__toreview {
       border-color: var(--toreview-panel);
 }
   
-.panel__done {
+.tablero__done {
       border-color: var(--done-panel);
 }
 
