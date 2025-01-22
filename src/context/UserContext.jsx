@@ -1,13 +1,14 @@
 // UserContext.js
 import React, { createContext, useEffect } from "react";
 import { useUserStore } from "../config/userStore";
-import { useAxiosPost } from "../hooks/useAxios";
+import useAxiosStore from "../hooks/useAxios";
 import { jwtDecode } from "jwt-decode";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const { setUser, clearUser, user } = useUserStore();
+  const { fetch } = useAxiosStore();
 
   useEffect(() => {
     const verifyToken = () => {
@@ -19,11 +20,12 @@ export const UserProvider = ({ children }) => {
       }
 
       try {
-        const response = useAxiosPost(
+        const response = fetch(
           "http://localhost:3000/usuarios/verify-token",
-          {},
+          "POST",
+          null,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            Authorization: `Bearer ${token}`,
           }
         );
 

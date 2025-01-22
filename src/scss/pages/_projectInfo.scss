@@ -1,0 +1,88 @@
+@import '../utilities/mixins';
+@import '../utilities/variables';
+
+/* HEADER */
+.info__header {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var( --fondo-color);
+    padding: 2rem;
+}
+
+.header__image{
+    width: 20%;
+    height: auto;
+}
+
+.header__titulo {
+    @include middle-text(500);
+    color: var(--black-text);
+}
+
+.info__proyecto {
+    display:flex;
+    flex-direction: column;
+}
+
+ /* DESCRIPCION PROYECTO */
+.proyecto__descripcion {
+    display:flex;
+    flex-direction: column;
+    background-color: var( --fondo-color);
+}
+
+.descripcion__titulo {
+    @include middle-text(300);
+    color: var(--black-text);
+}
+
+.descripcion__parrafo {
+    @include description-text;
+    color: var(--black-text);
+}
+
+
+ /* FECHA PROYECTO */
+ .proyecto__fechas {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var( --fondo-color);
+}
+
+.fechas__titulo {
+    @include middle-text(200);
+    color: var(--black-text);
+}
+
+.fechas__parrafo {
+    @include description-text;
+    color: var(--black-text);
+}
+
+ /* ADMINISTRADOR PROYECTO */
+.proyecto__administrador {
+    display:flex;
+    flex-direction: column;
+    background-color: var( --fondo-color);
+}
+
+.administrador__titulo {
+    @include middle-text(200);
+    color: var(--black-text);
+}
+
+.administrador__nombre {
+    @include description-text;
+    color: var(--black-text);
+}
+
+
+/* TABLAS DE TAREAS */
+
+.contenedor__tareas{
+    display: flex;
+    flex-direction: row;
+    background-color: var( --fondo-color);
+}

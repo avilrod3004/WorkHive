@@ -1,0 +1,17 @@
+@import '../utilities/variables';
+@import '../utilities/mixins';
+
+.edit__menu {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--fondo-menu);
+}
+
+.menu__button {
+    color: var(--icono-menu);
+}
+
+.menu__text {
+    @include description-text;
+    color: var(--black-text);
+}
