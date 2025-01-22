@@ -15,8 +15,8 @@ const Home = () => {
   return (
     <div className="contenedor__home">
       <section className="home__logo">
-        <img className="logo__colmena1" src={hive} alt="colmena" />
         <h3 className="logo__frase">Organiza,colabora y controla tu éxito</h3>
+        <img className="logo__colmena1" src={hive} alt="colmena" />
         <img className="logo__imagen" src={logo} alt="logoWH" />
         <img className="logo__colmena2" src={hive} alt="colmena" />
       </section>
