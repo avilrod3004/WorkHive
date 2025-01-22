@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import LogoWorkHive from "../assets/logo.png";
 
 const Register = () => {
   const { setUser } = useUserStore();
@@ -94,83 +95,102 @@ const Register = () => {
 
   return (
     <>
-      <Formik
-        initialValues={{
-          nombre: "",
-          email: "",
-          password: "",
-          repeatPassword: "",
-        }}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {({
-          values,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          resetForm,
-          isSubmitting,
-          errors,
-          touched,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="nombre">
-              Nombre de usuario:
-              <input
-                type="text"
-                name="nombre"
-                value={values.nombre}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {errors.nombre && touched.nombre && errors.nombre}
-            </label>
+      <main className="formulario-cuenta">
+        <aside className="formulario-cuenta__lateral">
+          <img src={LogoWorkHive} alt="" className="lateral__logo"/>
+          <p className="lateral__nombre">WORKHIVE</p>
+        </aside>
 
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                name="email"
-                value={values.email}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {errors.email && touched.email && errors.email}
-            </label>
+        <section className="formulario-cuenta__principal">
+          <Formik
+              initialValues={{
+                nombre: "",
+                email: "",
+                password: "",
+                repeatPassword: "",
+              }}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+          >
+            {({
+                values,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                resetForm,
+                isSubmitting,
+                errors,
+                touched,
+              }) => (
+                <form onSubmit={handleSubmit} className="principal__formulario">
+                  <h1 className="formulario__titulo">Create una cuenta</h1>
 
-            <label htmlFor="password">
-              Contraseña:
-              <input
-                type="password"
-                name="password"
-                value={values.password}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {errors.password && touched.password && errors.password}
-            </label>
+                  <label htmlFor="nombre" className="formulario__label">
+                    Nombre de usuario
+                    <input
+                        type="text"
+                        name="nombre"
+                        value={values.nombre}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        className="formulario__input"
+                    />
+                    {errors.nombre && touched.nombre && errors.nombre}
+                  </label>
 
-            <label htmlFor="repeatPassword">
-              Repetir contraseña:
-              <input
-                type="password"
-                name="repeatPassword"
-                value={values.repeatPassword}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              {errors.repeatPassword &&
-                touched.repeatPassword &&
-                errors.repeatPassword}
-            </label>
+                  <label htmlFor="email" className="formulario__label">
+                    Email
+                    <input
+                        type="email"
+                        name="email"
+                        value={values.email}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        className="formulario__input"
+                    />
+                    {errors.email && touched.email && errors.email}
+                  </label>
 
-            <button disabled={isSubmitting} type="submit">
-              Crear cuenta
-            </button>
-          </form>
-        )}
-      </Formik>
+                  <label htmlFor="password" className="formulario__label">
+                    Contraseña
+                    <input
+                        type="password"
+                        name="password"
+                        value={values.password}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        className="formulario__input"
+                    />
+                    {errors.password && touched.password && errors.password}
+                  </label>
+
+                  <label htmlFor="repeatPassword" className="formulario__label">
+                    Repetir contraseña
+                    <input
+                        type="password"
+                        name="repeatPassword"
+                        value={values.repeatPassword}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        className="formulario__input"
+                    />
+                    {errors.repeatPassword &&
+                        touched.repeatPassword &&
+                        errors.repeatPassword}
+                  </label>
+
+                  <button disabled={isSubmitting} type="submit" className="formulario__submit">
+                    Crear cuenta
+                  </button>
+                </form>
+            )}
+          </Formik>
+
+          <div>
+            <p>Ya tienes una cuenta? <a href="" className="principal__cambio">Inicia sesión</a></p>
+          </div>
+        </section>
+      </main>
     </>
   );
 };
