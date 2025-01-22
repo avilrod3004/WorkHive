@@ -1,27 +1,30 @@
 import React from 'react';
+import bee from "../assets/bee.png"
 
 const UserProfile = () => {
     return (
         <>
-            <nav>
-                <ul>
-                    <li><a href="">CREAR NUEVO PROYECTO</a></li>
-                    <li><a href="">CONFIGURACIÓN USUARIO</a></li>
+            <nav className='menu__usuario'>
+                <ul className='usuario__lista'>
+                    <li className='lista__opcion'><a href="">CREAR NUEVO PROYECTO</a></li>
+                    <li className='lista__opcion'><a href="">CONFIGURACIÓN USUARIO</a></li>
                 </ul>
             </nav>
 
-            <section>
-                <header>
+            <section className='info__usuario'>
+                <div className='usuario__images'>
                     {/* Foto de perfil del usuario */}
-                    <img src="" alt=""/>
+                    <img className='images__user' src="" alt=""/>
 
                     {/* Logo WorkHive */}
-                    <img src="" alt=""/>
+                    <img className='images__logo' src={bee} alt="Logo de WorkHive"/>
+                </div>
 
                     {/* Nombre completo del usuario */}
-                    <h1></h1>
-                </header>
+                <h1 className='usuario__nombre'></h1>
+            </section>
 
+            <section className='contenedor__proyectos'>
                 <div>
                     <h1>PROYECTOS ACTUALES</h1>
                     <ul>

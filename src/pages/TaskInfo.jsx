@@ -1,43 +1,47 @@
 import React from 'react';
+import bee from "../assets/bee.png"
+import MenuTask from "../components/TaskMenuEdit"
 
 const TaskInfo = () => {
     return (
-        <>
-            <header>
-                <img src="" alt="Logo WorkHive"/>
-
-                <nav>
-                    <ul>
-                        <li><a href=""><img src="" alt="Editar tarea"/></a></li>
-                        <li><a href=""><img src="" alt="Eliminar tarea"/></a></li>
-                    </ul>
-                </nav>
-
-                <aside>
-                    <p><span>ESTADO: </span>En proceso</p>
-                    <p><span>PRIORIDAD: </span>Alta</p>
-                </aside>
+        <div className='contenedor__info'>
+            <header className='info__header'>
+                <img className='header__image' src={bee} alt="Logo de WorkHive"/>
+                <h1 className='header__titulo'>Nombre tarea</h1>
+                <MenuTask />
+                <select className='header__estado' name="estado" id="estado">
+                    <option value="todo">To Do</option>
+                    <option value="inprogress">In Progress</option>
+                    <option value="toreview">To review</option>
+                    <option value="done">Done</option>
+                </select>
+                <select className='header__prioridad' name="prioridad" id="prioridad">
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select>
             </header>
 
-            <section>
-                <div>
-                    <h1>DESCRIPCIÓN DE TAREA</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium, aliquam aperiam aut cum cumque debitis dicta, dolor ea eos eveniet maxime natus odio placeat repellat repudiandae sunt unde voluptate! Aspernatur quam quasi quidem quod, recusandae sequi tempora ullam ut. Accusantium autem cupiditate, dolor doloremque, enim, et excepturi expedita harum iste maxime nesciunt nobis odio perferendis placeat possimus reprehenderit voluptas!</p>
+            <section className='info__proyecto'>
+                <div className='proyecto__descripcion'>
+                    <h1 className='descripcion__titulo'>DESCRIPCIÓN DE TAREA</h1>
+                    <p className='descripcion__parrafo'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium, aliquam aperiam aut cum cumque debitis dicta, dolor ea eos eveniet maxime natus odio placeat repellat repudiandae sunt unde voluptate! Aspernatur quam quasi quidem quod, recusandae sequi tempora ullam ut. Accusantium autem cupiditate, dolor doloremque, enim, et excepturi expedita harum iste maxime nesciunt nobis odio perferendis placeat possimus reprehenderit voluptas!</p>
                 </div>
 
-                <div>
-                    <p><span>Fecha límite: </span>05/01/2025</p>
+                <div className='proyecto__fechas'>
+                    <p className='fechas__parrafo'><span>Fecha límite: </span>05/01/2025</p>
                 </div>
 
-                <div>
-                    <p><span>ASIGNADO A: </span>David Pérez Romero</p>
+                <div className='proyecto__administrador'>
+                    <h1 className='administrador__titulo'>Asignado a:</h1>
+                    <p className='administrador__nombre'>David Pérez Romero</p>
                 </div>
             </section>
 
-            <section>
-                <h1>COMENTARIOS</h1>
+            <section className='contenedor__comentarios'>
+                <h1 className='comentarios__titulo'>COMENTARIOS</h1>
 
-                <ul>
+                <ul className='comentarios__lista'>
                     <li>
                         <article>
                             <h1>AITANA</h1>
@@ -76,7 +80,7 @@ const TaskInfo = () => {
                     </li>
                 </ul>
             </section>
-        </>
+        </div>
     );
 };
 

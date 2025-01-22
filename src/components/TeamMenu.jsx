@@ -11,7 +11,7 @@
 const TeamMenu = ({ teamMembers }) => {
   return (
     <div className="team__menu">
-      <h3 className='menu__titulo'>Equipo</h3>
+      <h2 className='menu__titulo'>Equipo</h2>
       <ul className='menu__miembros'>
         {teamMembers.map((member, index) => (
           <li className='menu__usuario' key={index}>{member}</li>

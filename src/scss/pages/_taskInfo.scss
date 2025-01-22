@@ -1,0 +1,20 @@
+@import '../utilities/mixins';
+@import '../utilities/variables';
+
+/* HEADER */
+.header__estado,
+.header__prioridad {
+    @include description-text();
+    color: var(--black-text);
+}
+
+/* COMENTARIOS */
+.comentarios__titulo{
+    @include title-text(600);
+    color: var(--black-text);
+}
+
+.comentarios__lista {
+    @include description-text();
+    color: var(--black-text);
+}
