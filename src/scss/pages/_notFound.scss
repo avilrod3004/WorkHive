@@ -1,0 +1,110 @@
+@import '../utilities/mixins';
+@import '../utilities/variables';
+
+.contenedor__error {
+    background-color: var(--fondo-color);
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.error__notFound {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;   
+    background-color: var(--fondo-color);
+    width: 100%; 
+    min-height: 50vh;
+}
+
+.notFound__number {
+    @include title-text(1000);
+    color: var(--black-text);
+    font-size: 2000%;
+
+    /* Media query para responsive */
+    @media screen and (max-width: 768px) {
+        font-size: 800%; 
+    }
+
+    @media screen and (max-width: 480px) {
+        font-size: 400%; 
+    }
+}
+
+.notFound__image{
+    width: 24rem; 
+    height: auto;
+
+    /* Media query para responsive */
+    @media screen and (max-width: 768px) {
+        width: 16rem;
+    }
+
+    @media screen and (max-width: 480px) {
+        width: 8rem; 
+    }
+}
+
+.notFound {
+    width: 100%;
+    background-color: var( --fondo-color);
+    text-align: center;
+    @include title-text(1000);
+    color: var(--black-text);
+    font-size: 600%;
+
+    /* Reduce el tamaño para responsive*/
+    @media screen and (max-width: 768px) {
+        font-size: 300%; 
+    }
+
+    @media screen and (max-width: 480px) {
+        font-size: 200%;
+    }
+}
+
+.bee-container {
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.bee {
+    position: absolute;
+    bottom: 0; 
+    left: 0; 
+    width: 4rem;
+    animation: fly 5s forwards;
+    z-index: 10; 
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(0, 0) scaleX(1); 
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+        transform: translate(50px, -200px) scaleX(1);
+    }
+    50% {
+        transform: translate(300px, -300px) scaleX(1); 
+    }
+
+    70% {
+        transform: translate(800px, -900px) scaleX(1); 
+    }
+
+    90% {
+        transform: translate(1000px, -850px) scaleX(-1); 
+    }
+    
+    100% {
+        transform: translate(950px, -750px) scaleX(-1);
+        opacity: 1;
+    }
+}
