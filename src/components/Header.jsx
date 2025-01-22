@@ -10,6 +10,7 @@ const Header = () => {
   });
 
   const { user, setUser } = useUserStore();
+
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
@@ -31,20 +32,28 @@ const Header = () => {
         WORKHIVE
       </NavLink>
       <ul className="header__menu">
-        <li className="menu__opcion">
-          <NavLink to="/login">Iniciar sesión</NavLink>
-        </li>
-        <li className="menu__opcion">
-          <NavLink to="/usuario">Usuario</NavLink>
-        </li>
-        <li className="menu__opcion">
-          <NavLink to="/register">Registrarse</NavLink>
-        </li>
-        <li className="menu__opcion">
-          <NavLink onClick={handleLogout} to="/login">
-            Cerrar sesión
-          </NavLink>
-        </li>
+        {!user && (
+          <li className="menu__opcion">
+            <NavLink to="/login">Iniciar sesión</NavLink>
+          </li>
+        )}
+        {user && (
+          <li className="menu__opcion">
+            <NavLink to="/usuario">Usuario</NavLink>
+          </li>
+        )}
+        {!user && (
+          <li className="menu__opcion">
+            <NavLink to="/register">Registrarse</NavLink>
+          </li>
+        )}
+        {user && (
+          <li className="menu__opcion">
+            <NavLink onClick={handleLogout} to="/login">
+              Cerrar sesión
+            </NavLink>
+          </li>
+        )}
       </ul>
       <div
         onClick={toggleTheme}
