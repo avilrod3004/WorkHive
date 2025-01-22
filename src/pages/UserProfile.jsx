@@ -1,21 +1,35 @@
-import React from 'react';
-import bee from "../assets/bee.png"
+import React, { useEffect } from "react";
+import bee from "../assets/bee.png";
+import { useNavigate } from "react-router-dom";
 import Board from "../components/Board"
 
 const UserProfile = () => {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token === null) {
+      navigate(-1);
+    }
+  }, [token, navigate]);
+
     const mockPanels = [
         { name: "Panel 1" },
         { name: "Panel 2" },
         { name: "Panel 3" },
       ];
-    return (
-        <div className='contenedor__usuario'>
-            <nav className='menu__usuario'>
-                <ul className='usuario__lista'>
-                    <li className='lista__opcion'><a href="">CREAR NUEVO PROYECTO</a></li>
-                    <li className='lista__opcion'><a href="">CONFIGURACIÓN USUARIO</a></li>
-                </ul>
-            </nav>
+  return (
+    <div className='contenedor__usuario'>
+      <nav className="menu__usuario">
+        <ul className="usuario__lista">
+          <li className="lista__opcion">
+            <a href="">CREAR NUEVO PROYECTO</a>
+          </li>
+          <li className="lista__opcion">
+            <a href="">CONFIGURACIÓN USUARIO</a>
+          </li>
+        </ul>
+      </nav>
 
             <section className='info__usuario'>
                 <div className='usuario__images'>
