@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
 
-  color: var(--input-color);
+  color: var(--label-color);
 }
 
 .formulario__input {
@@ -80,6 +80,7 @@
   height: 2rem;
 
   background-color: var(--fondo-color);
+  color: var(--black-text);
 }
 
 input[type="checkbox"] {
@@ -89,8 +90,8 @@ input[type="checkbox"] {
 
 .formulario__submit {
   background-color: var(--input-color);
-  color: var(--white-text);
-  filter: opacity(35%);
+  color: #000;
+  //filter: opacity(35%);
 
   padding: 1rem;
   border: none;
@@ -104,5 +105,6 @@ input[type="checkbox"] {
 }
 
 .formulario__error {
+  margin-top: 0.5rem;
   color: indianred;
 }
