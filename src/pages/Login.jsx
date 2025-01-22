@@ -9,34 +9,35 @@ const Login = () => {
   const { fetch } = useAxiosStore();
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-    try {
-      const loginResponse = await fetch(
-        import.meta.env.VITE_BASE_API + "usuarios/logins",
-        "POST",
-        { email: values.email, password: values.password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      try {
+          const loginResponse = await fetch(
+              import.meta.env.VITE_BASE_API + "usuarios/logins",
+              "POST",
+              {email: values.email, password: values.password},
+              {
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+              }
+          );
 
-      if (!loginResponse.status === 201) {
-        throw new Error(`Error: ${loginResponse.statusText}`);
+          if (!loginResponse.status === 201) {
+              throw new Error(`Error: ${loginResponse.statusText}`);
+          }
+
+          setUser({
+              id: loginResponse.data.user._id,
+              name: loginResponse.data.user.name,
+              role: loginResponse.data.user.role,
+          });
+          localStorage.setItem("token", loginResponse.data.token);
+          resetForm();
+          setSubmitting(false);
+      } catch (error) {
+          console.error(error);
+          setSubmitting(false);
       }
-
-      setUser({
-        id: loginResponse.data.user._id,
-        name: loginResponse.data.user.name,
-        role: loginResponse.data.user.role,
-      });
-      localStorage.setItem("token", loginResponse.data.token);
-      resetForm();
-      setSubmitting(false);
-    } catch (error) {
-      console.error(error);
-      setSubmitting(false);
-    }
+  }
     return (
         <>
             <main className="formulario-cuenta">
@@ -60,7 +61,7 @@ const Login = () => {
 
 
                                     <label htmlFor="email" className="formulario__label">
-                                        Email:
+                                        Email
                                         <input
                                             type="text"
                                             name="email"
@@ -75,7 +76,7 @@ const Login = () => {
                                     </label>
 
                                     <label htmlFor="password" className="formulario__label">
-                                        Contraseña:
+                                        Contraseña
                                         <input
                                             type="password"
                                             name="password"
@@ -90,11 +91,14 @@ const Login = () => {
                                     </label>
 
                                     <button disabled={isSubmitting} type="submit" className="formulario__submit">Log in</button>
-                                    <button className="formulario__cancel">Cancel</button>
                                 </form>
                             )
                         }
                     </Formik>
+
+                    <div>
+                        <p>No tienes una cuenta? <a href="" className="principal__cambio">Registrate</a></p>
+                    </div>
                 </section>
             </main>
         </>
