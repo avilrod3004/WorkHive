@@ -1,17 +1,15 @@
-@import '../utilities/variables';
-@import '../utilities/mixins';
+@import "../utilities/variables";
+@import "../utilities/mixins";
 
 .footer {
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--fondo-footer);
-    border: 2px solid #CFA97E;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--fondo-footer);
 }
 
 .footer__menu{
     display: flex;
-    justify-content: space-between;
-    
+    justify-content: space-between; 
 }
 
 .menu__opcion {
