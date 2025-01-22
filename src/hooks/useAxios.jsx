@@ -13,7 +13,6 @@ const useAxiosStore = create((set) => ({
         set({ data: response.data, isLoading: false });
         return { data: response.data, error: null };
       } else if (method === "POST") {
-        console.log(headers);
         const response = await axios.post(url, body, { headers });
         set({ data: response.data, isLoading: false });
         return { data: response.data, error: null };

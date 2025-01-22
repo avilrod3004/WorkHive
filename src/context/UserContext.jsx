@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
   const { fetch } = useAxiosStore();
 
   useEffect(() => {
-    const verifyToken = () => {
+    const verifyToken = async () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -20,8 +20,8 @@ export const UserProvider = ({ children }) => {
       }
 
       try {
-        const response = fetch(
-          "http://localhost:3000/usuarios/verify-token",
+        const response = await fetch(
+          import.meta.env.VITE_BASE_API + "usuarios/verify-token",
           "POST",
           null,
           {
@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
           }
         );
 
-        if (response.status === 200) {
+        if (response.error === null) {
           // Decodificar el token para obtener los datos del usuario
           const decodedToken = jwtDecode(token);
           const { id, name, role } = decodedToken;
