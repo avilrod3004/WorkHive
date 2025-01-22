@@ -80,7 +80,7 @@ const Login = () => {
                                             className="formulario__input"
                                         />
                                         {
-                                            errors.email && touched.email && errors.email
+                                            errors.email && touched.email && <p className="formulario__error">*{errors.email}</p>
                                         }
                                     </label>
 
@@ -95,7 +95,7 @@ const Login = () => {
                                             className="formulario__input"
                                         />
                                         {
-                                            errors.password && touched.password && errors.password
+                                            errors.password && touched.password && <p className="formulario__error">*{errors.password}</p>
                                         }
                                     </label>
 

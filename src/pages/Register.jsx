@@ -135,7 +135,9 @@ const Register = () => {
                         onChange={handleChange}
                         className="formulario__input"
                     />
-                    {errors.nombre && touched.nombre && errors.nombre}
+                    {
+                      errors.nombre && touched.nombre && <p className="formulario__error">*{errors.nombre}</p>
+                    }
                   </label>
 
                   <label htmlFor="email" className="formulario__label">
@@ -148,7 +150,9 @@ const Register = () => {
                         onChange={handleChange}
                         className="formulario__input"
                     />
-                    {errors.email && touched.email && errors.email}
+                    {
+                      errors.email && touched.email && <p className="formulario__error">*{errors.email}</p>
+                    }
                   </label>
 
                   <label htmlFor="password" className="formulario__label">
@@ -161,7 +165,9 @@ const Register = () => {
                         onChange={handleChange}
                         className="formulario__input"
                     />
-                    {errors.password && touched.password && errors.password}
+                    {
+                      errors.password && touched.password && <p className="formulario__error">*{errors.password}</p>
+                    }
                   </label>
 
                   <label htmlFor="repeatPassword" className="formulario__label">
@@ -174,9 +180,9 @@ const Register = () => {
                         onChange={handleChange}
                         className="formulario__input"
                     />
-                    {errors.repeatPassword &&
-                        touched.repeatPassword &&
-                        errors.repeatPassword}
+                    {
+                      errors.repeatPassword && touched.repeatPassword && <p className="formulario__error">*{errors.repeatPassword}</p>
+                    }
                   </label>
 
                   <button disabled={isSubmitting} type="submit" className="formulario__submit">
