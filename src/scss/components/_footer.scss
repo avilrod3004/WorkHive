@@ -1,18 +1,18 @@
-@import '../utilities/variables';
-@import '../utilities/mixins';
+@import "../utilities/variables";
+@import "../utilities/mixins";
 
 .footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--fondo-footer);
+
+  &__menu {
     display: flex;
     justify-content: space-between;
-    background-color: var(--fondo-footer);
+  }
 
-    &__menu {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-&__opcion {
+  &__opcion {
     @include middle-text();
     color: var(--black-text);
+  }
 }

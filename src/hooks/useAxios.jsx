@@ -12,7 +12,7 @@ const useStore = create((set) => ({
   setError: (error) => set({ error }),
 }));
 
-const useAxios = (url, method = "GET", body = null) => {
+const useAxios = (url, method = "GET", body = null, headers = null) => {
   const { data, isLoading, error, setData, setIsLoading, setError } =
     useStore();
 
@@ -28,6 +28,7 @@ const useAxios = (url, method = "GET", body = null) => {
           method,
           url,
           data: body,
+          headers,
         });
         setData(response.data);
       } catch (err) {
@@ -43,9 +44,13 @@ const useAxios = (url, method = "GET", body = null) => {
   return { data, isLoading, error };
 };
 
-export const useAxiosGet = (url) => useAxios(url, "GET");
-export const useAxiosPost = (url, body) => useAxios(url, "POST", body);
-export const useAxiosPut = (url, body) => useAxios(url, "PUT", body);
-export const useAxiosDelete = (url) => useAxios(url, "DELETE");
+export const useAxiosGet = (url, headers) =>
+  useAxios(url, "GET", null, headers);
+export const useAxiosPost = (url, body, headers) =>
+  useAxios(url, "POST", body, headers);
+export const useAxiosPut = (url, body, headers) =>
+  useAxios(url, "PUT", body, headers);
+export const useAxiosDelete = (url, headers) =>
+  useAxios(url, "DELETE", null, headers);
 
 export default useAxios;
