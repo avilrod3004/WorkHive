@@ -16,7 +16,7 @@ import {Formik} from "formik";
  */
 const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, children}) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen}>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}

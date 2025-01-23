@@ -13,7 +13,7 @@ import Modal from "./Modal.jsx";
  */
 const ConfirmModal = ({isOpen, onClose, onConfirm, message}) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen}>
             <p>{message}</p>
 
             <button onClick={onClose}>Cancelar</button>
