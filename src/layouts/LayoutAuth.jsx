@@ -4,12 +4,12 @@ import Footer from "../components/Footer";
 import { Outlet, useNavigate } from "react-router-dom";
 import { UserProvider } from "../context/UserContext";
 
-const LayoutPrivate = ({ children }) => {
+const LayoutAuth = ({ children }) => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token === null) {
+    if (token !== null) {
       navigate(-1);
     }
   }, []);
@@ -25,4 +25,4 @@ const LayoutPrivate = ({ children }) => {
   );
 };
 
-export default LayoutPrivate;
+export default LayoutAuth;

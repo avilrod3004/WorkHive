@@ -34,7 +34,7 @@ const Header = () => {
       <ul className="header__menu">
         {!user && (
           <li className="menu__opcion">
-            <NavLink to="/login">Iniciar sesión</NavLink>
+            <NavLink to="/auth/login">Iniciar sesión</NavLink>
           </li>
         )}
         {user && (
@@ -44,12 +44,12 @@ const Header = () => {
         )}
         {!user && (
           <li className="menu__opcion">
-            <NavLink to="/register">Registrarse</NavLink>
+            <NavLink to="/auth/register">Registrarse</NavLink>
           </li>
         )}
         {user && (
           <li className="menu__opcion">
-            <NavLink onClick={handleLogout} to="/login">
+            <NavLink onClick={handleLogout} to="/auth/login">
               Cerrar sesión
             </NavLink>
           </li>

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import LayoutPublic from "../layouts/LayoutPublic";
 import LayoutPrivate from "../layouts/LayoutPrivate";
+import LayoutAuth from "../layouts/LayoutAuth";
 import NotFound from "../pages/NotFound";
 import { lazy, Suspense } from "react";
 
@@ -11,6 +12,7 @@ const ContactUs = lazy(() => import("../pages/ContactUs"));
 const Register = lazy(() => import("../pages/Register"));
 const Login = lazy(() => import("../pages/Login"));
 const User = lazy(() => import("../pages/UserProfile"));
+const ProyectInfo = lazy(() => import("../pages/ProyectInfo"));
 
 /**
  * Manejo del enrutamiento de las páginas de la aplicación.
@@ -32,22 +34,6 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
-        element: (
-          <Suspense fallback={<div>Loading Login...</div>}>
-            <Login />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/register",
-        element: (
-          <Suspense fallback={<div>Loading Register...</div>}>
-            <Register />
-          </Suspense>
-        ),
-      },
-      {
         path: "/contactUs",
         element: (
           <Suspense fallback={<div>Loading Contact Us...</div>}>
@@ -62,8 +48,36 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/auth",
+    element: <LayoutAuth />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "/auth/login",
+        element: (
+          <Suspense fallback={<div>Loading Login...</div>}>
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/auth/register",
+        element: (
+          <Suspense fallback={<div>Loading Register...</div>}>
+            <Register />
+          </Suspense>
+        ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+  {
     path: "/usuario",
     element: <LayoutPrivate />,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -72,6 +86,18 @@ export const router = createBrowserRouter([
             <User />
           </Suspense>
         ),
+      },
+      {
+        path: "/usuario/tablero/:id",
+        element: (
+          <Suspense fallback={<div>Loading User Profile...</div>}>
+            <ProyectInfo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
