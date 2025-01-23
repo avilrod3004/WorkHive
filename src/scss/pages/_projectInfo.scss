@@ -1,12 +1,18 @@
 @import '../utilities/mixins';
 @import '../utilities/variables';
 
+.contenedor__info {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--fondo-color);
+}
+
 /* HEADER */
 .info__header {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: var( --fondo-color);
+    background-color: var(--fondo-color);
     padding: 2rem;
 }
 
@@ -29,7 +35,7 @@
 .proyecto__descripcion {
     display:flex;
     flex-direction: column;
-    background-color: var( --fondo-color);
+    background-color: var(--black-color);
 }
 
 .descripcion__titulo {
@@ -48,7 +54,7 @@
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: var( --fondo-color);
+    background-color: var(--primary-color);
 }
 
 .fechas__titulo {
@@ -65,7 +71,7 @@
 .proyecto__administrador {
     display:flex;
     flex-direction: column;
-    background-color: var( --fondo-color);
+    background-color: var(--black-color);
 }
 
 .administrador__titulo {

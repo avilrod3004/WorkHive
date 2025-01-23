@@ -21,6 +21,7 @@ import Panel from '../components/Panel'
  * )
  */
 const Board = ({ name, type, panels }) => {
+
     return (
       <div className={`tablero__${type}`}>
         <h2 className="tablero__title">{name}</h2>
