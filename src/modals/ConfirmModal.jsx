@@ -16,7 +16,7 @@ const ConfirmModal = ({isOpen, onClose, onConfirm, message}) => {
     return (
         <Modal isOpen={isOpen}>
 
-            <img src={Bee} alt="" className="modal-confirmacion__abeja"/>
+            <img src={Bee} alt="" className="modal__abeja"/>
 
             <p className="modal-confirmacion__pregunta">{message}</p>
 

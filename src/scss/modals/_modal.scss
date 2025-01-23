@@ -29,6 +29,7 @@
   justify-content: space-between;
 
   width: 100%;
+  padding-top: 2rem;
 }
 
 .modal__botones button {
@@ -37,6 +38,7 @@
   padding: 0.25rem 1rem;
 
   color: var(--black-text);
+  font-weight: bold;
 
   cursor: pointer;
 }

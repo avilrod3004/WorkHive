@@ -1,0 +1,22 @@
+.modal-form__formulario {
+  font-family: $font;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 20rem;
+}
+
+.modal-form__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  padding-bottom: 2rem;
+}
+
+.modal-form__titulo {
+  font-weight: bold;
+}

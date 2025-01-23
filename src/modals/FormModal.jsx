@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from "./Modal.jsx";
 import {Formik} from "formik";
+import Bee from "../assets/bee.png"
 
 /**
  * FormModal - Componente para mostrar un modal con un formulario gestionado por Formik.
@@ -14,7 +15,7 @@ import {Formik} from "formik";
  * @param {Function} props.children - Función render prop para personalizar el contenido del formulario. Recibe un objeto con las propiedades de Formik (`values`, `handleChange`, `handleBlur`, `errors`, `touched`).
  * @returns {React.ReactElement|null} El componente del modal con el formulario o `null` si no está abierto.
  */
-const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, children}) => {
+const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, children, title}) => {
     return (
         <Modal isOpen={isOpen}>
             <Formik
@@ -24,12 +25,18 @@ const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, 
             >
                 {
                     ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className="modal-form__formulario">
+                            <header className="modal-form__header">
+                                <img src={Bee} alt="" className="modal__abeja"/>
+                                <p className="modal-form__titulo">{title}</p>
+                            </header>
 
                             {children({values, handleChange, handleBlur, errors, touched})}
 
-                            <button disabled={isSubmitting} type="submit">Confirmar</button>
-                            <button onClick={onClose}>Cancelar</button>
+                            <div className="modal__botones">
+                                <button onClick={onClose} className="botones-modal__cancelar">Cancelar</button>
+                                <button disabled={isSubmitting} type="submit" className="botones-modal__confirmar">Confirmar</button>
+                            </div>
                         </form>
                     )
                 }
