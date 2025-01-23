@@ -1,0 +1,30 @@
+@import '../utilities/variables';
+@import '../utilities/mixins';
+
+.team__menu {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--fondo-color);
+}
+
+.menu__titulo {
+    @include middle-text(200);
+    color: var(--black-text);
+}
+
+.menu__icono {
+    color: var(--black-text);
+    cursor: pointer;
+}
+
+.menu__miembros {
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid var(--primary-color);
+}
+
+.menu__usuario {
+    @include middle-text(200);
+    color: var(--black-text);
+    border: 1px solid var(--primary-color);
+}

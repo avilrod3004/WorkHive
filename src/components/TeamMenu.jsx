@@ -1,4 +1,4 @@
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 /**
  * Componente que muestra un menú con los miembros del equipo.
@@ -9,16 +9,29 @@
  * @returns {JSX.Element} Componente TeamMenu renderizado
  */
 const TeamMenu = ({ teamMembers }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="team__menu">
-      <h2 className='menu__titulo'>Equipo</h2>
-      <ul className='menu__miembros'>
-        {teamMembers.map((member, index) => (
-          <li className='menu__usuario' key={index}>{member}</li>
-        ))}
-      </ul>
+      <h2 className='menu__titulo'>EQUIPO</h2>
+      <KeyboardArrowDownIcon 
+        className='menu__icono' 
+        onClick={toggleMenu}
+      />
+      {isOpen && (
+        <ul className='menu__miembros'>
+          {teamMembers.map((member, index) => (
+            <li className='menu__usuario' key={index}>{member}</li>
+          ))}
+        </ul>
+      )}
     </div>
-  )
+  );
+};
 }
 
 export default TeamMenu
