@@ -13,11 +13,10 @@ const Modal = ({isOpen, onClose, children}) => {
     if (!isOpen) return null;
 
     return (
-        <div>
-            <div>
+        <div className="modal">
+            <div className="modal__contenido">
                 {children}
             </div>
-            <div className="modal-backdrop" onClick={onClose}></div>
         </div>
     );
 };
