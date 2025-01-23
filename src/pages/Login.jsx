@@ -1,21 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik } from "formik";
 import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
-import { useNavigate } from "react-router-dom";
 import LogoWorkHive from "../assets/logo.png";
 
 const Login = () => {
   const { setUser } = useUserStore();
-  const token = localStorage.getItem("token");
   const { fetch } = useAxiosStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token !== null) {
-      navigate(-1);
-    }
-  }, []);
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     try {

@@ -1,22 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
-import { useNavigate } from "react-router-dom";
 import LogoWorkHive from "../assets/logo.png";
 
 const Register = () => {
   const { setUser } = useUserStore();
-  const token = localStorage.getItem("token");
   const { fetch } = useAxiosStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token !== null) {
-      navigate(-1);
-    }
-  }, []);
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().trim().required("El campo nombre es obligatorio"),
