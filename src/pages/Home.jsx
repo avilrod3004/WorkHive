@@ -3,6 +3,7 @@ import logoDark from "../assets/logoHomeDark.png";
 import organiza from "../assets/home/4.png";
 import colabora from "../assets/home/5.png";
 import exito from "../assets/home/exito.png";
+import { useTheme } from '../context/ThemeContext'
 
 /**
  * Home Component
@@ -12,10 +13,17 @@ import exito from "../assets/home/exito.png";
  * una sección con tres artículos que describen las características principales.
  */
 const Home = () => {
+
+  const { isDarkMode } = useTheme();
+
   return (
     <div className="contenedor__home">
       <section className="home__logo">
-        <img className="logo__imagen" src={logo} alt="logoWH" />
+        <img 
+          className="logo__imagen" 
+          src={isDarkMode ? logoDark : logo} 
+          alt="logoWH" 
+        />
         <h3 className="logo__frase">Organiza,colabora y controla tu éxito</h3>
       </section>
       <section className="home__frases">
