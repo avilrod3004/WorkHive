@@ -1,6 +1,8 @@
 import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
+import LogoWorkHive from "../assets/logo.png"
+
 
 const ContactUs = () => {
 
@@ -19,92 +21,122 @@ const ContactUs = () => {
 
     return (
         <>
-            <Formik
-                initialValues={{
-                    name: "",
-                    email: "",
-                    subject: "",
-                    message: "",
-                    accept: false
-                }}
-                onSubmit={onSubmit}
-                validationSchema={validationSchema}
-            >
-                {
-                    ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
-                        <form onSubmit={handleSubmit}>
-                            <label htmlFor="name">
-                                Nombre:
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={values.name}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}/>
-                                {
-                                    errors.name && touched.name && errors.name
-                                }
-                            </label>
+            <main className="formulario-cuenta">
+                <aside className="formulario-cuenta__lateral">
+                    <img src={LogoWorkHive} alt="" className="lateral__logo"/>
+                    <p className="lateral__nombre">WORKHIVE</p>
+                </aside>
 
-                            <label htmlFor="email">
-                                Email:
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={values.email}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}/>
-                                {
-                                    errors.email && touched.email && errors.email
-                                }
-                            </label>
+                <section className="formulario-cuenta__principal">
+                    <Formik
+                        initialValues={{
+                            name: "",
+                            email: "",
+                            subject: "",
+                            message: "",
+                            accept: false
+                        }}
+                        onSubmit={onSubmit}
+                        validationSchema={validationSchema}
+                    >
+                        {
+                            ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
+                                <form onSubmit={handleSubmit} className="principal__formulario">
+                                    <h1 className="formulario__titulo">Contacta con nosotros</h1>
 
-                            <label htmlFor="subject">
-                                Asunto:
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    value={values.subject}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}/>
-                                {
-                                    errors.subject && touched.subject && errors.subject
-                                }
-                            </label>
+                                    <label htmlFor="name" className="formulario__label">
+                                        Nombre *
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={values.name}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            className="formulario__input"
+                                            aria-required="true"
+                                            placeholder="Escriba su nombre"
+                                        />
+                                        {
+                                            errors.name && touched.name && <p className="formulario__error">*{errors.name}</p>
+                                        }
+                                    </label>
 
-                            <label htmlFor="message">
-                                Mensaje:
-                                <textarea
-                                    name="message"
-                                    id="message"
-                                    cols="60"
-                                    rows="10"
-                                    value={values.message}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}/>
-                                {
-                                    errors.message && touched.message && errors.message
-                                }
-                            </label>
+                                    <label htmlFor="email" className="formulario__label">
+                                        Email *
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={values.email}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            className="formulario__input"
+                                            aria-required="true"
+                                            placeholder="Escriba su e-mail"
+                                        />
+                                        {
+                                            errors.email && touched.email && <p className="formulario__error">*{errors.email}</p>
+                                        }
+                                    </label>
 
-                            <label htmlFor="accept">
-                                <input
-                                    type="checkbox"
-                                    name="accept"
-                                    checked={values.accept}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}/>Acepto los términos legales, la política de privacidad y las condiciones de este sitio web.
-                                {
-                                    errors.accept && touched.accept && errors.accept
-                                }
-                            </label>
+                                    <label htmlFor="subject" className="formulario__label">
+                                        Asunto *
+                                        <input
+                                            type="text"
+                                            name="subject"
+                                            value={values.subject}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            className="formulario__input"
+                                            aria-required="true"
+                                            placeholder="Describa en pocas palabras el contenido del mensaje"
+                                        />
+                                        {
+                                            errors.subject && touched.subject && <p className="formulario__error">*{errors.subject}</p>
+                                        }
+                                    </label>
 
-                            <button disabled={isSubmitting} type="submit">Send</button>
-                            <button type="button" onClick={() => resetForm()}>Reset</button>
-                        </form>
-                    )
-                }
-            </Formik>
+                                    <label htmlFor="message" className="formulario__label">
+                                        Mensaje *
+                                        <textarea
+                                            name="message"
+                                            id="message"
+                                            cols="60"
+                                            rows="10"
+                                            value={values.message}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            className="formulario__input"
+                                            aria-required="true"
+                                            placeholder="Escriba su mensaje"
+                                        />
+                                        {
+                                            errors.message && touched.message && <p className="formulario__error">*{errors.message}</p>
+                                        }
+                                    </label>
+
+                                    <label htmlFor="accept" className="formulario__label-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name="accept"
+                                            checked={values.accept}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            aria-required="true"
+                                            className="formulario__checkbox"
+                                        />
+                                            Acepto los términos legales, la política de privacidad y las condiciones de este sitio web.
+                                        {
+                                            errors.accept && touched.accept && <p className="formulario__error">*{errors.accept}</p>
+                                        }
+                                    </label>
+
+                                    <button disabled={isSubmitting} type="submit" className="formulario__submit">Enviar</button>
+                                </form>
+                            )
+                        }
+                    </Formik>
+                </section>
+            </main>
         </>
     );
 };
