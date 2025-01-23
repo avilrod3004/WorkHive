@@ -24,6 +24,7 @@
     color: var(--black-text);
     text-align: center;
     letter-spacing: 0.8rem;
+    margin: 0 1rem;
 }
 
 
@@ -100,7 +101,7 @@
 }
 
 
-@media (max-width: 944px) {
+@media (max-width: 840px) {
     .frases__eslogan, .frases__eslogan1 {
         flex-direction: column;
         padding: 2rem;

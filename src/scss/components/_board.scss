@@ -6,53 +6,55 @@
   
 .tablero__todo {
       min-width: 30rem;
+      min-height: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--todo-panel);
-            color: var(--black-text);
+            color: #212121;
             padding: 2rem;
-            margin-bottom: 8rem;
+            text-align:center;
       }
 }
   
 .tablero__inprogress {
       min-width: 30rem;
+      min-height: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--inprogress-panel);
-            color: var(--black-text);
+            color: #212121;
             padding: 2rem;
-            margin-bottom: 8rem;
+            text-align:center;
       }
 }
   
 .tablero__toreview {
       min-width: 30rem;
+      min-height: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--toreview-panel);
-            color: var(--black-text);
-            padding: 2rem;
-            margin-bottom: 8rem;
+            color: #212121;
+            padding: 1rem;
+            text-align:center;
       }
 }
   
 .tablero__done {
       min-width: 30rem;
-      padding: 2rem;
+      min-height: 30rem;
+      padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--done-panel);
-            color: var(--black-text);
+            color: #212121;
             padding: 2rem;
-            margin-bottom: 8rem;
+            text-align:center;
       }
 }
-
-/* TITULO TABLERO */
 
 
 .tablero__panels {
