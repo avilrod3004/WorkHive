@@ -98,103 +98,114 @@ const Register = () => {
     <>
       <main className="formulario-cuenta">
         <aside className="formulario-cuenta__lateral">
-          <img src={LogoWorkHive} alt="" className="lateral__logo"/>
+          <img src={LogoWorkHive} alt="" className="lateral__logo" />
           <p className="lateral__nombre">WORKHIVE</p>
         </aside>
 
         <section className="formulario-cuenta__principal">
           <Formik
-              initialValues={{
-                nombre: "",
-                email: "",
-                password: "",
-                repeatPassword: "",
-              }}
-              onSubmit={onSubmit}
-              validationSchema={validationSchema}
+            initialValues={{
+              nombre: "",
+              email: "",
+              password: "",
+              repeatPassword: "",
+            }}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
           >
             {({
-                values,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                resetForm,
-                isSubmitting,
-                errors,
-                touched,
-              }) => (
-                <form onSubmit={handleSubmit} className="principal__formulario">
-                  <h1 className="formulario__titulo">Create una cuenta</h1>
+              values,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              resetForm,
+              isSubmitting,
+              errors,
+              touched,
+            }) => (
+              <form onSubmit={handleSubmit} className="principal__formulario">
+                <h1 className="formulario__titulo">Create una cuenta</h1>
 
-                  <label htmlFor="nombre" className="formulario__label">
-                    Nombre de usuario
-                    <input
-                        type="text"
-                        name="nombre"
-                        value={values.nombre}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        className="formulario__input"
-                    />
-                    {
-                      errors.nombre && touched.nombre && <p className="formulario__error">*{errors.nombre}</p>
-                    }
-                  </label>
+                <label htmlFor="nombre" className="formulario__label">
+                  Nombre de usuario
+                  <input
+                    type="text"
+                    name="nombre"
+                    value={values.nombre}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className="formulario__input"
+                  />
+                  {errors.nombre && touched.nombre && (
+                    <p className="formulario__error">*{errors.nombre}</p>
+                  )}
+                </label>
 
-                  <label htmlFor="email" className="formulario__label">
-                    Email
-                    <input
-                        type="email"
-                        name="email"
-                        value={values.email}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        className="formulario__input"
-                    />
-                    {
-                      errors.email && touched.email && <p className="formulario__error">*{errors.email}</p>
-                    }
-                  </label>
+                <label htmlFor="email" className="formulario__label">
+                  Email
+                  <input
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className="formulario__input"
+                  />
+                  {errors.email && touched.email && (
+                    <p className="formulario__error">*{errors.email}</p>
+                  )}
+                </label>
 
-                  <label htmlFor="password" className="formulario__label">
-                    Contraseña
-                    <input
-                        type="password"
-                        name="password"
-                        value={values.password}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        className="formulario__input"
-                    />
-                    {
-                      errors.password && touched.password && <p className="formulario__error">*{errors.password}</p>
-                    }
-                  </label>
+                <label htmlFor="password" className="formulario__label">
+                  Contraseña
+                  <input
+                    type="password"
+                    name="password"
+                    value={values.password}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className="formulario__input"
+                  />
+                  {errors.password && touched.password && (
+                    <p className="formulario__error">*{errors.password}</p>
+                  )}
+                </label>
 
-                  <label htmlFor="repeatPassword" className="formulario__label">
-                    Repetir contraseña
-                    <input
-                        type="password"
-                        name="repeatPassword"
-                        value={values.repeatPassword}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        className="formulario__input"
-                    />
-                    {
-                      errors.repeatPassword && touched.repeatPassword && <p className="formulario__error">*{errors.repeatPassword}</p>
-                    }
-                  </label>
+                <label htmlFor="repeatPassword" className="formulario__label">
+                  Repetir contraseña
+                  <input
+                    type="password"
+                    name="repeatPassword"
+                    value={values.repeatPassword}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className="formulario__input"
+                  />
+                  {errors.repeatPassword && touched.repeatPassword && (
+                    <p className="formulario__error">
+                      *{errors.repeatPassword}
+                    </p>
+                  )}
+                </label>
 
-                  <button disabled={isSubmitting} type="submit" className="formulario__submit">
-                    Crear cuenta
-                  </button>
-                </form>
+                <button
+                  disabled={isSubmitting}
+                  type="submit"
+                  className="formulario__submit"
+                >
+                  Crear cuenta
+                </button>
+              </form>
             )}
           </Formik>
 
           <div>
-            <p>Ya tienes una cuenta? <a href="" className="principal__cambio">Inicia sesión</a></p>
+            <p>
+              Ya tienes una cuenta?{" "}
+              <a href="/login" className="principal__cambio">
+                Inicia sesión
+              </a>
+            </p>
           </div>
         </section>
       </main>

@@ -121,7 +121,7 @@ const Login = () => {
           <div>
             <p>
               No tienes una cuenta?{" "}
-              <a href="" className="principal__cambio">
+              <a href="/register" className="principal__cambio">
                 Registrate
               </a>
             </p>
