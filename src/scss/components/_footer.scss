@@ -15,4 +15,5 @@
 .menu__opcion {
   @include middle-text();
   color: var(--black-text);
+  margin: 1rem;
 }

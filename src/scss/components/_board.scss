@@ -5,8 +5,7 @@
 // Estilos borde del panel
   
 .tablero__todo {
-      min-width: 30rem;
-      min-height: 30rem;
+      width: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
@@ -18,8 +17,7 @@
 }
   
 .tablero__inprogress {
-      min-width: 30rem;
-      min-height: 30rem;
+      width: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
@@ -31,8 +29,7 @@
 }
   
 .tablero__toreview {
-      min-width: 30rem;
-      min-height: 30rem;
+      width: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
@@ -44,8 +41,7 @@
 }
   
 .tablero__done {
-      min-width: 30rem;
-      min-height: 30rem;
+      width: 30rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
