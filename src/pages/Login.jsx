@@ -3,9 +3,11 @@ import { Formik } from "formik";
 import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
 import LogoWorkHive from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { setUser } = useUserStore();
+  const navigate = useNavigate();
   const { fetch } = useAxiosStore();
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -112,7 +114,7 @@ const Login = () => {
           <div>
             <p>
               No tienes una cuenta?{" "}
-              <a href="/register" className="principal__cambio">
+              <a href="/auth/register" className="principal__cambio">
                 Registrate
               </a>
             </p>

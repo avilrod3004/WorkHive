@@ -4,9 +4,11 @@ import * as Yup from "yup";
 import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
 import LogoWorkHive from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { setUser } = useUserStore();
+  const navigate = useNavigate();
   const { fetch } = useAxiosStore();
 
   const validationSchema = Yup.object().shape({
@@ -193,7 +195,7 @@ const Register = () => {
           <div>
             <p>
               Ya tienes una cuenta?{" "}
-              <a href="/login" className="principal__cambio">
+              <a href="/auth/login" className="principal__cambio">
                 Inicia sesión
               </a>
             </p>
