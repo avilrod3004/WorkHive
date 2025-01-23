@@ -32,8 +32,8 @@ export const UserProvider = ({ children }) => {
         if (response.error === null) {
           // Decodificar el token para obtener los datos del usuario
           const decodedToken = jwtDecode(token);
-          const { id, name, role } = decodedToken;
-          setUser({ id, name, role }); // Actualiza el usuario en Zustand con los datos del token
+          const { id, nombre, rol } = decodedToken;
+          setUser({ id, nombre, rol }); // Actualiza el usuario en Zustand con los datos del token
         } else {
           localStorage.removeItem("token");
           clearUser();
