@@ -15,7 +15,7 @@ const Register = () => {
     if (token !== null) {
       navigate(-1);
     }
-  }, [token, navigate]);
+  }, []);
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().trim().required("El campo nombre es obligatorio"),
@@ -86,6 +86,7 @@ const Register = () => {
         role: loginResponse.data.user.role,
       });
       localStorage.setItem("token", loginResponse.data.token);
+      navigate("/usuario");
     } catch (error) {
       console.error(error);
       setSubmitting(false);

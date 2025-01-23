@@ -14,7 +14,7 @@ const Login = () => {
     if (token !== null) {
       navigate(-1);
     }
-  }, [token, navigate]);
+  }, []);
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
@@ -41,6 +41,7 @@ const Login = () => {
       localStorage.setItem("token", loginResponse.data.token);
       resetForm();
       setSubmitting(false);
+      navigate("/usuario");
     } catch (error) {
       console.error(error);
       setSubmitting(false);
