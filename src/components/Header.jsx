@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header className="header">
       <NavLink to="/" className="header__titulo">
-        WORKHIVE
+        workhive
       </NavLink>
       <ul className="header__menu">
         {!user && (
