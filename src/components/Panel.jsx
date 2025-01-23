@@ -12,7 +12,9 @@ import React from 'react'
 const Panel = ({ name, type }) => {
   return (
     <div className={`panel__${type}`}>
-      <div className="panel__content">{name}</div>
+      <div className='inside'>
+        <div className="panel__content">{name}</div>
+      </div>
     </div>
   );
 };
