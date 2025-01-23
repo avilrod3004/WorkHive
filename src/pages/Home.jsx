@@ -1,5 +1,5 @@
-import logo from "../assets/logo.png";
-import hive from "../assets/hive.png";
+import logo from "../assets/logoHome.png";
+import logoDark from "../assets/logoHomeDark.png";
 import organiza from "../assets/home/4.png";
 import colabora from "../assets/home/5.png";
 import exito from "../assets/home/exito.png";
@@ -15,10 +15,8 @@ const Home = () => {
   return (
     <div className="contenedor__home">
       <section className="home__logo">
-        <h3 className="logo__frase">Organiza,colabora y controla tu éxito</h3>
         <img className="logo__imagen" src={logo} alt="logoWH" />
-        <img className="logo__colmena1" src={hive} alt="colmena" />
-        <img className="logo__colmena2" src={hive} alt="colmena" />
+        <h3 className="logo__frase">Organiza,colabora y controla tu éxito</h3>
       </section>
       <section className="home__frases">
         <article className="frases__eslogan">
