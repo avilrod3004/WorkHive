@@ -5,28 +5,40 @@
 // Estilos borde del panel
   
 .tablero__todo {
-      border-color: var(--todo-panel);
+      border: 2px solid var(--todo-panel);
+      min-width: 30rem;
+      padding: 1rem;
 }
   
 .tablero__inprogress {
-      border-color: var(--inprogress-panel);
+      border: 2px solid var(--inprogress-panel);
+      min-width: 30rem;
+      padding: 1rem;
 }
   
 .tablero__toreview {
-      border-color: var(--toreview-panel);
+      border: 2px solid var(--toreview-panel);
+      min-width: 30rem;
+      padding: 1rem;
 }
   
 .tablero__done {
-      border-color: var(--done-panel);
+      border: 2px solid var(--done-panel);
+      min-width: 30rem;
+      padding: 1rem;
 }
 
-  
+/* TITULO TABLERO */
 .tablero__title{
       @include description-text;
       color: var(--black-text);
+      padding: 2rem;
+      margin-bottom: 8rem;
+      margin-left: 3rem;
 }
 
 .tablero__panels {
-      display: flex;
+      display:flex;
       flex-direction: column;
+      align-items: flex-start;
 }

@@ -6,6 +6,7 @@
     flex-direction: column;
     background-color: var(--fondo-color);
 }
+
 /* CREAR PROYECTO | CONFIGURACIÓN USUARIO */
 .usuario__lista {
     display: flex;
@@ -17,6 +18,7 @@
 .lista__opcion {
     @include middle-text(600);
     color: var(--black-text);
+    padding: 2rem;
 }
 
 
@@ -26,6 +28,7 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--fondo-color);
+    margin: 2rem;
 }
 
 .usuario__images{
@@ -64,25 +67,12 @@
 /* PROYECTOS USUARIO */
 
 .contenedor__proyectos {
+    margin: 10rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 6rem;
     background-color: var(--fondo-color);
 }
 
-// Estilos borde del panel
-  
-.panel__todo {
-    border-color: var(--todo-panel);
-}
-
-.panel__inprogress {
-    border-color: var(--inprogress-panel);
-}
-
-.panel__toreview {
-    border-color: var(--toreview-panel);
-}
-
-.panel__done {
-    border-color: var(--done-panel);
-}
