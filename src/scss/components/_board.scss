@@ -6,6 +6,7 @@
   
 .tablero__todo {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
@@ -19,6 +20,7 @@
   
 .tablero__inprogress {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
@@ -32,12 +34,13 @@
   
 .tablero__toreview {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--toreview-panel);
             color: var(--black-text);
-            padding: 1rem;
+            padding: 2rem;
             text-align:center;
             margin-bottom: 8rem;
       }
@@ -45,6 +48,7 @@
   
 .tablero__done {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
@@ -63,10 +67,23 @@
       align-items: flex-start;
 }
 
-@media (max-width: 845px){
+@media (max-width: 1667px){
       .tablero__panels{
             align-items: center;
             justify-content:space-around;
             gap: 6rem;
+      }
+}
+
+@media (max-width: 840px){
+      .tablero__inprogress{
+            .tablero__title{
+                  padding:1.5rem;
+            }
+      }
+      .tablero__toreview{
+            .tablero__title{
+                  padding:1.5rem;
+            }
       }
 }
