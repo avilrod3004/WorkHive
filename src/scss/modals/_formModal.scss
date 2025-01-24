@@ -20,3 +20,27 @@
 .modal-form__titulo {
   font-weight: bold;
 }
+
+/* input imagen */
+
+/* Oculta el input de archivo */
+.file-input {
+  display: none;
+}
+
+/* Estilo para el botón personalizado */
+.custom-button {
+  color: white;
+  //padding: 10px 20px;
+  border: 1px solid black;
+  cursor: pointer;
+  //border-radius: 5px;
+}
+
+
+.imagen-redonda {
+  border-radius: 50%; /* Hace que la imagen sea redonda */
+  width: 150px; /* Ajusta el tamaño de la imagen */
+  height: 150px; /* Ajusta el tamaño de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+}

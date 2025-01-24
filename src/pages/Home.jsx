@@ -6,6 +6,10 @@ import exito from "../assets/home/exito.png";
 import { useTheme } from '../context/ThemeContext'
 import * as Yup from "yup";
 import FormModal from "../modals/FormModal.jsx";
+import {useState} from "react";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import {brown} from "@mui/material/colors";
+import Abeja from "../assets/bee.png"
 
 /**
  * Home Component
@@ -84,15 +88,30 @@ const Home = () => {
             console.log("Sesion iniciada ", values);
             setModalFormOpen(false)
           }}
+          title="Configurar usuario"
       >
         {
           ({values, handleChange, handleBlur, errors, touched}) => (
               <>
+
+                <div className="formulario-perfil">
+                  <img src={Abeja} alt="" className="modal__abeja"/>
+
+                  <img src={organiza} alt="" className="imagen-redonda"/>
+
+                  <input type="file" id="fileInput" className="file-input"/>
+
+                  <label htmlFor="fileInput" className="custom-button">
+                    <AddPhotoAlternateIcon sx={{ color: brown[400] }}/>
+                  </label>
+                </div>
+
                 <label htmlFor="email">
-                  Email:
+                  Nombre
                   <input
                       type="text"
                       name="email"
+                      id="email"
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -103,10 +122,11 @@ const Home = () => {
                 </label>
 
                 <label htmlFor="password">
-                  Contraseña:
+                  Email:
                   <input
                       type="password"
                       name="password"
+                      id="password"
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
