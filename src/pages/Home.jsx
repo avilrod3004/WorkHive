@@ -4,6 +4,8 @@ import organiza from "../assets/home/4.png";
 import colabora from "../assets/home/5.png";
 import exito from "../assets/home/exito.png";
 import { useTheme } from '../context/ThemeContext'
+import * as Yup from "yup";
+import FormModal from "../modals/FormModal.jsx";
 
 /**
  * Home Component
@@ -15,6 +17,17 @@ import { useTheme } from '../context/ThemeContext'
 const Home = () => {
 
   const { isDarkMode } = useTheme();
+  const [modalFormOpen, setModalFormOpen] = useState(false);
+
+
+  const validationSchemaForm = Yup.object().shape({
+    email: Yup.string().trim()
+        .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, "El formato del email no es válido")
+        .required("El campo email es obligatorio"),
+    password: Yup.string().trim()
+        .matches(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/, "La contraseña no cumple los requisitos. Debe tener una longitud mínima de 8 caracteres y contener una letra en mayúscula, un número y un caracter especial.")
+        .required("El campo contraseña es obligatorio.")
+  })
 
   return (
     <div className="contenedor__home">
@@ -57,6 +70,55 @@ const Home = () => {
           </div>
         </article>
       </section>
+
+      <button onClick={() => setModalFormOpen(true)}>Modal formulario</button>
+      <FormModal
+          isOpen={modalFormOpen}
+          onClose={() => setModalFormOpen(false)}
+          initialValues={{
+            email: "",
+            password: ""
+          }}
+          validationSchema={validationSchemaForm}
+          onSubmit={(values) => {
+            console.log("Sesion iniciada ", values);
+            setModalFormOpen(false)
+          }}
+      >
+        {
+          ({values, handleChange, handleBlur, errors, touched}) => (
+              <>
+                <label htmlFor="email">
+                  Email:
+                  <input
+                      type="text"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                  />
+                  {
+                      errors.email && touched.email && errors.email
+                  }
+                </label>
+
+                <label htmlFor="password">
+                  Contraseña:
+                  <input
+                      type="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                  />
+                  {
+                      errors.password && touched.password && errors.password
+                  }
+                </label>
+              </>
+          )
+        }
+      </FormModal>
     </div>
   );
 };
