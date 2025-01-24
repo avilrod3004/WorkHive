@@ -3,14 +3,13 @@ import { useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
 import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
+import { useTaskStore } from "../config/taskStore";
 
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
+  const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
-
-  const [task, setTask] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchTask() {
