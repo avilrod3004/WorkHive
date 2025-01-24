@@ -10,7 +10,7 @@
 
 /* COMENTARIOS */
 .comentarios__titulo{
-    @include title-text(600);
+    @include title-text(300);
     color: var(--black-text);
 }
 

@@ -141,8 +141,10 @@ const ProyectInfo = () => {
     project && (
       <div className="contenedor__info">
         <header className="info__header">
-          <img className="header__image" src={bee} alt="Logo de WorkHive" />
-          <h1 className="header__titulo">{project.nombre}</h1>
+          <div className='contenedor__image'>
+            <img className="header__image" src={bee} alt="Logo de WorkHive" />
+            <h1 className="header__titulo">{project.nombre}</h1>
+          </div>
           <TeamMenu
             teamMembers={[project.administrador, ...project.colaboradores]}
           />

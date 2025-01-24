@@ -22,7 +22,9 @@ a {
 }
 
 a:hover {
-    color: #CFA97E;
-    font-size:clamp(0.9rem, 1.24vw, 2.1rem)
+    color: #9D6F3A;
 }
 
+a:active{
+    font-size:clamp(1rem, 1.5vw, 2.1rem)
+}
