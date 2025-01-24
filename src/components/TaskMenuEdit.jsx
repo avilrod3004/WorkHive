@@ -30,33 +30,3 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
 
 export default TaskMenuEdit
 
-/**
- * Ejemplo de uso del componente TaskMenuEdit:
- *
- * import React from 'react'
- * import TaskMenuEdit from './TaskMenuEdit'
- *
- * const App = () => {
- *   const handleEditTask = (id) => {
- *     console.log(`Editar tarea ${id}`);
- *     // Lógica para editar tarea
- *   }
- *
- *   const handleDeleteTask = (id) => {
- *     console.log(`Eliminar tarea ${id}`);
- *     // Lógica para eliminar tarea
- *   }
- *
- *   return (
- *     <div>
- *       <TaskMenuEdit 
- *         id="tarea1"
- *         onEditTask={handleEditTask}
- *         onDeleteTask={handleDeleteTask}
- *       />
- *     </div>
- *   )
- * }
- *
- * export default App
- */
