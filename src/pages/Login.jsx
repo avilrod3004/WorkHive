@@ -4,11 +4,14 @@ import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
 import LogoWorkHive from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import logoDark from "../assets/logodark.png";
+import { useTheme } from '../context/ThemeContext'
 
 const Login = () => {
   const { setUser } = useUserStore();
   const navigate = useNavigate();
   const { fetch } = useAxiosStore();
+  const { isDarkMode } = useTheme();
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
@@ -45,7 +48,7 @@ const Login = () => {
     <>
       <main className="formulario-cuenta">
         <aside className="formulario-cuenta__lateral">
-          <img src={LogoWorkHive} alt="" className="lateral__logo" />
+          <img src={isDarkMode ? logoDark : LogoWorkHive} alt="" className="lateral__logo" />
           <p className="lateral__nombre">WORKHIVE</p>
         </aside>
 
