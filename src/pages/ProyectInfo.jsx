@@ -1,91 +1,231 @@
-import React from 'react';
-import bee from "../assets/bee.png"
-import Menu from "../components/EditMenuProject"
-import TeamMenu from '../components/TeamMenu';
+import React, { useEffect } from "react";
+import bee from "../assets/bee.png";
+import Menu from "../components/EditMenuProject";
+import TeamMenu from "../components/TeamMenu";
+import { useProjectStore } from "../config/projectStore";
+import { NavLink, useParams } from "react-router-dom";
+import useAxiosStore from "../hooks/useAxios";
 
 const ProyectInfo = () => {
-    return (
-        <div className='contenedor__info'>
-            <header className='info__header'>
-                <img className='header__image' src={bee} alt="Logo de WorkHive"/>
-                <h1 className='header__titulo'>Nombre proyecto</h1>
-                <TeamMenu />
-            </header>
+  const { id } = useParams(); // Recuperar ID desde la URL
+  const {
+    project,
+    setProject,
+    loading,
+    setLoading,
+    setTodoTasks,
+    setInProgressTasks,
+    setToReviewTasks,
+    setDoneTasks,
+    todoTasks,
+    inProgressTasks,
+    toReviewTasks,
+    doneTasks,
+  } = useProjectStore();
+  const { fetch } = useAxiosStore();
+  const token = localStorage.getItem("token");
 
-            <section className='info__proyecto'>
-                <div className='proyecto__descripcion'>
-                    <h1 className='descripcion__titulo'>Descripción de proyecto</h1>
-                    <p className='descripcion__parrafo'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam autem commodi consequatur delectus est excepturi itaque laudantium maxime, minima molestias nam nisi omnis perferendis, possimus soluta vel, vitae voluptate! Aliquid cum facilis laborum minima modi, non possimus vero. At cupiditate ipsam itaque quis reiciendis? Autem corporis, esse eveniet fugiat hic obcaecati quidem rem sequi temporibus unde.</p>
-                </div>
+  useEffect(() => {
+    async function fetchProjectData() {
+      try {
+        const projectResponse = await fetch(
+          `${import.meta.env.VITE_BASE_API}tableros/${id}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (projectResponse.error) throw new Error(projectResponse.error);
+        return projectResponse.data;
+      } catch (error) {
+        console.error("Error al obtener el proyecto:", error);
+        throw error;
+      }
+    }
 
-                <div className='proyecto__fechas'>
-                    <div className='fechas__descripcion'>
-                        <p className='fechas__parrafo'><span>Fecha de inicio: </span>30/12/2024</p>
-                    </div>
+    async function fetchUserData(userId) {
+      try {
+        const userResponse = await fetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${userId}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (userResponse.error) throw new Error(userResponse.error);
+        return userResponse.data;
+      } catch (error) {
+        console.error(`Error al obtener datos del usuario ${userId}:`, error);
+        throw error;
+      }
+    }
 
-                    <div className='fechas__descripcion'>
-                        <p className='fechas__parrafo'><span>Fecha de fin: </span>05/01/2025</p>
-                    </div>
-                </div>
+    async function fetchTaskData(estado) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_API}tareas/estado`,
+          "POST",
+          { tablero: id, estado },
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+        return response.data;
+      } catch (error) {
+        console.error(`Error al obtener tareas de estado ${estado}:`, error);
+        return [];
+      }
+    }
 
-                <div className='proyecto__administrador'>
-                    <h1 className='administrador__titulo'>Administrador</h1>
-                    <p className='administrador__nombre'>Paquito Rodríguez Benalmadena</p>
-                </div>
-            </section>
+    async function getProjectAndTasks() {
+      setLoading(true);
+      try {
+        const projectData = await fetchProjectData();
 
-            <section className='contenedor__tareas'>
-                <div className='tareas__todo'>
-                    <h1 className='todo__titulo'>TO DO</h1>
+        // Obtener administrador
+        const adminData = await fetchUserData(projectData.administrador);
 
-                    <ul className='todo__lista'>
-                        <li>Nombre tarea 1</li>
-                        <li>Nombre tarea 2</li>
-                        <li>Nombre tarea 3</li>
-                        <li>Nombre tarea 4</li>
-                    </ul>
-                </div>
+        // Obtener colaboradores
+        const collaborators = await Promise.all(
+          projectData.colaboradores.map((colaboradorId) =>
+            fetchUserData(colaboradorId)
+          )
+        );
 
-                <div className='tareas__inprogress'>
-                    <h1 className='inprogress__titulo'>IN PROGRESS</h1>
+        // Actualizar proyecto con datos completos
+        setProject({
+          ...projectData,
+          administrador: adminData,
+          colaboradores: collaborators.filter(Boolean),
+        });
 
-                    <ul className='inprogress__lista'>
-                        <li>Nombre tarea 1</li>
-                        <li>Nombre tarea 2</li>
-                    </ul>
-                </div>
+        // Obtener y establecer tareas según estado
+        const [todo, inProgress, toReview, done] = await Promise.all([
+          fetchTaskData("pendiente"),
+          fetchTaskData("en_proceso"),
+          fetchTaskData("en_revision"),
+          fetchTaskData("completada"),
+        ]);
 
-                <div className='tareas__toreview'>
-                    <h1 className='toreview__titulo'>TO REVIEW</h1>
+        setTodoTasks(todo);
+        setInProgressTasks(inProgress);
+        setToReviewTasks(toReview);
+        setDoneTasks(done);
+      } catch (error) {
+        console.error(
+          "Error al cargar los datos del proyecto y tareas:",
+          error
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
 
-                    <ul className='toreview__lista'>
-                        <li>Nombre tarea 1</li>
-                        <li>Nombre tarea 2</li>
-                        <li>Nombre tarea 3</li>
-                    </ul>
-                </div>
+    if (id && token) getProjectAndTasks();
+  }, [
+    id,
+    token,
+    fetch,
+    setProject,
+    setLoading,
+    setTodoTasks,
+    setInProgressTasks,
+    setToReviewTasks,
+    setDoneTasks,
+  ]);
 
-                <div className='tareas__done'>
-                    <h1 className='done__titulo'>DONE</h1>
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
 
-                    <ul className='done__lista'>
-                        <li>Nombre tarea 1</li>
-                        <li>Nombre tarea 2</li>
-                    </ul>
-                </div>
-            </section>
+  return (
+    project && (
+      <div className="contenedor__info">
+        <header className="info__header">
+          <img className="header__image" src={bee} alt="Logo de WorkHive" />
+          <h1 className="header__titulo">{project.nombre}</h1>
+          <TeamMenu
+            teamMembers={[project.administrador, ...project.colaboradores]}
+          />
+        </header>
 
-            {/* <nav className='contenedor__menu'>
-                <ul className='menu__lista'>
-                    <li className='lista__opcion'><a href=""><img src="" alt="Agregar tarea"/></a></li>
-                    <li className='lista__opcion'><a href=""><img src="" alt="Añadir colaborador"/></a></li>
-                    <li className='lista__opcion'><a href=""><img src="" alt="Editar proyecto"/></a></li>
-                    <li className='lista__opcion'><a href=""><img src="" alt="Borrar proyecto"/></a></li>
-                </ul>
-            </nav> */}
-            <Menu />
-        </div>
-    );
+        <section className="info__proyecto">
+          <div className="proyecto__descripcion">
+            <h1 className="descripcion__titulo">Descripción de proyecto</h1>
+            <p className="descripcion__parrafo">{project.descripcion}</p>
+          </div>
+
+          <div className="proyecto__fechas">
+            <div className="fechas__descripcion">
+              <p className="fechas__parrafo">
+                <span>Fecha de inicio: </span>
+                {new Date(project.fechaInicio).toLocaleDateString()}
+              </p>
+            </div>
+
+            <div className="fechas__descripcion">
+              <p className="fechas__parrafo">
+                <span>Fecha de fin: </span>
+                {new Date(project.fechaFin).toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+
+          <div className="proyecto__administrador">
+            <h1 className="administrador__titulo">Administrador</h1>
+            <p className="administrador__nombre">
+              {project.administrador.nombre}
+            </p>
+          </div>
+        </section>
+
+        <section className="contenedor__tareas">
+          <div className="tareas__todo">
+            <h1 className="todo__titulo">TO DO</h1>
+            <ul className="todo__lista">
+              {todoTasks.map((tarea) => (
+                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
+                  <li key={tarea._id}>{tarea.nombre}</li>
+                </NavLink>
+              ))}
+            </ul>
+          </div>
+
+          <div className="tareas__inprogress">
+            <h1 className="inprogress__titulo">IN PROGRESS</h1>
+            <ul className="inprogress__lista">
+              {inProgressTasks.map((tarea) => (
+                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
+                  <li key={tarea._id}>{tarea.nombre}</li>
+                </NavLink>
+              ))}
+            </ul>
+          </div>
+
+          <div className="tareas__toreview">
+            <h1 className="toreview__titulo">TO REVIEW</h1>
+            <ul className="toreview__lista">
+              {toReviewTasks.map((tarea) => (
+                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
+                  <li key={tarea._id}>{tarea.nombre}</li>
+                </NavLink>
+              ))}
+            </ul>
+          </div>
+
+          <div className="tareas__done">
+            <h1 className="done__titulo">DONE</h1>
+            <ul className="done__lista">
+              {doneTasks.map((tarea) => (
+                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
+                  <li key={tarea._id}>{tarea.nombre}</li>
+                </NavLink>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <Menu />
+      </div>
+    )
+  );
 };
 
 export default ProyectInfo;
