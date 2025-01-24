@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
+import beeDark from "../assets/beedark.png";
+import panelFondo from "../assets/panelFondo.png";
 import Board from "../components/Board";
 import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
 import { useProjectsStore } from "../config/projectsStore";
+import SettingsIcon from '@mui/icons-material/Settings';
+import AddIcon from '@mui/icons-material/Add';
+import { useTheme } from '../context/ThemeContext'
 
 const UserProfile = () => {
   const {
@@ -18,6 +23,7 @@ const UserProfile = () => {
   const { user } = useUserStore();
   const { fetch } = useAxiosStore();
   const token = localStorage.getItem("token");
+  const { isDarkMode } = useTheme();
 
   async function getProjects() {
     try {
@@ -90,31 +96,53 @@ const UserProfile = () => {
       <nav className="menu__usuario">
         <ul className="usuario__lista">
           <li className="lista__opcion">
-            <a href="">CREAR NUEVO PROYECTO</a>
+            <a href="">
+              <AddIcon 
+                sx={{
+                  '&:hover': {
+                    color: '#FFDE81',
+                    cursor: 'pointer',
+                    fontSize: 28,
+                  },
+                }}
+              />
+              CREAR NUEVO PROYECTO
+            </a>
           </li>
           <li className="lista__opcion">
-            <a href="">CONFIGURACIÓN USUARIO</a>
+            <a href="">
+              <SettingsIcon 
+                sx={{
+                  '&:hover': {
+                    color: '#FFDE81',
+                    cursor: 'pointer',
+                    fontSize: 28,
+                  },
+                }}
+              />
+              CONFIGURACIÓN USUARIO
+            </a>
           </li>
         </ul>
       </nav>
 
       <section className="info__usuario">
-        <div className="usuario__images">
-          {/* Foto de perfil del usuario */}
-          {user && user.fotoPerfil ? (
-            <img className="images__user" src={user.fotoPerfil} alt="" />
-          ) : (
-            <img
-              className="images__user"
-              src="https://cdn-icons-png.flaticon.com/512/6326/6326055.png"
-              alt=""
-            />
-          )}
-          <div className="user__bee">
-            {/* Logo WorkHive */}
-            <img className="images__logo" src={bee} alt="Logo de WorkHive" />
+          <div className="user__container">
+
+            {/* Foto de perfil del usuario */}
+            {user && user.fotoPerfil ? (
+              <img className="images__user" src={user.fotoPerfil} alt="" />
+            ) : (
+              <img
+                className="images__user"
+                src="https://cdn-icons-png.flaticon.com/512/6326/6326055.png"
+                alt=""
+              />
+            )}
+
+            {/* Logo abejita */}
+            <img className="images__logo" src={isDarkMode ? beeDark : bee} alt="Logo de WorkHive" />
           </div>
-        </div>
 
         {/* Nombre completo del usuario */}
         <h1 className="usuario__nombre">{user && user.nombre}</h1>
