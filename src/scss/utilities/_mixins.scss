@@ -8,7 +8,7 @@
     letter-spacing: $letter-spacing-description; 
 }
   
-@mixin title-text($weight: 300) {
+@mixin title-text($weight: 500) {
   font-family: $font;
   font-weight: $weight;
   font-size: $font-size-title;

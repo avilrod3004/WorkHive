@@ -1,27 +1,89 @@
 @import '../utilities/variables';
 @import '../utilities/mixins';
 
-
+*{
+      box-sizing: border-box;
+    
+    }
 // Estilos borde del panel
   
 .panel__todo {
-      border-color: var(--todo-panel);
+      position: relative;
+	width: 22vmin;
+	height: 20vmin;
+	background-color:var(--todo-panel);
+      -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      margin-top: 2rem;
 }
   
 .panel__inprogress {
-      border-color: var(--inprogress-panel);
+      position: relative;
+	width: 22vmin;
+	height: 20vmin;
+	background-color:var(--inprogress-panel);
+      -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      margin-top: -4.3rem;
 }
   
 .panel__toreview {
-      border-color: var(--toreview-panel);
+      position: relative;
+	width: 22vmin;
+	height: 20vmin;
+	background-color:var(--toreview-panel);
+      -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      margin-top: -4.3rem;
 }
   
 .panel__done {
-      border-color: var(--done-panel);
+      position: relative;
+	width: 22vmin;
+	height: 20vmin;
+	background-color:var(--done-panel);
+      -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      margin-top: -4.3rem;
 }
 
-  
+.inside {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      background: var(--fondo-color);
+      -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
 .panel__content {
       @include description-text;
       color: var(--black-text);
+      width:100%;
+      height:100%;
+      padding:0 2rem;
+      position:absolute;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      word-break:break-all;
+}
+
+.panel__todo:nth-child(odd){
+      align-self: flex-end;
+}
+
+.panel__inprogress:nth-child(odd){
+      align-self: flex-end;
+}
+
+  
+.panel__toreview:nth-child(odd){
+      align-self: flex-end;
+}
+
+.panel__done:nth-child(odd){
+      align-self: flex-end;
 }

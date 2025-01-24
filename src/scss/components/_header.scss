@@ -6,33 +6,29 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: var(--fondo-header);
+    padding: 1rem;
 }
 
 .header__titulo {
-    @include title-text(700);
+    @include title-text(1500);
     color: var(--black-text);
-    margin: 0.1rem;
-    padding: 1rem;
+    letter-spacing: 0.6rem;
 }
 
 .header__menu {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin: 0.1rem;
-    padding: 1rem;
+    justify-content: space-between;
+    gap: 2rem;
 }
 
 .menu__opcion {
-    margin: 0.1rem;
-    padding: 0.5rem;
     @include middle-text();
     color: var(--black-text);
+    letter-spacing: 0.2rem;
 }
 
 .theme-icon {
-    margin: 1rem;
-    padding: 1rem;
     cursor: pointer;
     color: var(--black-text);
 }

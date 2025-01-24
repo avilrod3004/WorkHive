@@ -1,9 +1,9 @@
-import React from 'react';
-import Panel from '../components/Panel'
+import React from "react";
+import Panel from "../components/Panel";
 
 /**
  * Componente Board (Tablero)
- * 
+ *
  * Este componente representa un tablero que contiene múltiples paneles.
  * El tablero tiene un tipo específico que determina su estilo y el de sus paneles.
  *
@@ -12,7 +12,8 @@ import Panel from '../components/Panel'
  * @param {string} props.name - El nombre del tablero.
  * @param {string} props.type - El tipo del tablero (e.g., 'todo', 'inprogress', 'toreview', 'done').
  * @param {Array} props.panels - Un array de objetos que representan los paneles del tablero.
- * @param {string} props.panels[].name - El nombre de cada panel individual.
+ * @param {string} props.panels[]._id - El identificador de cada panel individual.
+ * @param {string} props.panels[].nombre - El nombre de cada panel individual.
  *
  * @example
  * const panels = [{ name: 'Panel 1' }, { name: 'Panel 2' }];
@@ -21,18 +22,16 @@ import Panel from '../components/Panel'
  * )
  */
 const Board = ({ name, type, panels }) => {
-
-    return (
-      <div className={`tablero__${type}`}>
-        <h2 className="tablero__title">{name}</h2>
-        <div className="tablero__panels">
-          {panels.map((panel, index) => (
-            <Panel key={index} name={panel.name} type={type} />
-          ))}
-        </div>
+  return (
+    <div className={`tablero__${type}`}>
+      <h2 className="tablero__title">{name}</h2>
+      <div className="tablero__panels">
+        {panels.map((panel, index) => (
+          <Panel key={index} name={panel.nombre} type={type} id={panel._id} />
+        ))}
       </div>
-    );
-  };
-  
+    </div>
+  );
+};
 
-  export default Board;
+export default Board;

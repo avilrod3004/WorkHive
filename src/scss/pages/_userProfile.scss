@@ -6,6 +6,7 @@
     flex-direction: column;
     background-color: var(--fondo-color);
 }
+
 /* CREAR PROYECTO | CONFIGURACIÓN USUARIO */
 .usuario__lista {
     display: flex;
@@ -17,7 +18,15 @@
 .lista__opcion {
     @include middle-text(600);
     color: var(--black-text);
+    padding: 2rem;
 }
+
+a {
+    display:flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
 
 
 /* INFO USUARIO */
@@ -26,63 +35,46 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--fondo-color);
+    margin: 2rem;
 }
 
-.usuario__images{
+.user__container{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
 }
 
 .images__user{
-    width: 25%;
+    width: 40%;
     height: auto;
     border-radius: 50%;
     object-fit: cover;
-    // aspect-ratio: 4/4;
-}
-
-.user__bee {
-    display: flex;
-    justify-content: column;
-    align-items:self-start;
 }
 
 .images__logo {
-    width: 6%;
+    width: 10%;
     height: auto;
-    // bottom: -70px; /* Ajusta para mover hacia arriba o abajo */
-    // left: -10px; /* Ajusta para mover hacia la izquierda o derecha */
-
+    margin-left: -8rem;
+    margin-top: -3rem;
 }
 
 .usuario__nombre{
-    @include middle-text(700);
+    @include title-text(700);
     color: var(--black-text);
+    margin: 2rem;
 }
 
 /* PROYECTOS USUARIO */
 
 .contenedor__proyectos {
+    margin: 1rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 6rem;
     background-color: var(--fondo-color);
 }
 
-// Estilos borde del panel
-  
-.panel__todo {
-    border-color: var(--todo-panel);
-}
+/* PANEL FONDO */
 
-.panel__inprogress {
-    border-color: var(--inprogress-panel);
-}
-
-.panel__toreview {
-    border-color: var(--toreview-panel);
-}
-
-.panel__done {
-    border-color: var(--done-panel);
-}

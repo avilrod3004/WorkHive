@@ -3,20 +3,12 @@ import { NavLink } from "react-router-dom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useUserStore } from "../config/userStore";
+import { useTheme } from "../context/ThemeContext";
 
 const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    return document.documentElement.getAttribute("data-theme") === "dark";
-  });
-
+  const { isDarkMode, setIsDarkMode } = useTheme();
   const { user, setUser } = useUserStore();
 
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-theme",
-      isDarkMode ? "dark" : "light"
-    );
-  }, [isDarkMode]);
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
@@ -29,12 +21,12 @@ const Header = () => {
   return (
     <header className="header">
       <NavLink to="/" className="header__titulo">
-        WORKHIVE
+        workhive
       </NavLink>
       <ul className="header__menu">
         {!user && (
           <li className="menu__opcion">
-            <NavLink to="/login">Iniciar sesión</NavLink>
+            <NavLink to="/auth/login">Iniciar sesión</NavLink>
           </li>
         )}
         {user && (
@@ -44,12 +36,12 @@ const Header = () => {
         )}
         {!user && (
           <li className="menu__opcion">
-            <NavLink to="/register">Registrarse</NavLink>
+            <NavLink to="/auth/register">Registrarse</NavLink>
           </li>
         )}
         {user && (
           <li className="menu__opcion">
-            <NavLink onClick={handleLogout} to="/login">
+            <NavLink onClick={handleLogout} to="/auth/login">
               Cerrar sesión
             </NavLink>
           </li>

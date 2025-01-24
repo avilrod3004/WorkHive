@@ -7,7 +7,9 @@
 html, body {
     height: 100%;  
     background-color: var(--fondo-color);
+    min-height: 80vh;
 }
+
 
 ul,li {
     list-style: none;
@@ -15,4 +17,12 @@ ul,li {
   
 a {
     text-decoration: none;
+    @include middle-text(200);
+    color: var(--black-text);
 }
+
+a:hover {
+    color: #CFA97E;
+    font-size:clamp(1.1rem, 1.24vw, 2.1rem)
+}
+

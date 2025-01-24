@@ -1,8 +1,9 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useState } from "react";
 
 /**
  * Componente que muestra un menú con los miembros del equipo.
- * 
+ *
  * @component
  * @param {Object} props - Propiedades del componente
  * @param {Array[String]} props.teamMembers - Array con los nombres de los miembros del equipo
@@ -17,24 +18,22 @@ const TeamMenu = ({ teamMembers }) => {
 
   return (
     <div className="team__menu">
-      <h2 className='menu__titulo'>EQUIPO</h2>
-      <KeyboardArrowDownIcon 
-        className='menu__icono' 
-        onClick={toggleMenu}
-      />
+      <h2 className="menu__titulo">EQUIPO</h2>
+      <KeyboardArrowDownIcon className="menu__icono" onClick={toggleMenu} />
       {isOpen && (
-        <ul className='menu__miembros'>
+        <ul className="menu__miembros">
           {teamMembers.map((member, index) => (
-            <li className='menu__usuario' key={index}>{member}</li>
+            <li className="menu__usuario" key={index}>
+              {member}
+            </li>
           ))}
         </ul>
       )}
     </div>
   );
 };
-}
 
-export default TeamMenu
+export default TeamMenu;
 
 // PENSADO PARA PASARLE UN ARRAY, EJEMPLO:
 // import React from 'react'

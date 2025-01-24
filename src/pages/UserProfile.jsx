@@ -1,56 +1,167 @@
 import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
-import { useNavigate } from "react-router-dom";
-import Board from "../components/Board"
+import beeDark from "../assets/beedark.png";
+import panelFondo from "../assets/panelFondo.png";
+import Board from "../components/Board";
+import { useUserStore } from "../config/userStore";
+import useAxiosStore from "../hooks/useAxios";
+import { useProjectsStore } from "../config/projectsStore";
+import SettingsIcon from '@mui/icons-material/Settings';
+import AddIcon from '@mui/icons-material/Add';
+import { useTheme } from '../context/ThemeContext'
 
 const UserProfile = () => {
+  const {
+    isLoading,
+    actualProjects,
+    completedProjects,
+    setIsLoading,
+    setActualProjects,
+    setCompletedProjects,
+  } = useProjectsStore();
+
+  const { user } = useUserStore();
+  const { fetch } = useAxiosStore();
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
+
+  async function getProjects() {
+    try {
+      if (user) {
+        const [adminProjects, collaboratorProjects] = await Promise.all([
+          fetch(
+            import.meta.env.VITE_BASE_API + `tableros/administrador/${user.id}`,
+            "GET",
+            null,
+            { Authorization: `Bearer ${token}` }
+          ),
+          fetch(
+            import.meta.env.VITE_BASE_API + `tableros/colaborador/${user.id}`,
+            "GET",
+            null,
+            { Authorization: `Bearer ${token}` }
+          ),
+        ]);
+
+        if (adminProjects.error) throw new Error(adminProjects.error);
+        if (collaboratorProjects.error)
+          throw new Error(collaboratorProjects.error);
+
+        const allProjects = [
+          ...adminProjects.data,
+          ...collaboratorProjects.data,
+        ];
+        const projectPromises = allProjects.map((project) =>
+          fetch(
+            import.meta.env.VITE_BASE_API + `tableros/${project._id}/actual`,
+            "GET",
+            null,
+            { Authorization: `Bearer ${token}` }
+          )
+        );
+
+        const projectStatuses = await Promise.all(projectPromises);
+
+        const newActualProjects = [];
+        const newCompletedProjects = [];
+
+        allProjects.forEach((project, index) => {
+          if (projectStatuses[index].data.actual) {
+            newActualProjects.push(project);
+          } else {
+            newCompletedProjects.push(project);
+          }
+        });
+
+        setActualProjects(newActualProjects);
+        setCompletedProjects(newCompletedProjects);
+      }
+    } catch (error) {
+      console.error("Error al cargar los proyectos", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    if (token === null) {
-      navigate(-1);
-    }
-  }, [token, navigate]);
+    getProjects();
+  }, [user, token, fetch]);
 
-    const mockPanels = [
-        { name: "Panel 1" },
-        { name: "Panel 2" },
-        { name: "Panel 3" },
-      ];
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
+
   return (
-    <div className='contenedor__usuario'>
+    <div className="contenedor__usuario">
       <nav className="menu__usuario">
         <ul className="usuario__lista">
           <li className="lista__opcion">
-            <a href="">CREAR NUEVO PROYECTO</a>
+            <a href="">
+              <AddIcon 
+                sx={{
+                  '&:hover': {
+                    color: '#FFDE81',
+                    cursor: 'pointer',
+                    fontSize: 28,
+                  },
+                }}
+              />
+              CREAR NUEVO PROYECTO
+            </a>
           </li>
           <li className="lista__opcion">
-            <a href="">CONFIGURACIÓN USUARIO</a>
+            <a href="">
+              <SettingsIcon 
+                sx={{
+                  '&:hover': {
+                    color: '#FFDE81',
+                    cursor: 'pointer',
+                    fontSize: 28,
+                  },
+                }}
+              />
+              CONFIGURACIÓN USUARIO
+            </a>
           </li>
         </ul>
       </nav>
 
-            <section className='info__usuario'>
-                <div className='usuario__images'>
-                    {/* Foto de perfil del usuario */}
-                    <img className='images__user' src="https://cdn-icons-png.flaticon.com/512/6326/6326055.png" alt=""/>
-                    <div className='user__bee'>
-                         {/* Logo WorkHive */}
-                        <img className='images__logo' src={bee} alt="Logo de WorkHive"/>
-                    </div>
-                </div>
+      <section className="info__usuario">
+          <div className="user__container">
 
-                    {/* Nombre completo del usuario */}
-                <h1 className='usuario__nombre'>PAqiuto</h1>
-            </section>
+            {/* Foto de perfil del usuario */}
+            {user && user.fotoPerfil ? (
+              <img className="images__user" src={user.fotoPerfil} alt="" />
+            ) : (
+              <img
+                className="images__user"
+                src="https://cdn-icons-png.flaticon.com/512/6326/6326055.png"
+                alt=""
+              />
+            )}
 
-            <section className='contenedor__proyectos'>
-                <Board name="PROYECTOS ACTUALES" type="inprogress" panels={mockPanels} />
-                <Board name="PROYECTOS FINALIZADOS" type="done" panels={mockPanels} />
-            </section>
-        </div>
-    );
+            {/* Logo abejita */}
+            <img className="images__logo" src={isDarkMode ? beeDark : bee} alt="Logo de WorkHive" />
+          </div>
+
+        {/* Nombre completo del usuario */}
+        <h1 className="usuario__nombre">{user && user.nombre}</h1>
+      </section>
+
+      <section className="contenedor__proyectos">
+        <Board
+          name="PROYECTOS ACTUALES"
+          type="inprogress"
+          panels={actualProjects}
+        />
+        <Board
+          name="PROYECTOS FINALIZADOS"
+          type="done"
+          panels={completedProjects}
+        />
+      </section>
+    </div>
+  );
 };
 
 export default UserProfile;

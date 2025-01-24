@@ -9,7 +9,8 @@ const useAxiosStore = create((set) => ({
   fetch: async (url, method = "GET", body = null, headers = null) => {
     try {
       if (method === "GET") {
-        const response = await axios.get(url, body, { headers });
+        set({ isLoading: true });
+        const response = await axios.get(url, { headers });
         set({ data: response.data, isLoading: false });
         return { data: response.data, error: null };
       } else if (method === "POST") {
@@ -21,7 +22,7 @@ const useAxiosStore = create((set) => ({
         set({ data: response.data, isLoading: false });
         return { data: response.data, error: null };
       } else if (method === "DELETE") {
-        const response = await axios.delete(url, body, { headers });
+        const response = await axios.delete(url, { headers });
         set({ data: response.data, isLoading: false });
         return { data: response.data, error: null };
       } else {

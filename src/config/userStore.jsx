@@ -1,4 +1,3 @@
-// store.js - Configuración de Zustand
 import { create } from "zustand";
 
 export const useUserStore = create((set) => ({

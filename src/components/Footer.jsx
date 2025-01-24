@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className='footer'>
         <nav className='footer__menu'>
             <li className='menu__opcion'>
-                <NavLink to="/contactUs">Contacta con nosotros</NavLink>
+                <NavLink to="/contactUs">contacta con nosotros</NavLink>
             </li>
         </nav>
     </footer>
