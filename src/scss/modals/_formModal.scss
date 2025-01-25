@@ -19,28 +19,63 @@
 
 .modal-form__titulo {
   font-weight: bold;
+  color: var(--black-text);
 }
 
-/* input imagen */
 
-/* Oculta el input de archivo */
-.file-input {
+/* Input para cambiar la foto de perfil del usuario */
+
+.formulario-perfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formulario-perfil__foto {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.foto__input-fichero {
   display: none;
 }
 
-/* Estilo para el botón personalizado */
-.custom-button {
+.foto__boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  padding: 0.3rem;
+  margin-left: -2rem;
+  z-index: 1000;
+
   color: white;
-  //padding: 10px 20px;
-  border: 1px solid black;
+  background-color: var(--fondo-color);
+
   cursor: pointer;
-  //border-radius: 5px;
 }
 
+.foto__imagen-redonda {
+  width: 7rem;
+  height: 7rem;
 
-.imagen-redonda {
-  border-radius: 50%; /* Hace que la imagen sea redonda */
-  width: 150px; /* Ajusta el tamaño de la imagen */
-  height: 150px; /* Ajusta el tamaño de la imagen */
-  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  border-radius: 50%;
+  object-fit: cover;
 }
+
+//import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+//import {brown} from "@mui/material/colors";
+
+//<div className="formulario-perfil">
+//  <div className="formulario-perfil__foto">
+//    <img src={organiza} alt="" className="foto__imagen-redonda"/>
+//
+//    <input type="file" id="fileInput" className="foto__input-fichero"/>
+//
+//    <label htmlFor="fileInput" className="foto__boton">
+//      <AddPhotoAlternateIcon sx={{ color: brown[400] }} />
+//    </label>
+//  </div>
+//</div>

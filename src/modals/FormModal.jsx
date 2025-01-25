@@ -2,6 +2,8 @@ import React from 'react';
 import Modal from "./Modal.jsx";
 import {Formik} from "formik";
 import Bee from "../assets/bee.png"
+import DarkBee from "../assets/beedark.png"
+import {useTheme} from "../context/ThemeContext.jsx";
 
 /**
  * FormModal - Componente para mostrar un modal con un formulario gestionado por Formik.
@@ -16,6 +18,8 @@ import Bee from "../assets/bee.png"
  * @returns {React.ReactElement|null} El componente del modal con el formulario o `null` si no está abierto.
  */
 const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, children, title}) => {
+    const { isDarkMode } = useTheme();
+
     return (
         <Modal isOpen={isOpen}>
             <Formik
@@ -27,7 +31,7 @@ const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, 
                     ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
                         <form onSubmit={handleSubmit} className="modal-form__formulario">
                             <header className="modal-form__header">
-                                <img src={Bee} alt="" className="modal__abeja"/>
+                                <img src={isDarkMode ? DarkBee : Bee} alt="" className="modal__abeja"/>
                                 <p className="modal-form__titulo">{title}</p>
                             </header>
 
