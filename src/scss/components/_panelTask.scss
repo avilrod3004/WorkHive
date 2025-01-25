@@ -7,52 +7,52 @@
     }
 // Estilos borde del panel
   
-.panel__todo {
+.panelTask__todo {
       position: relative;
-	width: 26vmin;
-	height: 24vmin;
+      width: 22vmin;
+      height: 20vmin;
       min-width: 100px;
       min-height: 80px;
 	background-color:var(--todo-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
+      margin-top: -5rem;
 }
   
-.panel__inprogress {
+.panelTask__inprogress {
       position: relative;
-	width: 26vmin;
-	height: 24vmin;
+      width: 22vmin;
+      height: 20vmin;
       min-width: 100px;
       min-height: 80px;
 	background-color:var(--inprogress-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
+      margin-top: -5rem;
 }
   
-.panel__toreview {
+.panelTask__toreview {
       position: relative;
-	width: 26vmin;
-	height: 24vmin;
+      width: 22vmin;
+      height: 20vmin;
       min-width: 100px;
       min-height: 80px;
 	background-color:var(--toreview-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
+      margin-top: -5rem;
 }
   
-.panel__done {
+.panelTask__done {
       position: relative;
-	width: 26vmin;
-	height: 24vmin;
+      width: 22vmin;
+      height: 20vmin;
       min-width: 100px;
       min-height: 80px;
 	background-color:var(--done-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
+      margin-top: -5rem;
 }
 
 .inside {
@@ -66,7 +66,7 @@
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 
-.panel__content {
+.panelTask__content {
       @include description-text;
       color: var(--black-text);
       width:100%;
@@ -80,42 +80,43 @@
       text-overflow: ellipsis ellipsis;
 }
 
-.panel__todo:nth-child(even){
+.panelTask__todo:nth-child(even){
       align-self: flex-end;
 }
 
-.panel__inprogress:nth-child(even){
+.panelTask__inprogress:nth-child(even){
       align-self: flex-end;
 }
 
   
-.panel__toreview:nth-child(even){
+.panelTask__toreview:nth-child(even){
       align-self: flex-end;
 }
 
-.panel__done:nth-child(even){
+.panelTask__done:nth-child(even){
       align-self: flex-end;
 }
 
 @media (max-width: 1600px){
-      .panel__todo:nth-child(even){
+      .panelTask__todo:nth-child(even){
             align-self: center;
             margin: 1rem;
       }
       
-      .panel__inprogress:nth-child(even){
+      .panelTask__inprogress:nth-child(even){
             align-self: center;
             margin: 1rem;
       }
       
         
-      .panel__toreview:nth-child(even){
+      .panelTask__toreview:nth-child(even){
             align-self: center;
             margin: 1rem;
       }
       
-      .panel__done:nth-child(even){
+      .panelTask__done:nth-child(even){
             align-self: center;
             margin: 1rem;
       }
 }
+
