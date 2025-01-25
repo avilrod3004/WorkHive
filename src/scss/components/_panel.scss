@@ -119,3 +119,9 @@
             margin: 1rem;
       }
 }
+  
+.panel__done:active, .panel__inprogress:active, .panel__todo:active, .panel__toreview:active {
+      width: 27vmin;
+	height: 25vmin;
+}
+  
