@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
 import panelFondo from "../assets/panelFondo.png";
@@ -9,6 +9,9 @@ import { useProjectsStore } from "../config/projectsStore";
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '../context/ThemeContext'
+import FormModal from "../modals/FormModal.jsx";
+import * as Yup from "yup";
+
 
 const UserProfile = () => {
   const {
@@ -24,6 +27,27 @@ const UserProfile = () => {
   const { fetch } = useAxiosStore();
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
+  const [modalNewProjectOpen, setmodalNewProjectOpen] = useState(false);
+  const [modalEditProfileOpen, setmodalEditProfileOpen] = useState(false);
+
+  const validationSchemaNewProject = Yup.object().shape({
+    name: Yup.string().trim()
+        .required("El campo 'Nombre proyecto' es obligatorio"),
+    description: Yup.string().trim()
+        .required("El campo 'Descripción' es obligatorio."),
+    dateIni: Yup.date()
+        .required("El campo 'Fecha' es obligatorio")
+        .min(new Date(), "La fecha debe ser posterior a la actual")
+  })
+
+  const validationSchemaEditProject = Yup.object().shape({
+    name: Yup.string().trim()
+      .required("El campo 'Nombre' es obligatorio"),
+    email: Yup.string().trim()
+      .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, "El formato del email no es válido")
+      .required("El campo 'Email' es obligatorio")
+  })
+
 
   async function getProjects() {
     try {
@@ -96,7 +120,7 @@ const UserProfile = () => {
       <nav className="menu__usuario">
         <ul className="usuario__lista">
           <li className="lista__opcion">
-            <a href="">
+            <a href="#" onClick={() => setmodalNewProjectOpen(true)}>
               <AddIcon 
                 sx={{
                   '&:hover': {
@@ -160,6 +184,87 @@ const UserProfile = () => {
           panels={completedProjects}
         />
       </section>
+
+      <FormModal
+          isOpen={modalNewProjectOpen}
+          onClose={() => setmodalNewProjectOpen(false)}
+          initialValues={{
+            name: "",
+            dateIni: "",
+            dateEnd: "",
+            description: "",
+          }}
+          validationSchema={validationSchemaNewProject}
+          onSubmit={(values) => {
+            setmodalNewProjectOpen(false)
+          }}
+          title="Añadir proyecto"
+      >
+        {
+          ({values, handleChange, handleBlur, errors, touched}) => (
+              <>
+                <label htmlFor="name" className="formulario__label">
+                  Nombre proyecto
+                  <input
+                      type="text"
+                      name="name"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                  />
+                  {
+                      errors.name && touched.name && <p className="formulario__error">* {errors.name}</p>
+                  }
+                </label>
+
+                <label htmlFor="dateIni" className="formulario__label">
+                  Fecha inicio
+                  <input
+                      type="date"
+                      name="dateIni"
+                      value={values.dateIni}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                  />
+                  {
+                      errors.dateIni && touched.dateIni && <p className="formulario__error">* {errors.dateIni}</p>
+                  }
+                </label>
+
+                <label htmlFor="dateEnd" className="formulario__label">
+                  Fecha fin
+                  <input
+                      type="date"
+                      name="dateEnd"
+                      value={values.dateEnd}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                  />
+                  {
+                      errors.dateEnd && touched.dateEnd && <p className="formulario__error">* {errors.dateEnd}</p>
+                  }
+                </label>
+
+                <label htmlFor="description" className="formulario__label">
+                  Descripción
+                  <textarea
+                      name="description"
+                      value={values.description}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                  />
+                  {
+                      errors.description && touched.description && <p className="formulario__error">* {errors.description}</p>
+                  }
+                </label>
+              </>
+          )
+        }
+      </FormModal>
     </div>
   );
 };
