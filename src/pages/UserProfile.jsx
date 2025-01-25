@@ -11,6 +11,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '../context/ThemeContext'
 import FormModal from "../modals/FormModal.jsx";
 import * as Yup from "yup";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import {brown} from "@mui/material/colors";
+import fotoCambiar from "../assets/margarita.png";
 
 
 const UserProfile = () => {
@@ -40,7 +43,7 @@ const UserProfile = () => {
         .min(new Date(), "La fecha debe ser posterior a la actual")
   })
 
-  const validationSchemaEditProject = Yup.object().shape({
+  const validationSchemaEditProfile = Yup.object().shape({
     name: Yup.string().trim()
       .required("El campo 'Nombre' es obligatorio"),
     email: Yup.string().trim()
@@ -134,7 +137,7 @@ const UserProfile = () => {
             </a>
           </li>
           <li className="lista__opcion">
-            <a href="">
+            <a href="#" onClick={() => setmodalEditProfileOpen(true)}>
               <SettingsIcon 
                 sx={{
                   '&:hover': {
@@ -259,6 +262,70 @@ const UserProfile = () => {
                   />
                   {
                       errors.description && touched.description && <p className="formulario__error">* {errors.description}</p>
+                  }
+                </label>
+              </>
+          )
+        }
+      </FormModal>
+
+      <FormModal
+          isOpen={modalEditProfileOpen}
+          onClose={() => setmodalEditProfileOpen(false)}
+          initialValues={{
+            name: "",
+            dateIni: "",
+            dateEnd: "",
+            description: "",
+          }}
+          validationSchema={validationSchemaEditProfile}
+          onSubmit={(values) => {
+            setmodalEditProfileOpen(false)
+          }}
+          title="Editar perfil"
+      >
+        {
+          ({values, handleChange, handleBlur, errors, touched}) => (
+              <>
+                <div className="formulario-perfil">
+                  <div className="formulario-perfil__foto">
+                    <img src={fotoCambiar} alt="" className="foto__imagen-redonda"/>
+
+                    <input type="file" id="fileInput" className="foto__input-fichero"/>
+
+                    <label htmlFor="fileInput" className="foto__boton">
+                      <AddPhotoAlternateIcon sx={{ color: brown[400] }} />
+                    </label>
+                  </div>
+                </div>
+
+                <label htmlFor="name" className="formulario__label">
+                  Nombre
+                  <input
+                      type="text"
+                      name="name"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                  />
+                  {
+                      errors.name && touched.name && <p className="formulario__error">* {errors.name}</p>
+                  }
+                </label>
+
+                <label htmlFor="email" className="formulario__label">
+                  Email
+                  <input
+                      type="text"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                  />
+                  {
+                      errors.email && touched.email && <p className="formulario__error">* {errors.email}</p>
                   }
                 </label>
               </>

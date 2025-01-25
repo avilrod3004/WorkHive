@@ -10,7 +10,7 @@
 
 .modal-form__header {
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   gap: 1rem;
 
@@ -64,18 +64,3 @@
   border-radius: 50%;
   object-fit: cover;
 }
-
-//import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-//import {brown} from "@mui/material/colors";
-
-//<div className="formulario-perfil">
-//  <div className="formulario-perfil__foto">
-//    <img src={organiza} alt="" className="foto__imagen-redonda"/>
-//
-//    <input type="file" id="fileInput" className="foto__input-fichero"/>
-//
-//    <label htmlFor="fileInput" className="foto__boton">
-//      <AddPhotoAlternateIcon sx={{ color: brown[400] }} />
-//    </label>
-//  </div>
-//</div>
