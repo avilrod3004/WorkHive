@@ -16,13 +16,11 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
   return (
     <div className='edit__menu'>
-      <button className="menu__button" onClick={() => onEditTask(id)}>
+      <button className="menu__button" title='Editar tarea' onClick={() => onEditTask(id)}>
         <BorderColorIcon />
-        <span className='menu__text'>Editar Tarea</span>
       </button>
-      <button className="menu__button" onClick={() => onDeleteTask(id)}>
+      <button className="menu__button" title='Eliminar tarea' onClick={() => onDeleteTask(id)}>
         <DeleteForeverIcon />
-        <span className='menu__text'>Eliminar Tarea</span>
       </button>
     </div>
   )

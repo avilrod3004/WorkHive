@@ -4,7 +4,8 @@
 .edit__menu {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 0.4rem;
     margin: 1rem;
     background-color: var(--fondo-color);
 }
@@ -22,4 +23,6 @@
     padding: 0.5rem;
     background-color: var(--fondo-color);
     cursor: pointer;
+    border: 2px solid var(--icono-menu);
+    border-radius: 50%;
 }
