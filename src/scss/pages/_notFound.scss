@@ -84,27 +84,23 @@
 
 @keyframes fly {
     0% {
-        transform: translate(0, 0) scaleX(1); 
+        transform: translate(0, -200%) scaleX(1); 
         opacity: 0;
     }
     20% {
         opacity: 1;
-        transform: translate(50px, -200px) scaleX(1);
+        transform: translate(100%, -400%) scaleX(1);
     }
     50% {
-        transform: translate(300px, -300px) scaleX(1); 
+        transform: translate(300%, -500%) scaleX(1); 
     }
 
     70% {
-        transform: translate(800px, -900px) scaleX(1); 
-    }
-
-    90% {
-        transform: translate(1000px, -850px) scaleX(-1); 
+        transform: translate(900%, -1100%) scaleX(1); 
     }
     
     100% {
-        transform: translate(950px, -750px) scaleX(-1);
+        transform: translate(2300%, -1400%) scaleX(1);
         opacity: 1;
     }
 }

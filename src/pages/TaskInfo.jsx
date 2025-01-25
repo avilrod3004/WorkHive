@@ -1,87 +1,180 @@
-import React from 'react';
-import bee from "../assets/bee.png"
-import MenuTask from "../components/TaskMenuEdit"
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import bee from "../assets/bee.png";
+import MenuTask from "../components/TaskMenuEdit";
+import useAxiosStore from "../hooks/useAxios";
+import { useTaskStore } from "../config/taskStore";
 
 const TaskInfo = () => {
-    return (
-        <div className='contenedor__info'>
-            <header className='info__header'>
-                <img className='header__image' src={bee} alt="Logo de WorkHive"/>
-                <h1 className='header__titulo'>Nombre tarea</h1>
-                <MenuTask />
-                <select className='header__estado' name="estado" id="estado">
-                    <option value="todo">To Do</option>
-                    <option value="inprogress">In Progress</option>
-                    <option value="toreview">To review</option>
-                    <option value="done">Done</option>
-                </select>
-                <select className='header__prioridad' name="prioridad" id="prioridad">
-                    <option value="alta">Alta</option>
-                    <option value="media">Media</option>
-                    <option value="baja">Baja</option>
-                </select>
-            </header>
+  const { idTarea } = useParams(); // `idTarea` para la tarea específica
+  const { fetch } = useAxiosStore();
+  const { task, loading, setTask, setLoading } = useTaskStore();
+  const token = localStorage.getItem("token");
 
-            <section className='info__proyecto'>
-                <div className='proyecto__descripcion'>
-                    <h1 className='descripcion__titulo'>DESCRIPCIÓN DE TAREA</h1>
-                    <p className='descripcion__parrafo'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium, aliquam aperiam aut cum cumque debitis dicta, dolor ea eos eveniet maxime natus odio placeat repellat repudiandae sunt unde voluptate! Aspernatur quam quasi quidem quod, recusandae sequi tempora ullam ut. Accusantium autem cupiditate, dolor doloremque, enim, et excepturi expedita harum iste maxime nesciunt nobis odio perferendis placeat possimus reprehenderit voluptas!</p>
-                </div>
+  useEffect(() => {
+    async function fetchTask() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
 
-                <div className='proyecto__fechas'>
-                    <p className='fechas__parrafo'><span>Fecha límite: </span>05/01/2025</p>
-                </div>
+        const fetchedTask = response.data;
 
-                <div className='proyecto__administrador'>
-                    <h1 className='administrador__titulo'>Asignado a:</h1>
-                    <p className='administrador__nombre'>David Pérez Romero</p>
-                </div>
-            </section>
+        // Obtener datos del usuario asignado
+        const assignedUserResponse = await fetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${fetchedTask.asignadoA}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        const assignedUser = assignedUserResponse.data;
 
-            <section className='contenedor__comentarios'>
-                <h1 className='comentarios__titulo'>COMENTARIOS</h1>
+        // Obtener datos de los usuarios que comentaron
+        const comentariosUsuarios = await Promise.all(
+          fetchedTask.comentarios.map(async (comentario) => {
+            const usuarioResponse = await fetch(
+              `${import.meta.env.VITE_BASE_API}usuarios/${comentario.usuario}`,
+              "GET",
+              null,
+              { Authorization: `Bearer ${token}` }
+            );
+            return { ...comentario, usuario: usuarioResponse.data.nombre };
+          })
+        );
 
-                <ul className='comentarios__lista'>
-                    <li>
-                        <article>
-                            <h1>AITANA</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi autem commodi debitis, dolorem earum et eum impedit in minus mollitia nostrum, obcaecati pariatur quasi qui, quisquam quo ullam veritatis voluptatum!</p>
-                            <p>06/01/2025</p>
-                        </article>
+        // Actualizar tarea con datos completos
+        setTask({
+          ...fetchedTask,
+          asignadoA: assignedUser.nombre,
+          comentarios: comentariosUsuarios,
+        });
+      } catch (error) {
+        console.error("Error al cargar la tarea:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-                        <article>
-                            <h1>ÁNGEL</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ducimus ea hic illo in iusto, maxime nemo quibusdam ratione sequi. Nobis totam, veritatis. Accusantium aliquid beatae nam provident sit voluptatibus?</p>
-                            <p>24/12/2025</p>
-                        </article>
+    if (idTarea && token) {
+      fetchTask();
+    }
+  }, [idTarea, token, fetch]);
 
-                        <article>
-                            <h1></h1>
-                            <p></p>
-                            <p></p>
-                        </article>
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
 
-                        <article>
-                            <h1></h1>
-                            <p></p>
-                            <p></p>
-                        </article>
+  if (!task) {
+    return <h1>No se encontró la tarea.</h1>;
+  }
 
-                        <article>
-                            <h1></h1>
-                            <p></p>
-                            <p></p>
-                        </article>
+  return (
+    task && (
+      <div className="contenedor__info">
+        <header className="info__header">
+          <img className="header__image" src={bee} alt="Logo de WorkHive" />
+          <h1 className="header__titulo">{task.nombre}</h1>
+          <MenuTask />
+          <select
+            className="header__estado"
+            name="estado"
+            id="estado"
+            value={task.estado}
+            onChange={(e) => {
+              task.estado = e.target.value;
+              fetch(
+                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                "PUT",
+                {
+                  estado: e.target.value,
+                },
+                {
+                  Authorization: `Bearer ${token}`,
+                }
+              );
+            }}
+          >
+            <option value="pendiente">To Do</option>
+            <option value="en_proceso">In Progress</option>
+            <option value="en_revision">To Review</option>
+            <option value="completada">Done</option>
+          </select>
+          <select
+            className="header__prioridad"
+            name="prioridad"
+            id="prioridad"
+            value={task.prioridad}
+            onChange={(e) => {
+              task.prioridad = e.target.value;
+              fetch(
+                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                "PUT",
+                {
+                  prioridad: e.target.value,
+                },
+                {
+                  Authorization: `Bearer ${token}`,
+                }
+              );
+            }}
+          >
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </header>
 
-                        <article>
-                            <p>AGREGAR COMENTARIO</p>
-                            <a href=""><img src="" alt="Agregar comentario"/></a>
-                        </article>
-                    </li>
-                </ul>
-            </section>
-        </div>
-    );
+        <section className="info__proyecto">
+          <div className="proyecto__descripcion">
+            <h1 className="descripcion__titulo">Descripción de tarea</h1>
+            <p className="descripcion__parrafo">{task.descripcion}</p>
+          </div>
+
+          <div className="proyecto__fechas">
+            <p className="fechas__parrafo">
+              <span>Fecha límite: </span>
+              {new Date(task.fechaLimite).toLocaleDateString()}
+            </p>
+          </div>
+
+          <div className="proyecto__administrador">
+            <h1 className="administrador__titulo">Asignado a:</h1>
+            <p className="administrador__nombre">{task.asignadoA}</p>
+          </div>
+        </section>
+
+        <section className="contenedor__comentarios">
+          <h1 className="comentarios__titulo">Comentarios</h1>
+
+          <ul className="comentarios__lista">
+            {task.comentarios.map((comentario) => (
+              <li key={comentario._id}>
+                <article>
+                  <h1>{comentario.usuario}</h1>
+                  <p>{comentario.mensaje}</p>
+                  <p>
+                    {new Date(comentario.fecha).toLocaleDateString()}{" "}
+                    {new Date(comentario.fecha).toLocaleTimeString()}
+                  </p>
+                </article>
+              </li>
+            ))}
+
+            <article>
+              <p>AGREGAR COMENTARIO</p>
+              <a href="">
+                <img src="" alt="Agregar comentario" />
+              </a>
+            </article>
+          </ul>
+        </section>
+      </div>
+    )
+  );
 };
 
 export default TaskInfo;

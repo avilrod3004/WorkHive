@@ -13,6 +13,7 @@ const Register = lazy(() => import("../pages/Register"));
 const Login = lazy(() => import("../pages/Login"));
 const User = lazy(() => import("../pages/UserProfile"));
 const ProyectInfo = lazy(() => import("../pages/ProyectInfo"));
+const TaskInfo = lazy(() => import("../pages/TaskInfo"));
 
 /**
  * Manejo del enrutamiento de las páginas de la aplicación.
@@ -92,6 +93,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div>Loading User Profile...</div>}>
             <ProyectInfo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/usuario/tablero/:idTablero/tarea/:idTarea",
+        element: (
+          <Suspense fallback={<div>Loading Task Info...</div>}>
+            <TaskInfo />
           </Suspense>
         ),
       },

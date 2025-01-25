@@ -1,0 +1,28 @@
+@import '../utilities/variables';
+@import '../utilities/mixins';
+
+.edit__menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 1rem;
+    background-color: var(--fondo-color);
+}
+
+.menu__text {
+    @include description-text;
+    color: var(--black-text);
+}
+
+.menu__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: var(--fondo-color);
+    cursor: pointer;
+    border: 2px solid var(--icono-menu);
+    border-radius: 50%;
+}

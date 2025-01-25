@@ -18,20 +18,25 @@ const TeamMenu = ({ teamMembers }) => {
 
   return (
     <div className="team__menu">
+    <div className="menu__header">
       <h2 className="menu__titulo">EQUIPO</h2>
       <KeyboardArrowDownIcon className="menu__icono" onClick={toggleMenu} />
-      {isOpen && (
-        <ul className="menu__miembros">
-          {teamMembers.map((member, index) => (
-            <li className="menu__usuario" key={index}>
-              {member}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
-  );
+    {isOpen && (
+      <table className="menu__tabla">
+        <tbody>
+          {teamMembers.map((member, index) => (
+            <tr key={index} className="menu__usuario">
+              <td>{member.nombre}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+);
 };
+
 
 export default TeamMenu;
 
