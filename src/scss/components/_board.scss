@@ -6,49 +6,57 @@
   
 .tablero__todo {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--todo-panel);
-            color: #212121;
+            color: var(--black-text);
             padding: 2rem;
             text-align:center;
+            margin-bottom: 8rem;
       }
 }
   
 .tablero__inprogress {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--inprogress-panel);
-            color: #212121;
+            color: var(--black-text);
             padding: 2rem;
             text-align:center;
+            margin-bottom: 8rem;
       }
 }
   
 .tablero__toreview {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--toreview-panel);
-            color: #212121;
-            padding: 1rem;
+            color: var(--black-text);
+            padding: 2rem;
             text-align:center;
+            margin-bottom: 8rem;
       }
 }
   
 .tablero__done {
       width: 30rem;
+      min-width: 10rem;
       padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--done-panel);
-            color: #212121;
+            color: var(--black-text);
             padding: 2rem;
             text-align:center;
+            margin-bottom: 8rem;
       }
 }
 
@@ -57,4 +65,25 @@
       display:flex;
       flex-direction: column;
       align-items: flex-start;
+}
+
+@media (max-width: 1667px){
+      .tablero__panels{
+            align-items: center;
+            justify-content:space-around;
+            gap: 6rem;
+      }
+}
+
+@media (max-width: 840px){
+      .tablero__inprogress{
+            .tablero__title{
+                  padding:1.5rem;
+            }
+      }
+      .tablero__toreview{
+            .tablero__title{
+                  padding:1.5rem;
+            }
+      }
 }

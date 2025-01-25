@@ -65,7 +65,7 @@
 }
 
 .frase__titulo {
-    @include middle-text(800);
+    @include middle-text(700);
     color: var(--black-text);
     font-size: 2rem;
     margin-bottom: 10px;
@@ -87,7 +87,7 @@
 }
 
 .frase__titulo1 {
-    @include middle-text(800);
+    @include middle-text(700);
     color: var(--black-text);
     font-size: 2rem;
     margin-bottom: 10px;

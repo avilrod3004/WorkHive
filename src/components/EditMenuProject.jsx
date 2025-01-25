@@ -20,21 +20,17 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const EditMenuProject = ({ id, onAddProject, onAddPerson, onEditProject, onDeleteProject }) => {
   return (
     <div className="edit__menu">
-      <button className="menu__button" onClick={() => onAddProject(id)}>
+      <button className="menu__button" title='Añadir Proyecto' onClick={() => onAddProject(id)}>
         <AddIcon />
-        <span className='menu__text'>Añadir Proyecto</span>
       </button>
-      <button className="menu__button" onClick={() => onAddPerson(id)}>
+      <button className="menu__button" title='Añadir persona' onClick={() => onAddPerson(id)}>
         <PersonAddAlt1Icon />
-        <span className='menu__text'>Añadir Persona</span>
       </button>
-      <button className="menu__button" onClick={() => onEditProject(id)}>
+      <button className="menu__button" title='Editar Proyecto' onClick={() => onEditProject(id)}>
         <BorderColorIcon />
-        <span className='menu__text'>Editar Proyecto</span>
       </button>
-      <button className="menu__button" onClick={() => onDeleteProject(id)}>
+      <button className="menu__button" title='Eliminar Proyecto' onClick={() => onDeleteProject(id)}>
         <DeleteForeverIcon />
-        <span className='menu__text'>Eliminar Proyecto</span>
       </button>
     </div>
   )

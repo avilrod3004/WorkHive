@@ -5,6 +5,8 @@ import TeamMenu from "../components/TeamMenu";
 import { useProjectStore } from "../config/projectStore";
 import { NavLink, useParams } from "react-router-dom";
 import useAxiosStore from "../hooks/useAxios";
+import BoardTask from "../components/BoardTask";
+
 
 const ProyectInfo = () => {
   const { id } = useParams(); // Recuperar ID desde la URL
@@ -139,8 +141,10 @@ const ProyectInfo = () => {
     project && (
       <div className="contenedor__info">
         <header className="info__header">
-          <img className="header__image" src={bee} alt="Logo de WorkHive" />
-          <h1 className="header__titulo">{project.nombre}</h1>
+          <div className='contenedor__image'>
+            <img className="header__image" src={bee} alt="Logo de WorkHive" />
+            <h1 className="header__titulo">{project.nombre}</h1>
+          </div>
           <TeamMenu
             teamMembers={[project.administrador, ...project.colaboradores]}
           />
@@ -177,49 +181,30 @@ const ProyectInfo = () => {
         </section>
 
         <section className="contenedor__tareas">
-          <div className="tareas__todo">
-            <h1 className="todo__titulo">TO DO</h1>
-            <ul className="todo__lista">
-              {todoTasks.map((tarea) => (
-                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
-                  <li key={tarea._id}>{tarea.nombre}</li>
-                </NavLink>
-              ))}
-            </ul>
-          </div>
-
-          <div className="tareas__inprogress">
-            <h1 className="inprogress__titulo">IN PROGRESS</h1>
-            <ul className="inprogress__lista">
-              {inProgressTasks.map((tarea) => (
-                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
-                  <li key={tarea._id}>{tarea.nombre}</li>
-                </NavLink>
-              ))}
-            </ul>
-          </div>
-
-          <div className="tareas__toreview">
-            <h1 className="toreview__titulo">TO REVIEW</h1>
-            <ul className="toreview__lista">
-              {toReviewTasks.map((tarea) => (
-                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
-                  <li key={tarea._id}>{tarea.nombre}</li>
-                </NavLink>
-              ))}
-            </ul>
-          </div>
-
-          <div className="tareas__done">
-            <h1 className="done__titulo">DONE</h1>
-            <ul className="done__lista">
-              {doneTasks.map((tarea) => (
-                <NavLink to={`/usuario/tablero/${id}/tarea/${tarea._id}`}>
-                  <li key={tarea._id}>{tarea.nombre}</li>
-                </NavLink>
-              ))}
-            </ul>
-          </div>
+            <BoardTask
+                name="TO DO"
+                type='todo'
+                panels={todoTasks}
+                idTablero={id}
+            />
+            <BoardTask
+                name="IN PROGRESS"
+                type='inprogress'
+                panels={inProgressTasks}
+                idTablero={id}
+            />
+            <BoardTask
+                name="TO REVIEW"
+                type='toreview'
+                panels={toReviewTasks}
+                idTablero={id}
+            />
+            <BoardTask
+                name="DONE"
+                type='done'
+                panels={doneTasks}
+                idTablero={id}
+            />
         </section>
 
         <Menu />

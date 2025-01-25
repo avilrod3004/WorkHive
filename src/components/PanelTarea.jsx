@@ -11,12 +11,12 @@ import { NavLink } from "react-router-dom";
  * @param {string} props.id - El identificador del panel
  * @returns {JSX.Element} Componente Panel renderizado
  */
-const Panel = ({ name, type, id }) => {
+const PanelTarea = ({ name, type, id , tareaId}) => {
   return (
     <div className={`panel__${type}`}>
       <div className="inside">
 
-          <NavLink to={`/usuario/tablero/${id}`}>
+          <NavLink to={`/usuario/tablero/${id}/tarea/${tareaId}`}>
               <div className="panel__content">{name}</div>
           </NavLink>
       </div>
@@ -24,4 +24,4 @@ const Panel = ({ name, type, id }) => {
   );
 };
 
-export default Panel;
+export default PanelTarea;

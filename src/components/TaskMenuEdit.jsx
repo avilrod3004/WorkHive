@@ -16,13 +16,11 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
   return (
     <div className='edit__menu'>
-      <button className="menu__button" onClick={() => onEditTask(id)}>
+      <button className="menu__button" title='Editar tarea' onClick={() => onEditTask(id)}>
         <BorderColorIcon />
-        <span className='menu__text'>Editar Tarea</span>
       </button>
-      <button className="menu__button" onClick={() => onDeleteTask(id)}>
+      <button className="menu__button" title='Eliminar tarea' onClick={() => onDeleteTask(id)}>
         <DeleteForeverIcon />
-        <span className='menu__text'>Eliminar Tarea</span>
       </button>
     </div>
   )
@@ -30,33 +28,3 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
 
 export default TaskMenuEdit
 
-/**
- * Ejemplo de uso del componente TaskMenuEdit:
- *
- * import React from 'react'
- * import TaskMenuEdit from './TaskMenuEdit'
- *
- * const App = () => {
- *   const handleEditTask = (id) => {
- *     console.log(`Editar tarea ${id}`);
- *     // Lógica para editar tarea
- *   }
- *
- *   const handleDeleteTask = (id) => {
- *     console.log(`Eliminar tarea ${id}`);
- *     // Lógica para eliminar tarea
- *   }
- *
- *   return (
- *     <div>
- *       <TaskMenuEdit 
- *         id="tarea1"
- *         onEditTask={handleEditTask}
- *         onDeleteTask={handleDeleteTask}
- *       />
- *     </div>
- *   )
- * }
- *
- * export default App
- */
