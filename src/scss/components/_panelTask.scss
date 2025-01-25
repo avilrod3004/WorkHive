@@ -120,3 +120,7 @@
       }
 }
 
+.panelTask__done:active, .panelTask__inprogress:active, .panelTask__todo:active, .panelTask__toreview:active {
+    width: 27vmin;
+  height: 25vmin;
+}
