@@ -25,12 +25,17 @@ const UserProfile = () => {
     setCompletedProjects,
   } = useProjectsStore();
 
-  const { user } = useUserStore();
-  const { fetch } = useAxiosStore();
+  const { user, setUser } = useUserStore();
+  const { fetch: newFetch } = useAxiosStore();
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
   const [modalNewProjectOpen, setmodalNewProjectOpen] = useState(false);
   const [modalEditProfileOpen, setmodalEditProfileOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState({
+    src: null,
+    file: null,
+    name: "",
+  });
 
   const validationSchemaNewProject = Yup.object().shape({
     name: Yup.string()
@@ -55,18 +60,40 @@ const UserProfile = () => {
       .required("El campo 'Email' es obligatorio"),
   });
 
+  async function getUser() {
+    try {
+      if (user) {
+        const response = await newFetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${user._id || user.id}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+
+        if (response.error) throw new Error(response.error);
+
+        const userData = await response.data;
+        setUser(userData);
+      }
+    } catch (error) {
+      console.error("Error al obtener los datos del usuario:", error);
+    }
+  }
+
   async function getProjects() {
     try {
       if (user) {
         const [adminProjects, collaboratorProjects] = await Promise.all([
-          fetch(
-            import.meta.env.VITE_BASE_API + `tableros/administrador/${user.id}`,
+          newFetch(
+            import.meta.env.VITE_BASE_API +
+              `tableros/administrador/${user._id || user.id}`,
             "GET",
             null,
             { Authorization: `Bearer ${token}` }
           ),
-          fetch(
-            import.meta.env.VITE_BASE_API + `tableros/colaborador/${user.id}`,
+          newFetch(
+            import.meta.env.VITE_BASE_API +
+              `tableros/colaborador/${user._id || user.id}`,
             "GET",
             null,
             { Authorization: `Bearer ${token}` }
@@ -82,7 +109,7 @@ const UserProfile = () => {
           ...collaboratorProjects.data,
         ];
         const projectPromises = allProjects.map((project) =>
-          fetch(
+          newFetch(
             import.meta.env.VITE_BASE_API + `tableros/${project._id}/actual`,
             "GET",
             null,
@@ -114,8 +141,79 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
-    getProjects();
-  }, [user, token, fetch]);
+    async function fetchData() {
+      setIsLoading(true);
+      await getUser();
+      await getProjects();
+    }
+
+    if (user && token) {
+      fetchData();
+    }
+  }, [token, fetch]);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/jpg",
+        "image/webp",
+      ];
+      if (!allowedTypes.includes(file.type)) {
+        console.log(
+          "Por favor, sube una imagen válida (JPEG, PNG, JPG o WEBP)."
+        );
+        return;
+      }
+
+      // Guardamos el archivo y el nombre del archivo directamente
+      setSelectedImage({
+        src: URL.createObjectURL(file), // Vista previa usando un objeto URL temporal
+        file, // El archivo original para enviarlo con FormData
+        name: file.name, // Nombre del archivo
+      });
+    }
+  };
+
+  const handleEditProfileSubmit = async (values) => {
+    try {
+      if (user) {
+        const formData = new FormData();
+        formData.append("nombre", values.name);
+        formData.append("email", values.email);
+
+        console.log(selectedImage);
+
+        if (selectedImage.file) {
+          formData.append("fotoPerfil", selectedImage.file);
+        }
+
+        const response = await newFetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${user._id || user.id}`,
+          "PUT",
+          formData,
+          {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          }
+        );
+
+        if (!response.status === 201) {
+          throw new Error("Error al actualizar el perfil");
+        }
+
+        const updatedUser = await response.data;
+        setUser(updatedUser);
+        console.log("Perfil actualizado exitosamente:", updatedUser);
+      }
+    } catch (error) {
+      console.error("Error al actualizar el perfil:", error);
+    } finally {
+      setmodalEditProfileOpen(false);
+    }
+  };
 
   if (isLoading) {
     return <p>Cargando...</p>;
@@ -309,15 +407,11 @@ const UserProfile = () => {
         isOpen={modalEditProfileOpen}
         onClose={() => setmodalEditProfileOpen(false)}
         initialValues={{
-          name: "",
-          dateIni: "",
-          dateEnd: "",
-          description: "",
+          name: user?.nombre || "",
+          email: user?.email || "",
         }}
         validationSchema={validationSchemaEditProfile}
-        onSubmit={(values) => {
-          setmodalEditProfileOpen(false);
-        }}
+        onSubmit={handleEditProfileSubmit}
         title="Editar perfil"
       >
         {({ values, handleChange, handleBlur, errors, touched }) => (
@@ -325,8 +419,8 @@ const UserProfile = () => {
             <div className="formulario-perfil">
               <div className="formulario-perfil__foto">
                 <img
-                  src={fotoCambiar}
-                  alt=""
+                  src={selectedImage.src || user.fotoPerfil || fotoCambiar}
+                  alt="Foto de perfil"
                   className="foto__imagen-redonda"
                 />
 
@@ -334,6 +428,7 @@ const UserProfile = () => {
                   type="file"
                   id="fileInput"
                   className="foto__input-fichero"
+                  onChange={handleImageChange}
                 />
 
                 <label htmlFor="fileInput" className="foto__boton">
