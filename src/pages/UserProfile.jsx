@@ -2,6 +2,12 @@
  * @module Pages
  * @category Routes
  */
+
+  /**
+ * @namespace UserProfileFunctions
+ * @memberof module:Pages
+ * @description Funciones auxiliares para el componente UserProfile
+ */
 import React, { useEffect, useState } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
@@ -28,7 +34,7 @@ import fotoCambiar from "../assets/margarita.png";
  * perfil del usuario y crear nuevos proyectos.
  *
  * @component
- * @returns {JSX.Element} El componente UserProfile renderizado
+ * @returns {JSX.Element} Página de perfil de usuario, mostrando sus proyectos actuales y los finalizados.
  */
 const UserProfile = () => {
   const {
@@ -75,7 +81,9 @@ const UserProfile = () => {
       .required("El campo 'Email' es obligatorio"),
   });
 
+
    /**
+   * @memberof UserProfileFunctions
    * Obtiene los datos del usuario actual desde la API
    * @async
    * @function getUser
@@ -101,6 +109,7 @@ const UserProfile = () => {
   }
 
   /**
+   * @memberof UserProfileFunctions
    * Obtiene los proyectos del usuario desde la API y los categoriza como actuales o completados
    * @async
    * @function getProjects
@@ -166,6 +175,7 @@ const UserProfile = () => {
   }
 
    /**
+   * @memberof UserProfileFunctions
    * Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
    */
   useEffect(() => {
@@ -181,6 +191,7 @@ const UserProfile = () => {
   }, [token, fetch]);
 
   /**
+   * @memberof UserProfileFunctions
    * Maneja el cambio de la imagen de perfil
    * @param {Event} e - El evento de cambio del input de archivo
    */
@@ -210,6 +221,7 @@ const UserProfile = () => {
   };
 
    /**
+   * @memberof UserProfileFunctions
    * Maneja el envío del formulario de edición de perfil
    * @async
    * @param {Object} values - Los valores del formulario

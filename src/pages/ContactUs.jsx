@@ -3,6 +3,12 @@
  * @category Routes
  */
 
+  /**
+ * @namespace ContactUsFunction
+ * @memberof module:Pages
+ * @description Funciones auxiliares para el componente ContactUs
+ */
+
 import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
@@ -23,6 +29,7 @@ const ContactUs = () => {
     const { isDarkMode } = useTheme();
 
     /**
+     * @memberof ContactUsFunction
      * Esquema de validación para el formulario
      * Define las reglas de validación para cada campo del formulario
      */
@@ -35,6 +42,7 @@ const ContactUs = () => {
     })
 
     /**
+     * @memberof ContactUsFunction
      * Función que se ejecuta al enviar el formulario
      * 
      * @param {Object} values - Valores del formulario

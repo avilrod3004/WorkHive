@@ -2,6 +2,13 @@
  * @module Pages
  * @category Routes
  */
+
+
+  /**
+ * @namespace RegisterFunction
+ * @memberof module:Pages
+ * @description Funciones auxiliares para el componente Register
+ */
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -29,6 +36,7 @@ const Register = () => {
   const { isDarkMode } = useTheme();
 
   /**
+   * @memberof RegisterFunction
    * Esquema de validación para el formulario de registro
    */
   const validationSchema = Yup.object().shape({
@@ -54,6 +62,7 @@ const Register = () => {
   });
 
   /**
+   * @memberof RegisterFunction
    * Función que se ejecuta al enviar el formulario de registro
    * 
    * @param {Object} values - Valores del formulario

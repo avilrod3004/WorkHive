@@ -16,6 +16,8 @@ import { useTheme } from '../context/ThemeContext'
  * Este componente representa la página de inicio de la aplicación WorkHive.
  * Muestra el menu de navegación, logo y eslogan y
  * una sección con tres artículos que describen las características principales.
+ * 
+ * @return {JSX.Element} Página de inicio de la aplicación WorkHive.
  */
 const Home = () => {
 

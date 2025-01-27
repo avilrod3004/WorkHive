@@ -27,7 +27,7 @@ const TaskInfo = lazy(() => import("../pages/TaskInfo"));
  * Este objeto define las rutas y sus componentes asociados,
  * incluyendo rutas públicas y privadas, así como la gestión de errores.
  *
- * @returns {Object} El objeto de enrutamiento creado por createBrowserRouter.
+ * @returns {Object} El objeto de enrutamiento creado por createBrowserRouter, con la ruta a cada página de la aplicación.
  */
 export const router = createBrowserRouter([
   {

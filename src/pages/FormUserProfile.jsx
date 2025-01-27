@@ -3,6 +3,12 @@
  * @module Pages
  * @category Routes
  */
+
+  /**
+ * @namespace FormUserProfileFunction
+ * @memberof module:Pages
+ * @description Funciones auxiliares para el componente FormUserProfile
+ */
 import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
@@ -19,6 +25,7 @@ import * as Yup from "yup";
 const FormUserProfile = () => {
 
     /**
+     * @memberof FormUserProfileFunction
      * Esquema de validación para el formulario
      * Define las reglas de validación para cada campo del formulario
      */
@@ -30,6 +37,7 @@ const FormUserProfile = () => {
     })
 
     /**
+     * @memberof FormUserProfileFunction
      * Función que se ejecuta al enviar el formulario
      * 
      * @param {Object} values - Valores del formulario
