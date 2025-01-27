@@ -1,45 +1,46 @@
 .team__menu {
-    background-color: var(--fondo-color);
-  }
-  
-  .menu__header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem;
-    gap: 1rem;
-  }
-  
-  .menu__titulo {
-    @include middle-text(500);
-    color: var(--black-text);
-    margin: 0;
-  }
-  
-  .menu__icono {
-    color: var(--black-text);
-    cursor: pointer;
-  }
-  
-  .menu__tabla {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--fondo-color);
-    border: 2px solid var(--primary-color);
-  }
-  
-  .menu__tabla th,
-  .menu__tabla td {
-    padding: 0.8rem;
-    text-align: left;
-    border-bottom: 2px solid var(--primary-color);
-  }
-  
-  .menu__usuario td {
-    @include middle-text(200);
-    color: var(--black-text);
-  }
-  
+  background-color: var(--fondo-color);
+}
 
-  
+.menu__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  gap: 1rem;
+  position: relative;
+}
+
+.menu__titulo {
+  @include middle-text(500);
+  color: var(--black-text);
+  margin: 0;
+}
+
+.menu__icono {
+  color: var(--black-text);
+  cursor: pointer;
+}
+
+.menu__tabla {
+  position: absolute;
+  z-index: 10;
+  right: 2rem;
+  border-collapse: collapse;
+  background-color: var(--fondo-color);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu__tabla th,
+.menu__tabla td {
+  padding: 0.8rem;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.menu__usuario td {
+  @include middle-text(200);
+  color: var(--black-text);
+}
