@@ -15,6 +15,16 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { brown } from "@mui/material/colors";
 import fotoCambiar from "../assets/margarita.png";
 
+/**
+ * Componente UserProfile
+ * 
+ * Este componente muestra la página de perfil del usuario, incluyendo su información personal,
+ * proyectos actuales y proyectos completados. También proporciona funcionalidad para editar el
+ * perfil del usuario y crear nuevos proyectos.
+ *
+ * @component
+ * @returns {JSX.Element} El componente UserProfile renderizado
+ */
 const UserProfile = () => {
   const {
     isLoading,
@@ -60,6 +70,11 @@ const UserProfile = () => {
       .required("El campo 'Email' es obligatorio"),
   });
 
+   /**
+   * Obtiene los datos del usuario actual desde la API
+   * @async
+   * @function getUser
+   */
   async function getUser() {
     try {
       if (user) {
@@ -80,6 +95,11 @@ const UserProfile = () => {
     }
   }
 
+  /**
+   * Obtiene los proyectos del usuario desde la API y los categoriza como actuales o completados
+   * @async
+   * @function getProjects
+   */
   async function getProjects() {
     try {
       if (user) {
@@ -140,6 +160,9 @@ const UserProfile = () => {
     }
   }
 
+   /**
+   * Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
+   */
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
@@ -152,6 +175,10 @@ const UserProfile = () => {
     }
   }, [token, fetch]);
 
+  /**
+   * Maneja el cambio de la imagen de perfil
+   * @param {Event} e - El evento de cambio del input de archivo
+   */
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -177,6 +204,11 @@ const UserProfile = () => {
     }
   };
 
+   /**
+   * Maneja el envío del formulario de edición de perfil
+   * @async
+   * @param {Object} values - Los valores del formulario
+   */
   const handleEditProfileSubmit = async (values) => {
     try {
       if (user) {
