@@ -8,6 +8,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import {brown} from "@mui/material/colors";
 import FormModal from "../modals/FormModal.jsx";
 import * as Yup from "yup";
+import ConfirmModal from "../modals/ConfirmModal.jsx";
 
 /**
  * Componente de menú de edición para proyectos.
@@ -25,8 +26,9 @@ import * as Yup from "yup";
 const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeleteProject }) => {
 
     const [modalNewTaskOpen, setmodalNewTaskOpen] = useState(false);
-    const [modalAddColaborator, setmodalAddColaborator] = useState(false);
-    const [modalEditProject, setmodalEditProject] = useState(false);
+    const [modalAddColaboratorOpen, setmodalAddColaboratorOpen] = useState(false);
+    const [modalEditProjectOpen, setmodalEditProjectOpen] = useState(false);
+    const [modalDeleteProjectOpen, setmodalDeleteProjectOpen] = useState(false);
 
     const validationSchemaNewTask = Yup.object().shape({
         name: Yup.string()
@@ -72,13 +74,13 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
       <button className="menu__button" title='Añadir tarea' onClick={() => setmodalNewTaskOpen(true)}>
         <AddIcon />
       </button>
-      <button className="menu__button" title='Añadir colaborador' onClick={() => setmodalAddColaborator(true)}>
+      <button className="menu__button" title='Añadir colaborador' onClick={() => setmodalAddColaboratorOpen(true)}>
         <PersonAddAlt1Icon />
       </button>
-      <button className="menu__button" title='Editar Proyecto' onClick={() => setmodalEditProject(true)}>
+      <button className="menu__button" title='Editar Proyecto' onClick={() => setmodalEditProjectOpen(true)}>
         <BorderColorIcon />
       </button>
-      <button className="menu__button" title='Eliminar Proyecto' onClick={() => onDeleteProject(id)}>
+      <button className="menu__button" title='Eliminar Proyecto' onClick={() => setmodalDeleteProjectOpen(true)}>
         <DeleteForeverIcon />
       </button>
 
@@ -188,14 +190,14 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
 
         {/* Modal para añadir colaboradores al proyecto */}
         <FormModal
-            isOpen={modalAddColaborator}
-            onClose={() => setmodalAddColaborator(false)}
+            isOpen={modalAddColaboratorOpen}
+            onClose={() => setmodalAddColaboratorOpen(false)}
             initialValues={{
                 email: "",
             }}
             validationSchema={validationSchemaAddColaborator}
             onSubmit={(values) => {
-                setmodalAddColaborator(false)
+                setmodalAddColaboratorOpen(false)
             }}
             title="Añadir colaborador"
         >
@@ -224,8 +226,8 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
 
         {/* Modal para editar los datos del proyecto */}
         <FormModal
-            isOpen={modalEditProject}
-            onClose={() => setmodalEditProject(false)}
+            isOpen={modalEditProjectOpen}
+            onClose={() => setmodalEditProjectOpen(false)}
             initialValues={{
                 name: "",
                 admin: "",
@@ -235,7 +237,7 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
             }}
             validationSchema={validationSchemaEditProject}
             onSubmit={(values) => {
-                setmodalEditProject(false)
+                setmodalEditProjectOpen(false)
             }}
             title="Editar proyecto"
         >
@@ -319,6 +321,16 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
                 )
             }
         </FormModal>
+
+        {/* Modal para confirmar si el usuario quiere eliminar el proyecto */}
+        <ConfirmModal
+            isOpen={modalDeleteProjectOpen}
+            onClose={() => setmodalDeleteProjectOpen(false)}
+            message="¿Estas seguro de que quieres eliminar el proyecto?"
+            onConfirm={() => {
+                setmodalDeleteProjectOpen(false)
+            }}
+        />
     </div>
   )
 }
