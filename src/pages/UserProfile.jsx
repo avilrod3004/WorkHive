@@ -47,6 +47,9 @@ const UserProfile = () => {
     dateIni: Yup.date()
       .required("El campo 'Fecha' es obligatorio")
       .min(new Date(), "La fecha debe ser posterior a la actual"),
+    dateEnd: Yup.date()
+      .required("El campo 'Fecha' es obligatorio")
+      .min(new Date(), "La fecha debe ser posterior a la actual"),
   });
 
   const validationSchemaEditProfile = Yup.object().shape({
