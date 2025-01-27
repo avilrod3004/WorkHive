@@ -2,9 +2,13 @@ import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
 import LogoWorkHive from "../assets/logo.png"
+import logoDark from "../assets/logodark.png";
+import { useTheme } from '../context/ThemeContext'
 
 
 const ContactUs = () => {
+
+    const { isDarkMode } = useTheme();
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().trim().required("El campo nombre es obligatorio"),
@@ -23,7 +27,7 @@ const ContactUs = () => {
         <>
             <main className="formulario-cuenta">
                 <aside className="formulario-cuenta__lateral">
-                    <img src={LogoWorkHive} alt="" className="lateral__logo"/>
+                    <img src={isDarkMode ? logoDark : LogoWorkHive} alt="" className="lateral__logo"/>
                     <p className="lateral__nombre">WORKHIVE</p>
                 </aside>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from "./Modal.jsx";
+import Bee from "../assets/bee.png"
 
 /**
  * ConfirmModal - Componente para mostrar un modal de confirmación.
@@ -13,11 +14,16 @@ import Modal from "./Modal.jsx";
  */
 const ConfirmModal = ({isOpen, onClose, onConfirm, message}) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
-            <p>{message}</p>
+        <Modal isOpen={isOpen}>
 
-            <button onClick={onClose}>Cancelar</button>
-            <button onClick={onConfirm}>Confirmar</button>
+            <img src={Bee} alt="" className="modal__abeja"/>
+
+            <p className="modal-confirmacion__pregunta">{message}</p>
+
+            <div className="modal__botones">
+                <button onClick={onClose} className="botones-modal__cancelar">Cancelar</button>
+                <button onClick={onConfirm} className="botones-modal__confirmar">Confirmar</button>
+            </div>
         </Modal>
     );
 };
