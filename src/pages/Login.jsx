@@ -88,6 +88,7 @@ const Login = () => {
                 setError(null);
                 originalHandleChange(e);
               };
+
               return (
                 <form onSubmit={handleSubmit} className="principal__formulario">
                   <h1 className="formulario__titulo">Inicia sesión</h1>
