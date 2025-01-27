@@ -200,7 +200,7 @@ const UserProfile = () => {
           }
         );
 
-        if (!response.status === 201) {
+        if (response.error) {
           throw new Error("Error al actualizar el perfil");
         }
 
@@ -325,7 +325,7 @@ const UserProfile = () => {
 
             const data = await response.data;
 
-            if (!response.status === 201) {
+            if (response.error) {
               throw new Error(data.message || "Error al crear el tablero");
             }
 

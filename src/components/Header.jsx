@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -7,7 +7,7 @@ import { useTheme } from "../context/ThemeContext";
 
 const Header = () => {
   const { isDarkMode, setIsDarkMode } = useTheme();
-  const { user, setUser } = useUserStore();
+  const { user, setUser, setError } = useUserStore();
 
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -26,7 +26,9 @@ const Header = () => {
       <ul className="header__menu">
         {!user && (
           <li className="menu__opcion">
-            <NavLink to="/auth/login">Iniciar sesión</NavLink>
+            <NavLink to="/auth/login" onClick={() => setError(null)}>
+              Iniciar sesión
+            </NavLink>
           </li>
         )}
         {user && (
@@ -36,7 +38,9 @@ const Header = () => {
         )}
         {!user && (
           <li className="menu__opcion">
-            <NavLink to="/auth/register">Registrarse</NavLink>
+            <NavLink to="/auth/register" onClick={() => setError(null)}>
+              Registrarse
+            </NavLink>
           </li>
         )}
         {user && (

@@ -26,7 +26,7 @@ const Login = () => {
         }
       );
 
-      if (!(loginResponse.error.status === 201)) {
+      if (loginResponse.error) {
         throw loginResponse.error;
       }
 
@@ -41,7 +41,7 @@ const Login = () => {
       setSubmitting(false);
       navigate("/usuario");
     } catch (error) {
-      if (error.status === 400) {
+      if (error.status === 400 || error.status === 401) {
         setError("Email y/o contraseña incorrectos");
       } else {
         setError(
@@ -139,7 +139,11 @@ const Login = () => {
           <div>
             <p>
               No tienes una cuenta?{" "}
-              <a href="/auth/register" className="principal__cambio">
+              <a
+                href="/auth/register"
+                onClick={() => setError(null)}
+                className="principal__cambio"
+              >
                 Registrate
               </a>
             </p>

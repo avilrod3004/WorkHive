@@ -56,7 +56,7 @@ const Register = () => {
         }
       );
 
-      if (!(response.error.status === 201)) {
+      if (response.error) {
         throw response.error;
       }
       resetForm();
@@ -218,7 +218,11 @@ const Register = () => {
           <div>
             <p>
               Ya tienes una cuenta?{" "}
-              <a href="/auth/login" className="principal__cambio">
+              <a
+                href="/auth/login"
+                onClick={() => setError(null)}
+                className="principal__cambio"
+              >
                 Inicia sesión
               </a>
             </p>
