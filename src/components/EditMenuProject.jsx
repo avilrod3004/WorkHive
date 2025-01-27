@@ -11,16 +11,16 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
  * @component
  * @param {Object} props - Propiedades del componente
  * @param {string} props.id - Identificador único del proyecto
- * @param {function} props.onAddProject - Función para añadir un nuevo proyecto
+ * @param {function} props.onAddTask - Función para añadir una nueva tarea
  * @param {function} props.onAddPerson - Función para añadir una persona al proyecto
  * @param {function} props.onEditProject - Función para editar el proyecto
  * @param {function} props.onDeleteProject - Función para eliminar el proyecto
  * @returns {JSX.Element} Componente EditMenuProject renderizado
  */
-const EditMenuProject = ({ id, onAddProject, onAddPerson, onEditProject, onDeleteProject }) => {
+const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeleteProject }) => {
   return (
     <div className="edit__menu">
-      <button className="menu__button" title='Añadir Proyecto' onClick={() => onAddProject(id)}>
+      <button className="menu__button" title='Añadir tarea' onClick={() => onAddTask(id)}>
         <AddIcon />
       </button>
       <button className="menu__button" title='Añadir persona' onClick={() => onAddPerson(id)}>
