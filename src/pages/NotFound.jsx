@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React from 'react'
 import margarita from '../assets/margarita.png';
 import margaritaDark from '../assets/margaritaDark.png';
@@ -6,6 +10,7 @@ import beeDark from '../assets/beedark.png';
 import { useTheme } from '../context/ThemeContext'
 
 /**
+ * @page
  * Componente NotFound
  * 
  * Este componente renderiza una página de error 404 (Not Found) personalizada.

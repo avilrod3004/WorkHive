@@ -1,3 +1,7 @@
+/**
+ * @module Layouts
+ * @category Structure
+ */
 import React from 'react';
 import Modal from "./Modal.jsx";
 import {Formik} from "formik";
@@ -6,6 +10,7 @@ import DarkBee from "../assets/beedark.png"
 import {useTheme} from "../context/ThemeContext.jsx";
 
 /**
+ * @layout
  * FormModal - Componente para mostrar un modal con un formulario gestionado por Formik.
  *
  * @param {Object} props - Propiedades del componente.

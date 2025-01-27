@@ -1,6 +1,11 @@
+/**
+ * @module Stores
+ * @category State
+ */
 import { create } from "zustand";
 
 /**
+ * @store
  * Store de Zustand para gestionar el estado del usuario.
  * 
  * @typedef {Object} UserStore

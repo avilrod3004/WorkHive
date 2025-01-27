@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React, { useEffect, useState } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
@@ -16,6 +20,7 @@ import { brown } from "@mui/material/colors";
 import fotoCambiar from "../assets/margarita.png";
 
 /**
+ * @page
  * Componente UserProfile
  * 
  * Este componente muestra la página de perfil del usuario, incluyendo su información personal,

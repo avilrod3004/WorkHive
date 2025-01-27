@@ -1,6 +1,11 @@
+/**
+ * @module Stores
+ * @category State
+ */
 import { create } from "zustand";
 
 /**
+ * @store
  * Store de Zustand para gestionar el estado de un proyecto y sus tareas.
  * 
  * @typedef {Object} ProjectStore

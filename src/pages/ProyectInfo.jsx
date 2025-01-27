@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png"
@@ -10,6 +14,7 @@ import BoardTask from "../components/BoardTask";
 import { useTheme } from '../context/ThemeContext'
 
 /**
+ * @page
  * Componente ProyectInfo
  * 
  * Este componente muestra la información detallada de un proyecto específico,

@@ -1,8 +1,14 @@
+
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
 
 /**
+ * @page
  * Componente FormUserProfile
  * 
  * Este componente renderiza un formulario para editar el perfil del usuario.

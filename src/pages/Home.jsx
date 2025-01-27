@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import logo from "../assets/logoHome.png";
 import logoDark from "../assets/logoHomeDark.png";
 import organiza from "../assets/home/4.png";
@@ -6,6 +10,7 @@ import exito from "../assets/home/exito.png";
 import { useTheme } from '../context/ThemeContext'
 
 /**
+ * @page
  * Home Component
  *
  * Este componente representa la página de inicio de la aplicación WorkHive.

@@ -1,3 +1,8 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
+
 import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
@@ -6,6 +11,7 @@ import logoDark from "../assets/logodark.png";
 import { useTheme } from '../context/ThemeContext'
 
 /**
+ * @page
  * Componente ContactUs
  * 
  * Este componente renderiza un formulario de contacto utilizando Formik para el manejo del estado del formulario

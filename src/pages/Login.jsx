@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React from "react";
 import { Formik } from "formik";
 import { useUserStore } from "../config/userStore";
@@ -8,6 +12,7 @@ import logoDark from "../assets/logodark.png";
 import { useTheme } from '../context/ThemeContext'
 
 /**
+ * @page
  * Componente Login
  * 
  * Este componente renderiza un formulario de inicio de sesión.

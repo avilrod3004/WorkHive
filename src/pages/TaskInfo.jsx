@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
@@ -6,6 +10,7 @@ import useAxiosStore from "../hooks/useAxios";
 import { useTaskStore } from "../config/taskStore";
 
 /**
+ * @page
  * Componente TaskInfo
  * 
  * Este componente muestra la información detallada de una tarea específica,

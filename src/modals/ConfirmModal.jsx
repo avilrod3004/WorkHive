@@ -1,8 +1,13 @@
+/**
+ * @module Layouts
+ * @category Structure
+ */
 import React from 'react';
 import Modal from "./Modal.jsx";
 import Bee from "../assets/bee.png"
 
 /**
+ * @layouts
  * ConfirmModal - Componente para mostrar un modal de confirmación.
  *
  * @param {Object} props - Propiedades del componente.

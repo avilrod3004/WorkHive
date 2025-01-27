@@ -1,7 +1,7 @@
 
 /**
- * @module useAxiosStore
- * @description Módulo que crea un store de Zustand para manejar peticiones HTTP con Axios.
+ * @module Hooks
+ * @category Custom
  */
 import axios from "axios";
 import { create } from "zustand";

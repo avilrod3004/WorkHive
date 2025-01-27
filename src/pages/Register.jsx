@@ -1,3 +1,7 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -9,6 +13,7 @@ import logoDark from "../assets/logodark.png";
 import { useTheme } from '../context/ThemeContext'
 
 /**
+ * @page
  * Componente Register
  * 
  * Este componente renderiza un formulario de registro de usuario.

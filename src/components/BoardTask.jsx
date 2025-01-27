@@ -1,3 +1,7 @@
+/**
+ * @module Components
+ * @category UI
+ */
 import React from "react";
 import PanelTarea from "../components/PanelTarea";
 

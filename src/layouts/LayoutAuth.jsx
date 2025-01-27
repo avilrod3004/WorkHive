@@ -1,3 +1,7 @@
+/**
+ * @module Layouts
+ * @category Structure
+ */
 import React, { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -5,6 +9,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { UserProvider } from "../context/UserContext";
 
 /**
+ * @layout
  * Componente de diseño para páginas de autenticación.
  * Redirige a los usuarios autenticados y proporciona un diseño común para las páginas de autenticación.
  *

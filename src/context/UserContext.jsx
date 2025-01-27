@@ -1,3 +1,8 @@
+/**
+ * @module Contexts
+ * @category State
+ */
+
 // UserContext.js
 import React, { createContext, useEffect } from "react";
 import { useUserStore } from "../config/userStore";
@@ -5,6 +10,7 @@ import useAxiosStore from "../hooks/useAxios";
 import { jwtDecode } from "jwt-decode";
 
 /**
+ * @context
  * Contexto para gestionar la información del usuario.
  * @type {React.Context<{user: Object|null, setUser: Function}>}
  */

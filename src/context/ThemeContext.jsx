@@ -1,8 +1,13 @@
-// ThemeContext.js
+/**
+ * @module Contexts
+ * @category State
+ */
+
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 /**
+ * @context
  * Contexto para gestionar el tema de la aplicación.
  * @type {React.Context<{isDarkMode: boolean, setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>}>}
  */

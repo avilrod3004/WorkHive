@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/BoardTask.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-useAxiosStore.html">useAxiosStore</a><ul class='methods'><li data-type='method'><a href="module-useAxiosStore.html#~fetch">fetch</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#Board">Board</a></li><li><a href="global.html#BoardTask">BoardTask</a></li><li><a href="global.html#ConfirmModal">ConfirmModal</a></li><li><a href="global.html#ContactUs">ContactUs</a></li><li><a href="global.html#EditMenuProject">EditMenuProject</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FormModal">FormModal</a></li><li><a href="global.html#FormUserProfile">FormUserProfile</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#LayoutAuth">LayoutAuth</a></li><li><a href="global.html#LayoutPrivate">LayoutPrivate</a></li><li><a href="global.html#LayoutPublic">LayoutPublic</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Panel">Panel</a></li><li><a href="global.html#PanelTarea">PanelTarea</a></li><li><a href="global.html#ProyectInfo">ProyectInfo</a></li><li><a href="global.html#Register">Register</a></li><li><a href="global.html#TaskInfo">TaskInfo</a></li><li><a href="global.html#TaskMenuEdit">TaskMenuEdit</a></li><li><a href="global.html#TeamMenu">TeamMenu</a></li><li><a href="global.html#ThemeContext">ThemeContext</a></li><li><a href="global.html#ThemeProvider">ThemeProvider</a></li><li><a href="global.html#UserContext">UserContext</a></li><li><a href="global.html#UserProfile">UserProfile</a></li><li><a href="global.html#UserProvider">UserProvider</a></li><li><a href="global.html#clearProject">clearProject</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearUser">clearUser</a></li><li><a href="global.html#getProjects">getProjects</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#setActualProjects">setActualProjects</a></li><li><a href="global.html#setCompletedProjects">setCompletedProjects</a></li><li><a href="global.html#setDoneTasks">setDoneTasks</a></li><li><a href="global.html#setInProgressTasks">setInProgressTasks</a></li><li><a href="global.html#setIsLoading">setIsLoading</a></li><li><a href="global.html#setLoading">setLoading</a></li><li><a href="global.html#setProject">setProject</a></li><li><a href="global.html#setTask">setTask</a></li><li><a href="global.html#setToReviewTasks">setToReviewTasks</a></li><li><a href="global.html#setTodoTasks">setTodoTasks</a></li><li><a href="global.html#setUser">setUser</a></li><li><a href="global.html#useProjectStore">useProjectStore</a></li><li><a href="global.html#useProjectsStore">useProjectsStore</a></li><li><a href="global.html#useTaskStore">useTaskStore</a></li><li><a href="global.html#useTheme">useTheme</a></li><li><a href="global.html#useUserStore">useUserStore</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/BoardTask.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PanelTarea from "../components/PanelTarea";
+
+/**
+ * Componente Board (Tablero)
+ *
+ * Este componente representa un tablero que contiene múltiples paneles.
+ * El tablero tiene un tipo específico que determina su estilo y el de sus paneles.
+ *
+ * @component
+ * @param {Object} props - Las propiedades del componente.
+ * @param {string} props.name - El nombre del tablero.
+ * @param {string} props.type - El tipo del tablero (e.g., 'todo', 'inprogress', 'toreview', 'done').
+ * @param {Array} props.panels - Un array de objetos que representan los paneles del tablero.
+ * @param {string} props.panels[]._id - El identificador de cada panel individual.
+ * @param {string} props.panels[].nombre - El nombre de cada panel individual.
+ *
+ */
+const BoardTask = ({ name, type, panels, idTablero }) => {
+  return (
+    &lt;div className={`tableroTask__${type}`}>
+      &lt;h2 className="tablero__titleTask">{name}&lt;/h2>
+      &lt;div className="tablero__panelsTask">
+        {panels.map((panel, index) => (
+          &lt;PanelTarea key={index} name={panel.nombre} type={type} id={idTablero} tareaId={panel._id}/>
+        ))}
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default BoardTask;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Mon Jan 27 2025 09:38:18 GMT+0100 (hora estándar de Europa central) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
