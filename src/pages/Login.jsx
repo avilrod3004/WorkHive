@@ -3,11 +3,7 @@
  * @category Routes
  */
 
-  /**
- * @namespace LoginFunction
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente Login
- */
+
 import React from "react";
 import { Formik } from "formik";
 import { useUserStore } from "../config/userStore";
@@ -34,7 +30,6 @@ const Login = () => {
   const { isDarkMode } = useTheme();
 
   /**
-   * @memberof LoginFunction
    * Función que se ejecuta al enviar el formulario de inicio de sesión
    * 
    * @param {Object} values - Valores del formulario

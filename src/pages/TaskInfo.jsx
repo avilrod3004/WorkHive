@@ -3,11 +3,6 @@
  * @category Routes
  */
 
-  /**
- * @namespace TaskInfoFunction
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente TaskInfo
- */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
@@ -30,10 +25,8 @@ const TaskInfo = () => {
   const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
 
-   /**
-   * @memberof TaskInfoFunction
-   * Efecto para cargar los datos de la tarea
-   */
+   // Efecto para cargar los datos de la tarea
+   
   useEffect(() => {
     /**
      * Función para obtener los datos de la tarea y sus detalles asociados

@@ -3,12 +3,6 @@
  * @category Routes
  */
 
-  /**
- * @namespace ContactUsFunction
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente ContactUs
- */
-
 import React from 'react';
 import {Formik} from "formik";
 import * as Yup from "yup";
@@ -27,12 +21,7 @@ import { useTheme } from '../context/ThemeContext'
  */
 const ContactUs = () => {
     const { isDarkMode } = useTheme();
-
-    /**
-     * @memberof ContactUsFunction
-     * Esquema de validación para el formulario
-     * Define las reglas de validación para cada campo del formulario
-     */
+//Esquema de validación para el formulario
     const validationSchema = Yup.object().shape({
         name: Yup.string().trim().required("El campo nombre es obligatorio"),
         email: Yup.string().trim().matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, "El formato del email no es válido").required("El campo email es obligatorio"),
@@ -42,7 +31,6 @@ const ContactUs = () => {
     })
 
     /**
-     * @memberof ContactUsFunction
      * Función que se ejecuta al enviar el formulario
      * 
      * @param {Object} values - Valores del formulario

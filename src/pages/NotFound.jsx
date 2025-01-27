@@ -3,11 +3,7 @@
  * @category Routes
  */
 
-  /**
- * @namespace NotFoundFunction
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente NotFound
- */
+
 import React from 'react'
 import margarita from '../assets/margarita.png';
 import margaritaDark from '../assets/margaritaDark.png';
@@ -25,12 +21,8 @@ import { useTheme } from '../context/ThemeContext'
  * @returns {JSX.Element} Página de error 404 personalizada
  */
 const NotFound = () => {
-  
-  /**
-   * @memberof NotFoundFunction
-   * Hook personalizado para obtener el estado del tema
-   * @type {boolean} isDarkMode - Indica si el modo oscuro está activo
-   */
+//Hook personalizado para obtener el estado del tema
+
   const { isDarkMode } = useTheme();
 
   return (

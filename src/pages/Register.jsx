@@ -35,10 +35,8 @@ const Register = () => {
   const { fetch } = useAxiosStore();
   const { isDarkMode } = useTheme();
 
-  /**
-   * @memberof RegisterFunction
-   * Esquema de validación para el formulario de registro
-   */
+  //Esquema de validación para el formulario de registro
+
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().trim().required("El campo nombre es obligatorio"),
     email: Yup.string()
@@ -62,7 +60,6 @@ const Register = () => {
   });
 
   /**
-   * @memberof RegisterFunction
    * Función que se ejecuta al enviar el formulario de registro
    * 
    * @param {Object} values - Valores del formulario

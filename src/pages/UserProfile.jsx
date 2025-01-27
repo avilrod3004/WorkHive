@@ -3,11 +3,7 @@
  * @category Routes
  */
 
-  /**
- * @namespace UserProfileFunctions
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente UserProfile
- */
+
 import React, { useEffect, useState } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
@@ -83,7 +79,6 @@ const UserProfile = () => {
 
 
    /**
-   * @memberof UserProfileFunctions
    * Obtiene los datos del usuario actual desde la API
    * @async
    * @function getUser
@@ -109,7 +104,6 @@ const UserProfile = () => {
   }
 
   /**
-   * @memberof UserProfileFunctions
    * Obtiene los proyectos del usuario desde la API y los categoriza como actuales o completados
    * @async
    * @function getProjects
@@ -174,10 +168,8 @@ const UserProfile = () => {
     }
   }
 
-   /**
-   * @memberof UserProfileFunctions
-   * Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
-   */
+   //Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
+   
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
@@ -190,11 +182,8 @@ const UserProfile = () => {
     }
   }, [token, fetch]);
 
-  /**
-   * @memberof UserProfileFunctions
-   * Maneja el cambio de la imagen de perfil
-   * @param {Event} e - El evento de cambio del input de archivo
-   */
+  // Maneja el cambio de la imagen de perfil
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -220,12 +209,8 @@ const UserProfile = () => {
     }
   };
 
-   /**
-   * @memberof UserProfileFunctions
-   * Maneja el envío del formulario de edición de perfil
-   * @async
-   * @param {Object} values - Los valores del formulario
-   */
+   // Maneja el envío del formulario de edición de perfil
+  
   const handleEditProfileSubmit = async (values) => {
     try {
       if (user) {

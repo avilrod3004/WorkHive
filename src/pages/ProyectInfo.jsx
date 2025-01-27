@@ -3,11 +3,6 @@
  * @category Routes
  */
 
-  /**
- * @namespace ProyectInfoFunction
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente ProyectInfo
- */
 import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png"
@@ -48,10 +43,8 @@ const ProyectInfo = () => {
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
 
-   /**
-    * @memberof ProyectInfoFunction
-   * Efecto para cargar los datos del proyecto y sus tareas
-   */
+// Efecto para cargar los datos del proyecto y sus tareas
+
   useEffect(() => {
     /**
      * Función para obtener los datos del proyecto
@@ -74,7 +67,6 @@ const ProyectInfo = () => {
     }
 
     /**
-     * @memberof ProyectInfoFunction
      * Función para obtener los datos de un usuario
      * @param {string} userId - ID del usuario
      * @returns {Promise<Object>} Datos del usuario
@@ -96,7 +88,6 @@ const ProyectInfo = () => {
     }
 
     /**
-     * @memberof ProyectInfoFunction
      * Función para obtener las tareas según su estado
      * @param {string} estado - Estado de las tareas a obtener
      * @returns {Promise<Array>} Array de tareas
@@ -118,7 +109,6 @@ const ProyectInfo = () => {
     }
 
     /**
-     * @memberof ProyectInfoFunction
      * Función principal para obtener todos los datos del proyecto y sus tareas
      */
     async function getProjectAndTasks() {
