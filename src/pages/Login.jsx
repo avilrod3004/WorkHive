@@ -5,10 +5,10 @@ import useAxiosStore from "../hooks/useAxios";
 import LogoWorkHive from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import logoDark from "../assets/logodark.png";
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
 
 const Login = () => {
-  const { setUser } = useUserStore();
+  const { setUser, setError, error } = useUserStore();
   const navigate = useNavigate();
   const { fetch } = useAxiosStore();
   const { isDarkMode } = useTheme();
@@ -26,8 +26,9 @@ const Login = () => {
         }
       );
 
-      if (!loginResponse.status === 201) {
-        throw new Error(`Error: ${loginResponse.statusText}`);
+      if (!(loginResponse.error.status === 201)) {
+        setError("Usuario y/o contraseña incorrectos");
+        throw loginResponse;
       }
 
       setUser({
@@ -35,20 +36,35 @@ const Login = () => {
         name: loginResponse.data.user.name,
         role: loginResponse.data.user.role,
       });
+      setError(null);
       localStorage.setItem("token", loginResponse.data.token);
       resetForm();
       setSubmitting(false);
       navigate("/usuario");
     } catch (error) {
-      console.error(error);
+      // Verificamos si el error tiene una respuesta HTTP y verificamos el estado
+      if (error.error.status === 400) {
+        setError("Email y/o contraseña incorrectos");
+      } else {
+        setError(
+          "El servidor no se encuentra operativo en estos momentos, inténtelo más tarde..."
+        );
+      }
+
+      console.error(error.error.message);
       setSubmitting(false);
     }
   };
+
   return (
     <>
       <main className="formulario-cuenta">
         <aside className="formulario-cuenta__lateral">
-          <img src={isDarkMode ? logoDark : LogoWorkHive} alt="" className="lateral__logo" />
+          <img
+            src={isDarkMode ? logoDark : LogoWorkHive}
+            alt=""
+            className="lateral__logo"
+          />
           <p className="lateral__nombre">WORKHIVE</p>
         </aside>
 
@@ -62,56 +78,63 @@ const Login = () => {
           >
             {({
               values,
-              handleChange,
+              handleChange: originalHandleChange,
               handleBlur,
               handleSubmit,
               resetForm,
               isSubmitting,
               errors,
               touched,
-            }) => (
-              <form onSubmit={handleSubmit} className="principal__formulario">
-                <h1 className="formulario__titulo">Inicia sesión</h1>
+            }) => {
+              const handleChange = (e) => {
+                setError(null);
+                originalHandleChange(e);
+              };
+              return (
+                <form onSubmit={handleSubmit} className="principal__formulario">
+                  <h1 className="formulario__titulo">Inicia sesión</h1>
 
-                <label htmlFor="email" className="formulario__label">
-                  Email
-                  <input
-                    type="text"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="formulario__input"
-                  />
-                  {errors.email && touched.email && (
-                    <p className="formulario__error">*{errors.email}</p>
-                  )}
-                </label>
+                  <label htmlFor="email" className="formulario__label">
+                    Email
+                    <input
+                      type="text"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                    />
+                    {errors.email && touched.email && (
+                      <p className="formulario__error">*{errors.email}</p>
+                    )}
+                  </label>
 
-                <label htmlFor="password" className="formulario__label">
-                  Contraseña
-                  <input
-                    type="password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="formulario__input"
-                  />
-                  {errors.password && touched.password && (
-                    <p className="formulario__error">*{errors.password}</p>
-                  )}
-                </label>
+                  <label htmlFor="password" className="formulario__label">
+                    Contraseña
+                    <input
+                      type="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="formulario__input"
+                    />
+                    {errors.password && touched.password && (
+                      <p className="formulario__error">*{errors.password}</p>
+                    )}
+                    {error && <p className="formulario__error">*{error}</p>}
+                  </label>
 
-                <button
-                  disabled={isSubmitting}
-                  type="submit"
-                  className="formulario__submit"
-                >
-                  Log in
-                </button>
-              </form>
-            )}
+                  <button
+                    disabled={isSubmitting}
+                    type="submit"
+                    className="formulario__submit"
+                  >
+                    Log in
+                  </button>
+                </form>
+              );
+            }}
           </Formik>
 
           <div>
