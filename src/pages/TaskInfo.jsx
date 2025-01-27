@@ -3,11 +3,15 @@ import { useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
 import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
+<<<<<<< HEAD
 import { useTaskStore } from "../config/taskStore";
+=======
+>>>>>>> b18094e (Implementa carga dinámica de tareas en TaskInfo; añade manejo de comentarios y actualización de estado y prioridad.)
 
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
+<<<<<<< HEAD
   const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
 
@@ -128,6 +132,130 @@ const TaskInfo = () => {
           </select>
         </header>
 
+=======
+  const token = localStorage.getItem("token");
+
+  const [task, setTask] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchTask() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+
+        const fetchedTask = response.data;
+
+        // Obtener datos del usuario asignado
+        const assignedUserResponse = await fetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${fetchedTask.asignadoA}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        const assignedUser = assignedUserResponse.data;
+
+        // Obtener datos de los usuarios que comentaron
+        const comentariosUsuarios = await Promise.all(
+          fetchedTask.comentarios.map(async (comentario) => {
+            const usuarioResponse = await fetch(
+              `${import.meta.env.VITE_BASE_API}usuarios/${comentario.usuario}`,
+              "GET",
+              null,
+              { Authorization: `Bearer ${token}` }
+            );
+            return { ...comentario, usuario: usuarioResponse.data.nombre };
+          })
+        );
+
+        // Actualizar tarea con datos completos
+        setTask({
+          ...fetchedTask,
+          asignadoA: assignedUser.nombre,
+          comentarios: comentariosUsuarios,
+        });
+      } catch (error) {
+        console.error("Error al cargar la tarea:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (idTarea && token) {
+      fetchTask();
+    }
+  }, [idTarea, token, fetch]);
+
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
+
+  if (!task) {
+    return <h1>No se encontró la tarea.</h1>;
+  }
+
+  return (
+    task && (
+      <div className="contenedor__info">
+        <header className="info__header">
+          <img className="header__image" src={bee} alt="Logo de WorkHive" />
+          <h1 className="header__titulo">{task.nombre}</h1>
+          <MenuTask />
+          <select
+            className="header__estado"
+            name="estado"
+            id="estado"
+            value={task.estado}
+            onChange={(e) => {
+              task.estado = e.target.value;
+              fetch(
+                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                "PUT",
+                {
+                  estado: e.target.value,
+                },
+                {
+                  Authorization: `Bearer ${token}`,
+                }
+              );
+            }}
+          >
+            <option value="pendiente">To Do</option>
+            <option value="en_proceso">In Progress</option>
+            <option value="en_revision">To Review</option>
+            <option value="completada">Done</option>
+          </select>
+          <select
+            className="header__prioridad"
+            name="prioridad"
+            id="prioridad"
+            value={task.prioridad}
+            onChange={(e) => {
+              task.prioridad = e.target.value;
+              fetch(
+                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                "PUT",
+                {
+                  prioridad: e.target.value,
+                },
+                {
+                  Authorization: `Bearer ${token}`,
+                }
+              );
+            }}
+          >
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </header>
+
+>>>>>>> b18094e (Implementa carga dinámica de tareas en TaskInfo; añade manejo de comentarios y actualización de estado y prioridad.)
         <section className="info__proyecto">
           <div className="proyecto__descripcion">
             <h1 className="descripcion__titulo">Descripción de tarea</h1>
