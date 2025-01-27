@@ -46,10 +46,8 @@ const ProyectInfo = () => {
 // Efecto para cargar los datos del proyecto y sus tareas
 
   useEffect(() => {
-    /**
-     * Función para obtener los datos del proyecto
-     * @returns {Promise<Object>} Datos del proyecto
-     */
+    // Función para obtener los datos del proyecto
+
     async function fetchProjectData() {
       try {
         const projectResponse = await fetch(
@@ -66,11 +64,7 @@ const ProyectInfo = () => {
       }
     }
 
-    /**
-     * Función para obtener los datos de un usuario
-     * @param {string} userId - ID del usuario
-     * @returns {Promise<Object>} Datos del usuario
-     */
+    // Función para obtener los datos de un usuario
     async function fetchUserData(userId) {
       try {
         const userResponse = await fetch(
@@ -87,11 +81,8 @@ const ProyectInfo = () => {
       }
     }
 
-    /**
-     * Función para obtener las tareas según su estado
-     * @param {string} estado - Estado de las tareas a obtener
-     * @returns {Promise<Array>} Array de tareas
-     */
+    //Función para obtener las tareas según su estado
+
     async function fetchTaskData(estado) {
       try {
         const response = await fetch(
@@ -108,9 +99,8 @@ const ProyectInfo = () => {
       }
     }
 
-    /**
-     * Función principal para obtener todos los datos del proyecto y sus tareas
-     */
+    //Función principal para obtener todos los datos del proyecto y sus tareas
+
     async function getProjectAndTasks() {
       setLoading(true);
       try {

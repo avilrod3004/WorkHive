@@ -28,9 +28,8 @@ const TaskInfo = () => {
    // Efecto para cargar los datos de la tarea
    
   useEffect(() => {
-    /**
-     * Función para obtener los datos de la tarea y sus detalles asociados
-     */
+    // Función para obtener los datos de la tarea y sus detalles asociados
+
     async function fetchTask() {
       try {
         const response = await fetch(

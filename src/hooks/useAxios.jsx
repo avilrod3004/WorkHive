@@ -28,16 +28,8 @@ const useAxiosStore = create((set) => ({
   data: null,
   isLoading: false,
   error: null,
-  /**
-   * Realiza una petición HTTP.
-   * @async
-   * @param {string} url - La URL de la petición.
-   * @param {string} [method="GET"] - El método HTTP a utilizar.
-   * @param {any} [body=null] - El cuerpo de la petición para métodos POST y PUT.
-   * @param {Object} [headers=null] - Los headers de la petición.
-   * @returns {Promise<FetchResult>} Resultado de la petición.
-   * @throws {Error} Si el método HTTP no es soportado.
-   */
+  // Realiza una petición HTTP.
+
   fetch: async (url, method = "GET", body = null, headers = null) => {
     try {
       if (method === "GET") {

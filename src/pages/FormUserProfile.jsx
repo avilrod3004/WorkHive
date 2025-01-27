@@ -28,14 +28,8 @@ const FormUserProfile = () => {
             .required("El campo email es obligatorio")
     })
 
-    /**
-     * Función que se ejecuta al enviar el formulario
-     * 
-     * @param {Object} values - Valores del formulario
-     * @param {Object} actions - Acciones de Formik
-     * @param {Function} actions.setSubmitting - Función para establecer el estado de envío
-     * @param {Function} actions.resetForm - Función para resetear el formulario
-     */
+    // Función que se ejecuta al enviar el formulario
+    
     const onSubmit = (values, { setSubmitting, resetForm }) => {
         resetForm();
         setSubmitting(false);

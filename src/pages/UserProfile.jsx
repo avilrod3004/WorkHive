@@ -78,11 +78,8 @@ const UserProfile = () => {
   });
 
 
-   /**
-   * Obtiene los datos del usuario actual desde la API
-   * @async
-   * @function getUser
-   */
+   // Obtiene los datos del usuario actual desde la API
+
   async function getUser() {
     try {
       if (user) {
@@ -103,11 +100,8 @@ const UserProfile = () => {
     }
   }
 
-  /**
-   * Obtiene los proyectos del usuario desde la API y los categoriza como actuales o completados
-   * @async
-   * @function getProjects
-   */
+  // Obtiene los proyectos del usuario desde la API y los categoriza como actuales o completados
+
   async function getProjects() {
     try {
       if (user) {

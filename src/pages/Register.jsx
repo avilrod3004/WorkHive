@@ -53,14 +53,8 @@ const Register = () => {
       .required("Por favor, repita la contraseña"),
   });
 
-  /**
-   * Función que se ejecuta al enviar el formulario de registro
-   * 
-   * @param {Object} values - Valores del formulario
-   * @param {Object} actions - Acciones de Formik
-   * @param {Function} actions.setSubmitting - Función para establecer el estado de envío
-   * @param {Function} actions.resetForm - Función para resetear el formulario
-   */
+  //Función que se ejecuta al enviar el formulario de registro
+  
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     delete values.repeatPassword;
     values.role = "usuario";
