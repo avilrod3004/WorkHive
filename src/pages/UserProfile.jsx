@@ -309,11 +309,11 @@ const UserProfile = () => {
               descripcion: values.description,
               fechaInicio: values.dateIni || null,
               fechaFin: values.dateEnd || null,
-              administrador: user.id,
+              administrador: user._id || user.id,
               colaboradores: [],
             };
 
-            const response = await fetch(
+            const response = await newFetch(
               import.meta.env.VITE_BASE_API + "tableros",
               "POST",
               JSON.stringify(body),
