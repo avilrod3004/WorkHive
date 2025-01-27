@@ -4,13 +4,33 @@ import { useUserStore } from "../config/userStore";
 import useAxiosStore from "../hooks/useAxios";
 import { jwtDecode } from "jwt-decode";
 
+/**
+ * Contexto para gestionar la información del usuario.
+ * @type {React.Context<{user: Object|null, setUser: Function}>}
+ */
 const UserContext = createContext();
 
+/**
+ * Proveedor del contexto de usuario.
+ * Gestiona la autenticación y el estado del usuario.
+ *
+ * @param {Object} props - Propiedades del componente.
+ * @param {React.ReactNode} props.children - Componentes hijos que serán envueltos por el proveedor.
+ * @returns {JSX.Element} Componente UserProvider.
+ */
 export const UserProvider = ({ children }) => {
   const { setUser, clearUser, user } = useUserStore();
   const { fetch } = useAxiosStore();
 
+  /**
+   * Efecto para verificar el token de autenticación al montar el componente.
+   * Actualiza el estado del usuario basándose en la validez del token.
+   */
   useEffect(() => {
+    /**
+     * Verifica el token almacenado y actualiza el estado del usuario.
+     * @async
+     */
     const verifyToken = async () => {
       const token = localStorage.getItem("token");
 
@@ -30,7 +50,7 @@ export const UserProvider = ({ children }) => {
         );
 
         if (response.error === null) {
-          // Decodificar el token para obtener los datos del usuario
+          // Decodifica el token para obtener los datos del usuario
           const decodedToken = jwtDecode(token);
           const { id, nombre, rol } = decodedToken;
           setUser({ id, nombre, rol }); // Actualiza el usuario en Zustand con los datos del token
