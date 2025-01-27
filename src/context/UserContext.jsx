@@ -3,12 +3,6 @@
  * @category State
  */
 
-  /**
- * @namespace UserContextFunction
- * @memberof module:Context
- * @description Funciones auxiliares para el componente UserContext
- */
-
 // UserContext.js
 import React, { createContext, useEffect } from "react";
 import { useUserStore } from "../config/userStore";
@@ -22,24 +16,10 @@ import { jwtDecode } from "jwt-decode";
  */
 const UserContext = createContext();
 
-/**
- * @memberof UserContextFunction
- * Proveedor del contexto de usuario.
- * Gestiona la autenticación y el estado del usuario.
- *
- * @param {Object} props - Propiedades del componente.
- * @param {React.ReactNode} props.children - Componentes hijos que serán envueltos por el proveedor.
- * @returns {JSX.Element} Componente UserProvider.
- */
 export const UserProvider = ({ children }) => {
   const { setUser, clearUser, user } = useUserStore();
   const { fetch } = useAxiosStore();
 
-  /**
-   * @memberof UserContextFunction
-   * Efecto para verificar el token de autenticación al montar el componente.
-   * Actualiza el estado del usuario basándose en la validez del token.
-   */
   useEffect(() => {
     /**
      * Verifica el token almacenado y actualiza el estado del usuario.

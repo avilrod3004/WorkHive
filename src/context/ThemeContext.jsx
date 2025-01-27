@@ -3,13 +3,6 @@
  * @category State
  */
 
-  /**
- * @namespace ThemeContextFunction
- * @memberof module:Context
- * @description Funciones auxiliares para el componente ThemeContext
- */
-
-
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
@@ -29,20 +22,11 @@ const ThemeContext = createContext();
  * @returns {JSX.Element} Componente ThemeProvider.
  */
 export const ThemeProvider = ({ children }) => {
-  /**
-   * @memberof ThemeContextFunction
-   * Estado para rastrear si el modo oscuro está activo.
-   * Se inicializa basándose en el atributo data-theme actual del documento.
-   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
-   */
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return document.documentElement.getAttribute("data-theme") === "dark";
   });
 
-  /**
-   * @memberof ThemeContextFunction
-   * Efecto para actualizar el atributo data-theme del documento cuando cambia isDarkMode.
-   */
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",

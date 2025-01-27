@@ -1,11 +1,11 @@
 /**
- * @module Layouts
- * @category Structure
+ *  @module Modals
+ * @category UI
  */
 import React from 'react';
 
 /**
- * @layout
+ * @modal
  * Modal - Componente base para representar un modal.
  *
  * @param {Object} props - Propiedades del componente.
