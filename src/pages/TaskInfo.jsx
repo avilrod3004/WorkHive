@@ -4,12 +4,21 @@ import bee from "../assets/bee.png";
 import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
 import { useTaskStore } from "../config/taskStore";
+import FormModal from "../modals/FormModal.jsx";
+import * as Yup from "yup";
 
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
   const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
+  const [modalCommentOpen, setModalCommentOpen] = useState(false);
+
+  const validationSchemaComment = Yup.object().shape({
+    message: Yup.string()
+        .trim()
+        .required("El campo 'Comentario' es obligatorio")
+  })
 
   useEffect(() => {
     async function fetchTask() {
@@ -166,12 +175,46 @@ const TaskInfo = () => {
 
             <article>
               <p>AGREGAR COMENTARIO</p>
-              <a href="">
+              <a href="#" onClick={ () => setModalCommentOpen(true) }>
                 <img src="" alt="Agregar comentario" />
               </a>
             </article>
           </ul>
         </section>
+
+        {/* Modal para añadir comentarios a una tarea */}
+        <FormModal
+            isOpen={modalCommentOpen}
+            onClose={() => setModalCommentOpen(false)}
+            initialValues={{
+              message: "",
+            }}
+            validationSchema={validationSchemaComment}
+            onSubmit={(values) => {
+              setModalCommentOpen(false)
+            }}
+            title="Añadir comentario"
+        >
+          {
+            ({values, handleChange, handleBlur, errors, touched}) => (
+                <>
+                  <label htmlFor="message" className="formulario__label">
+                    Comentario
+                    <textarea
+                        name="message"
+                        value={values.message}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className="formulario__input"
+                    />
+                    {errors.message && touched.message && (
+                        <p className="formulario__error">* {errors.message}</p>
+                    )}
+                  </label>
+                </>
+            )
+          }
+        </FormModal>
       </div>
     )
   );
