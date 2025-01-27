@@ -25,6 +25,8 @@ import * as Yup from "yup";
 const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeleteProject }) => {
 
     const [modalNewTaskOpen, setmodalNewTaskOpen] = useState(false);
+    const [modalAddColaborator, setmodalAddColaborator] = useState(false);
+    const [modalEditProject, setmodalEditProject] = useState(false);
 
     const validationSchemaNewTask = Yup.object().shape({
         name: Yup.string()
@@ -41,21 +43,46 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
             .required("El campo 'Descripción' es obligatorio."),
     });
 
+    const validationSchemaAddColaborator = Yup.object().shape({
+        name: Yup.string()
+            .trim()
+            .required("El campo 'Nombre' es obligatorio"),
+    })
+
+    const validationSchemaEditProject = Yup.object().shape({
+        name: Yup.string()
+            .trim()
+            .required("El campo 'Nombre proyecto' es obligatorio"),
+        admin: Yup.string()
+            .trim()
+            .required("El campo 'Administrador' es obligatorio"),
+        description: Yup.string()
+            .trim()
+            .required("El campo 'Descripción' es obligatorio."),
+        dateIni: Yup.date()
+            .required("El campo 'Fecha' es obligatorio")
+            .min(new Date(), "La fecha debe ser posterior a la actual"),
+        dateEnd: Yup.date()
+            .required("El campo 'Fecha' es obligatorio")
+            .min(new Date(), "La fecha debe ser posterior a la actual"),
+    });
+
     return (
     <div className="edit__menu">
       <button className="menu__button" title='Añadir tarea' onClick={() => setmodalNewTaskOpen(true)}>
         <AddIcon />
       </button>
-      <button className="menu__button" title='Añadir colaborador' onClick={() => onAddPerson(id)}>
+      <button className="menu__button" title='Añadir colaborador' onClick={() => setmodalAddColaborator(true)}>
         <PersonAddAlt1Icon />
       </button>
-      <button className="menu__button" title='Editar Proyecto' onClick={() => onEditProject(id)}>
+      <button className="menu__button" title='Editar Proyecto' onClick={() => setmodalEditProject(true)}>
         <BorderColorIcon />
       </button>
       <button className="menu__button" title='Eliminar Proyecto' onClick={() => onDeleteProject(id)}>
         <DeleteForeverIcon />
       </button>
 
+        {/* Modal para añadir tareas al proyecto */}
         <FormModal
             isOpen={modalNewTaskOpen}
             onClose={() => setmodalNewTaskOpen(false)}
@@ -68,7 +95,7 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
             }}
             validationSchema={validationSchemaNewTask}
             onSubmit=":)"
-            title="Editar perfil"
+            title="Añadir tarea"
         >
             {({ values, handleChange, handleBlur, errors, touched }) => (
                 <>
@@ -157,6 +184,140 @@ const EditMenuProject = ({ id, onAddTask, onAddPerson, onEditProject, onDeletePr
                     </label>
                 </>
             )}
+        </FormModal>
+
+        {/* Modal para añadir colaboradores al proyecto */}
+        <FormModal
+            isOpen={modalAddColaborator}
+            onClose={() => setmodalAddColaborator(false)}
+            initialValues={{
+                email: "",
+            }}
+            validationSchema={validationSchemaAddColaborator}
+            onSubmit={(values) => {
+                setmodalAddColaborator(false)
+            }}
+            title="Añadir colaborador"
+        >
+            {
+                ({values, handleChange, handleBlur, errors, touched}) => (
+                    <>
+                        <label htmlFor="name" className="formulario__label">
+                            Nombre
+                            <input
+                                type="text"
+                                name="name"
+                                value={values.name}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="formulario__input"
+                            />
+                            {
+                                errors.name && touched.name && (
+                                <p className="formulario__error">* {errors.name}</p>
+                            )}
+                        </label>
+                    </>
+                )
+            }
+        </FormModal>
+
+        {/* Modal para editar los datos del proyecto */}
+        <FormModal
+            isOpen={modalEditProject}
+            onClose={() => setmodalEditProject(false)}
+            initialValues={{
+                name: "",
+                admin: "",
+                dateIni: "",
+                dateEnd: "",
+                description: "",
+            }}
+            validationSchema={validationSchemaEditProject}
+            onSubmit={(values) => {
+                setmodalEditProject(false)
+            }}
+            title="Editar proyecto"
+        >
+            {
+                ({values, handleChange, handleBlur, errors, touched}) => (
+                    <>
+                        <label htmlFor="name" className="formulario__label">
+                            Nombre proyecto
+                            <input
+                                type="text"
+                                name="name"
+                                value={values.name}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="formulario__input"
+                            />
+                            {errors.name && touched.name && (
+                                <p className="formulario__error">* {errors.name}</p>
+                            )}
+                        </label>
+
+                        <label htmlFor="admin" className="formulario__label">
+                            Administrador
+                            <input
+                                type="text"
+                                name="admin"
+                                value={values.admin}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="formulario__input"
+                            />
+                            {errors.admin && touched.admin && (
+                                <p className="formulario__error">* {errors.admin}</p>
+                            )}
+                        </label>
+
+                        <label htmlFor="dateIni" className="formulario__label">
+                            Fecha inicio
+                            <input
+                                type="date"
+                                name="dateIni"
+                                value={values.dateIni}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="formulario__input"
+                            />
+                            {errors.dateIni && touched.dateIni && (
+                                <p className="formulario__error">* {errors.dateIni}</p>
+                            )}
+                        </label>
+
+                        <label htmlFor="dateEnd" className="formulario__label">
+                            Fecha fin
+                            <input
+                                type="date"
+                                name="dateEnd"
+                                value={values.dateEnd}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="formulario__input"
+                            />
+                            {errors.dateEnd && touched.dateEnd && (
+                                <p className="formulario__error">* {errors.dateEnd}</p>
+                            )}
+                        </label>
+
+                        <label htmlFor="description" className="formulario__label">
+                            Descripción
+                            <textarea
+                                name="description"
+                                value={values.description}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="formulario__input"
+                            />
+                            {errors.description && touched.description && (
+                                <p className="formulario__error">* {errors.description}</p>
+                            )}
+                        </label>
+                    </>
+                )
+            }
         </FormModal>
     </div>
   )

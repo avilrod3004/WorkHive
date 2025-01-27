@@ -295,6 +295,7 @@ const UserProfile = () => {
         />
       </section>
 
+      {/* Modal para crear un nuevo proyecto */}
       <FormModal
         isOpen={modalNewProjectOpen}
         onClose={() => setmodalNewProjectOpen(false)}
