@@ -6,10 +6,10 @@ import useAxiosStore from "../hooks/useAxios";
 import LogoWorkHive from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import logoDark from "../assets/logodark.png";
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
 
 const Register = () => {
-  const { setUser } = useUserStore();
+  const { setUser, error, setError } = useUserStore();
   const navigate = useNavigate();
   const { fetch } = useAxiosStore();
   const { isDarkMode } = useTheme();
@@ -56,8 +56,8 @@ const Register = () => {
         }
       );
 
-      if (!response.status === 201) {
-        throw new Error(`Error: ${response.statusText}`);
+      if (!(response.error.status === 201)) {
+        throw response.error;
       }
       resetForm();
       setSubmitting(false);
@@ -73,8 +73,8 @@ const Register = () => {
         }
       );
 
-      if (!loginResponse.status === 201) {
-        throw new Error(`Error: ${loginResponse.statusText}`);
+      if (!(loginResponse.error.status === 201)) {
+        throw loginResponse.error;
       }
 
       setUser({
@@ -85,7 +85,15 @@ const Register = () => {
       localStorage.setItem("token", loginResponse.data.token);
       navigate("/usuario");
     } catch (error) {
-      console.error(error);
+      if (error.status === 400) {
+        setError("Ya hay un usuario registrado con ese email");
+      } else {
+        setError(
+          "El servidor no se encuentra operativo en estos momentos, inténtelo más tarde..."
+        );
+      }
+
+      console.error(error.message);
       setSubmitting(false);
     }
   };
@@ -94,7 +102,11 @@ const Register = () => {
     <>
       <main className="formulario-cuenta">
         <aside className="formulario-cuenta__lateral">
-          <img src={isDarkMode ? logoDark : LogoWorkHive} alt="" className="lateral__logo" />
+          <img
+            src={isDarkMode ? logoDark : LogoWorkHive}
+            alt=""
+            className="lateral__logo"
+          />
           <p className="lateral__nombre">WORKHIVE</p>
         </aside>
 
@@ -182,6 +194,7 @@ const Register = () => {
                       *{errors.repeatPassword}
                     </p>
                   )}
+                  {error && <p className="formulario__error">*{error}</p>}
                 </label>
 
                 <button

@@ -27,8 +27,7 @@ const Login = () => {
       );
 
       if (!(loginResponse.error.status === 201)) {
-        setError("Usuario y/o contraseña incorrectos");
-        throw loginResponse;
+        throw loginResponse.error;
       }
 
       setUser({
@@ -42,8 +41,7 @@ const Login = () => {
       setSubmitting(false);
       navigate("/usuario");
     } catch (error) {
-      // Verificamos si el error tiene una respuesta HTTP y verificamos el estado
-      if (error.error.status === 400) {
+      if (error.status === 400) {
         setError("Email y/o contraseña incorrectos");
       } else {
         setError(
@@ -51,7 +49,7 @@ const Login = () => {
         );
       }
 
-      console.error(error.error.message);
+      console.error(error.message);
       setSubmitting(false);
     }
   };
