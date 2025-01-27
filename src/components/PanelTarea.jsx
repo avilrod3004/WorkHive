@@ -13,11 +13,11 @@ import { NavLink } from "react-router-dom";
  */
 const PanelTarea = ({ name, type, id , tareaId}) => {
   return (
-    <div className={`panel__${type}`}>
+    <div className={`panelTask__${type}`}>
       <div className="inside">
 
           <NavLink to={`/usuario/tablero/${id}/tarea/${tareaId}`}>
-              <div className="panel__content">{name}</div>
+              <div className="panelTask__content">{name}</div>
           </NavLink>
       </div>
     </div>

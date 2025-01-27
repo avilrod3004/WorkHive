@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     background-color: var(--fondo-color);
+    min-height: 900px;
 }
 
 /* HEADER */
@@ -12,6 +13,7 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     background-color: var(--fondo-color);
     padding: 2rem;
 }
@@ -105,4 +107,11 @@
     display: flex;
     flex-direction: row;
     background-color: var( --fondo-color);
+}
+
+@media (max-width: 900px){
+    .contenedor__tareas{
+        flex-direction: column;
+        align-items: center;
+    }
 }

@@ -4,10 +4,11 @@
 
 // Estilos borde del panel
   
-.tablero__todo {
-      width: 30rem;
+.tableroTask__todo {
+      width: 40rem;
       min-width: 10rem;
-      .tablero__title{
+      padding: 1rem;
+      .tablero__titleTask{
             @include description-text;
             background-color: var(--todo-panel);
             color: var(--black-text);
@@ -17,10 +18,11 @@
       }
 }
   
-.tablero__inprogress {
-      width: 30rem;
+.tableroTask__inprogress {
+      width: 40rem;
       min-width: 10rem;
-      .tablero__title{
+      padding: 1rem;
+      .tablero__titleTask{
             @include description-text;
             background-color: var(--inprogress-panel);
             color: var(--black-text);
@@ -30,10 +32,11 @@
       }
 }
   
-.tablero__toreview {
-      width: 30rem;
+.tableroTask__toreview {
+      width: 40rem;
       min-width: 10rem;
-      .tablero__title{
+      padding: 1rem;
+      .tablero__titleTask{
             @include description-text;
             background-color: var(--toreview-panel);
             color: var(--black-text);
@@ -43,10 +46,11 @@
       }
 }
   
-.tablero__done {
-      width: 30rem;
+.tableroTask__done {
+      width: 40rem;
       min-width: 10rem;
-      .tablero__title{
+      padding: 1rem;
+      .tablero__titleTask{
             @include description-text;
             background-color: var(--done-panel);
             color: var(--black-text);
@@ -56,24 +60,17 @@
       }
 }
 
-.contenedor__tablero {
-      display: flex;
-      flex-direction: row;
-}
 
-.tablero__panels {
+.tablero__panelsTask {
       display:flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: -4rem;
 }
 
 @media (max-width: 1200px){
-      .tablero__panels{
+      .tablero__panelsTask{
             align-items: center;
             justify-content:space-around;
-            gap: 8rem;
+            gap: 6rem;
       }
 }
-
-

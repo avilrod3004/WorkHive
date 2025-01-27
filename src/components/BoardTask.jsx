@@ -18,9 +18,9 @@ import PanelTarea from "../components/PanelTarea";
  */
 const BoardTask = ({ name, type, panels, idTablero }) => {
   return (
-    <div className={`tablero__${type}`}>
-      <h2 className="tablero__title">{name}</h2>
-      <div className="tablero__panels">
+    <div className={`tableroTask__${type}`}>
+      <h2 className="tablero__titleTask">{name}</h2>
+      <div className="tablero__panelsTask">
         {panels.map((panel, index) => (
           <PanelTarea key={index} name={panel.nombre} type={type} id={idTablero} tareaId={panel._id}/>
         ))}

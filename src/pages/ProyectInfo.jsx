@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
+import beeDark from "../assets/beedark.png"
 import Menu from "../components/EditMenuProject";
 import TeamMenu from "../components/TeamMenu";
 import { useProjectStore } from "../config/projectStore";
 import { NavLink, useParams } from "react-router-dom";
 import useAxiosStore from "../hooks/useAxios";
 import BoardTask from "../components/BoardTask";
-
+import { useTheme } from '../context/ThemeContext'
 
 const ProyectInfo = () => {
   const { id } = useParams(); // Recuperar ID desde la URL
@@ -26,6 +27,7 @@ const ProyectInfo = () => {
   } = useProjectStore();
   const { fetch } = useAxiosStore();
   const token = localStorage.getItem("token");
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     async function fetchProjectData() {
@@ -142,7 +144,7 @@ const ProyectInfo = () => {
       <div className="contenedor__info">
         <header className="info__header">
           <div className='contenedor__image'>
-            <img className="header__image" src={bee} alt="Logo de WorkHive" />
+            <img className="header__image" src={isDarkMode ? beeDark : bee} alt="Logo de WorkHive" />
             <h1 className="header__titulo">{project.nombre}</h1>
           </div>
           <TeamMenu

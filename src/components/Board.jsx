@@ -23,14 +23,17 @@ import Panel from "../components/Panel";
  */
 const Board = ({ name, type, panels }) => {
   return (
-    <div className={`tablero__${type}`}>
-      <h2 className="tablero__title">{name}</h2>
-      <div className="tablero__panels">
-        {panels.map((panel, index) => (
-          <Panel key={index} name={panel.nombre} type={type} id={panel._id} />
-        ))}
-      </div>
-    </div>
+    <section className="contenedor__tablero">
+        <div className={`tablero__${type}`}>
+          <h2 className="tablero__title">{name}</h2>
+          <div className="tablero__panels">
+            {panels.map((panel, index) => (
+              <Panel key={index} name={panel.nombre} type={type} id={panel._id} />
+            ))}
+          </div>
+        </div>
+    </section>
+    
   );
 };
 
