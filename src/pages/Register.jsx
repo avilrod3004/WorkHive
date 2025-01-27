@@ -3,12 +3,6 @@
  * @category Routes
  */
 
-
-  /**
- * @namespace RegisterFunction
- * @memberof module:Pages
- * @description Funciones auxiliares para el componente Register
- */
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
