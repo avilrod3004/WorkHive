@@ -9,6 +9,8 @@ import bee from "../assets/bee.png";
 import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
 import { useTaskStore } from "../config/taskStore";
+import * as Yup from "yup";
+import FormModal from "../modals/FormModal";
 
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
