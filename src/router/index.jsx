@@ -1,3 +1,8 @@
+/**
+ * @module Router
+ * @category Navigation
+ */
+
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import LayoutPublic from "../layouts/LayoutPublic";
@@ -16,12 +21,13 @@ const ProyectInfo = lazy(() => import("../pages/ProyectInfo"));
 const TaskInfo = lazy(() => import("../pages/TaskInfo"));
 
 /**
+ * @router
  * Manejo del enrutamiento de las páginas de la aplicación.
  *
  * Este objeto define las rutas y sus componentes asociados,
  * incluyendo rutas públicas y privadas, así como la gestión de errores.
  *
- * @returns {Object} El objeto de enrutamiento creado por createBrowserRouter.
+ * @returns {Object} El objeto de enrutamiento creado por createBrowserRouter, con la ruta a cada página de la aplicación.
  */
 export const router = createBrowserRouter([
   {

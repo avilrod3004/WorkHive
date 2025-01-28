@@ -1,11 +1,35 @@
+
+/**
+ * @module Hooks
+ * @category Custom
+ */
 import axios from "axios";
 import { create } from "zustand";
 
-// Crear el store con Zustand
+/**
+ * @typedef {Object} AxiosStoreState
+ * @property {any} data - Los datos recibidos de la última petición.
+ * @property {boolean} isLoading - Indica si hay una petición en curso.
+ * @property {Error|null} error - El error de la última petición, si lo hubo.
+ * @property {Function} fetch - Función para realizar peticiones HTTP.
+ */
+
+/**
+ * @typedef {Object} FetchResult
+ * @property {any} data - Los datos recibidos de la petición.
+ * @property {Error|null} error - El error de la petición, si lo hubo.
+ */
+
+/**
+ * Store de Zustand para manejar peticiones HTTP con Axios.
+ * @type {import('zustand').UseStore<AxiosStoreState>}
+ */
 const useAxiosStore = create((set) => ({
   data: null,
   isLoading: false,
   error: null,
+  // Realiza una petición HTTP.
+
   fetch: async (url, method = "GET", body = null, headers = null) => {
     try {
       if (method === "GET") {

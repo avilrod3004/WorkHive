@@ -1,3 +1,8 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
@@ -5,13 +10,26 @@ import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
 import { useTaskStore } from "../config/taskStore";
 
+/**
+ * @page
+ * Componente TaskInfo
+ * 
+ * Este componente muestra la información detallada de una tarea específica,
+ * incluyendo su descripción, estado, prioridad, fecha límite, usuario asignado y comentarios.
+ * 
+ * @returns {JSX.Element} Página de información detallada de la tarea
+ */
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
   const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
 
+   // Efecto para cargar los datos de la tarea
+   
   useEffect(() => {
+    // Función para obtener los datos de la tarea y sus detalles asociados
+
     async function fetchTask() {
       try {
         const response = await fetch(

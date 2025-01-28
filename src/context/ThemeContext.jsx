@@ -1,8 +1,13 @@
-// ThemeContext.js
+/**
+ * @module Contexts
+ * @category State
+ */
+
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 /**
+ * @context
  * Contexto para gestionar el tema de la aplicación.
  * @type {React.Context<{isDarkMode: boolean, setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>}>}
  */
@@ -17,18 +22,11 @@ const ThemeContext = createContext();
  * @returns {JSX.Element} Componente ThemeProvider.
  */
 export const ThemeProvider = ({ children }) => {
-  /**
-   * Estado para rastrear si el modo oscuro está activo.
-   * Se inicializa basándose en el atributo data-theme actual del documento.
-   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
-   */
+
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return document.documentElement.getAttribute("data-theme") === "dark";
   });
 
-  /**
-   * Efecto para actualizar el atributo data-theme del documento cuando cambia isDarkMode.
-   */
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",

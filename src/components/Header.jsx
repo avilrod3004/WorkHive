@@ -1,18 +1,38 @@
-import React from "react";
+/**
+ * @module Components
+ * @category UI
+ */
+
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useUserStore } from "../config/userStore";
 import { useTheme } from "../context/ThemeContext";
 
+/**
+ * Componente Header
+ *
+ * Este componente renderiza el encabezado de la aplicación, que incluye el título,
+ * enlaces de navegación y un botón para cambiar entre el modo claro y oscuro.
+ *
+ * @component
+ * @returns {JSX.Element} El componente Header renderizado
+ */
 const Header = () => {
   const { isDarkMode, setIsDarkMode } = useTheme();
   const { user, setUser, setError } = useUserStore();
 
+  /**
+   * Alterna entre el modo claro y oscuro
+   */
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
 
+  /**
+   * Maneja el cierre de sesión del usuario
+   */
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("token");

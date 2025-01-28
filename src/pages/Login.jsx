@@ -1,3 +1,9 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
+
+
 import React from "react";
 import { Formik } from "formik";
 import { useUserStore } from "../config/userStore";
@@ -7,12 +13,32 @@ import { useNavigate } from "react-router-dom";
 import logoDark from "../assets/logodark.png";
 import { useTheme } from "../context/ThemeContext";
 
+/**
+ * @page
+ * Componente Login
+ * 
+ * Este componente renderiza un formulario de inicio de sesión.
+ * Utiliza Formik para el manejo del estado del formulario, Zustand para el manejo del estado global del usuario,
+ * y un hook personalizado para las peticiones HTTP.
+ * 
+ * @returns {JSX.Element} Formulario de inicio de sesión
+ */
 const Login = () => {
   const { setUser, setError, error } = useUserStore();
   const navigate = useNavigate();
   const { fetch } = useAxiosStore();
   const { isDarkMode } = useTheme();
 
+  /**
+   * Función que se ejecuta al enviar el formulario de inicio de sesión
+   * 
+   * @param {Object} values - Valores del formulario
+   * @param {string} values.email - Email del usuario
+   * @param {string} values.password - Contraseña del usuario
+   * @param {Object} actions - Acciones de Formik
+   * @param {Function} actions.setSubmitting - Función para establecer el estado de envío
+   * @param {Function} actions.resetForm - Función para resetear el formulario
+   */
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const loginResponse = await fetch(

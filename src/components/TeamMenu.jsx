@@ -1,3 +1,7 @@
+/**
+ * @module Components
+ * @category UI
+ */
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 

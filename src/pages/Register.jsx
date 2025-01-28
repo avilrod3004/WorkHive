@@ -1,3 +1,8 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
+
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -8,11 +13,23 @@ import { useNavigate } from "react-router-dom";
 import logoDark from "../assets/logodark.png";
 import { useTheme } from "../context/ThemeContext";
 
+/**
+ * @page
+ * Componente Register
+ * 
+ * Este componente renderiza un formulario de registro de usuario.
+ * Utiliza Formik para el manejo del estado del formulario, Yup para la validación,
+ * y hooks personalizados para el manejo del estado global y peticiones HTTP.
+ * 
+ * @returns {JSX.Element} Formulario de registro de usuario
+ */
 const Register = () => {
   const { setUser, error, setError } = useUserStore();
   const navigate = useNavigate();
   const { fetch } = useAxiosStore();
   const { isDarkMode } = useTheme();
+
+  //Esquema de validación para el formulario de registro
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().trim().required("El campo nombre es obligatorio"),
@@ -36,6 +53,8 @@ const Register = () => {
       .required("Por favor, repita la contraseña"),
   });
 
+  //Función que se ejecuta al enviar el formulario de registro
+  
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     delete values.repeatPassword;
     values.role = "usuario";
@@ -45,6 +64,7 @@ const Register = () => {
       formData.append(key, values[key]);
     }
     try {
+      // Registro del usuario
       const response = await fetch(
         import.meta.env.VITE_BASE_API + "usuarios",
         "POST",
@@ -62,6 +82,7 @@ const Register = () => {
       resetForm();
       setSubmitting(false);
 
+      // Login automático después del registro
       const loginResponse = await fetch(
         import.meta.env.VITE_BASE_API + "usuarios/logins",
         "POST",

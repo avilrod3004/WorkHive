@@ -1,3 +1,9 @@
+/**
+ * @module Pages
+ * @category Routes
+ */
+
+
 import React, { useEffect, useState } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
@@ -15,6 +21,17 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { brown } from "@mui/material/colors";
 import fotoCambiar from "../assets/margarita.png";
 
+/**
+ * @page
+ * Componente UserProfile
+ * 
+ * Este componente muestra la página de perfil del usuario, incluyendo su información personal,
+ * proyectos actuales y proyectos completados. También proporciona funcionalidad para editar el
+ * perfil del usuario y crear nuevos proyectos.
+ *
+ * @component
+ * @returns {JSX.Element} Página de perfil de usuario, mostrando sus proyectos actuales y los finalizados.
+ */
 const UserProfile = () => {
   const {
     isLoading,
@@ -60,6 +77,9 @@ const UserProfile = () => {
       .required("El campo 'Email' es obligatorio"),
   });
 
+
+   // Obtiene los datos del usuario actual desde la API
+
   async function getUser() {
     try {
       if (user) {
@@ -79,6 +99,8 @@ const UserProfile = () => {
       console.error("Error al obtener los datos del usuario:", error);
     }
   }
+
+  // Obtiene los proyectos del usuario desde la API y los categoriza como actuales o completados
 
   async function getProjects() {
     try {
@@ -140,6 +162,8 @@ const UserProfile = () => {
     }
   }
 
+   //Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
+   
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
@@ -151,6 +175,8 @@ const UserProfile = () => {
       fetchData();
     }
   }, [token, fetch]);
+
+  // Maneja el cambio de la imagen de perfil
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -177,6 +203,8 @@ const UserProfile = () => {
     }
   };
 
+   // Maneja el envío del formulario de edición de perfil
+  
   const handleEditProfileSubmit = async (values) => {
     try {
       if (user) {
