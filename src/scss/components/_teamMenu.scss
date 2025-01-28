@@ -1,5 +1,7 @@
 .team__menu {
-  background-color: var(--fondo-color);
+  background-color: var(--fondo-menu);
+  border: 1px solid var(--icono-menu);
+  border-radius: 10px;
 }
 
 .menu__header {

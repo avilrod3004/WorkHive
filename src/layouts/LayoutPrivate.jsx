@@ -35,7 +35,9 @@ const LayoutPrivate = ({ children }) => {
     <>
       <UserProvider>
         <Header />
-        {children ? children : <Outlet />}
+        <main>
+          {children ? children : <Outlet />}
+        </main>
         <Footer />
       </UserProvider>
     </>

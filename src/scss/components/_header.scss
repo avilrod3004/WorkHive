@@ -14,7 +14,7 @@
     color: var(--black-text);
     letter-spacing: 0.6rem;
     &:active{
-        font-size:clamp(1.6rem, 1.8vw, 2rem)
+        font-size:clamp(1.2rem, 1.6vw, 2rem)
     }
 }
 
@@ -34,4 +34,14 @@
 .theme-icon {
     cursor: pointer;
     color: var(--black-text);
+}
+
+
+@media (max-width: 550px) {
+
+    .header {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;;
+    }
 }

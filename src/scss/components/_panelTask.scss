@@ -121,6 +121,10 @@
 }
 
 .panelTask__done:active, .panelTask__inprogress:active, .panelTask__todo:active, .panelTask__toreview:active {
-    width: 27vmin;
-  height: 25vmin;
+    width: 24vmin;
+  height: 22vmin;
 }
+
+.panelTask__done:hover, .panelTask__inprogress:hover, .panelTask__todo:hover, .panelTask__toreview:hover {
+      background-color: #d8b68f;
+  }
