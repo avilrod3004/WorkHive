@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>pages/ProyectInfo.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Components.html">Components</a><ul class='methods'><li data-type='method'><a href="module-Components.html#~Board">Board</a></li><li data-type='method'><a href="module-Components.html#~BoardTask">BoardTask</a></li><li data-type='method'><a href="module-Components.html#~EditMenuProject">EditMenuProject</a></li><li data-type='method'><a href="module-Components.html#~Footer">Footer</a></li><li data-type='method'><a href="module-Components.html#~Header">Header</a></li><li data-type='method'><a href="module-Components.html#~Panel">Panel</a></li><li data-type='method'><a href="module-Components.html#~PanelTarea">PanelTarea</a></li><li data-type='method'><a href="module-Components.html#~TaskMenuEdit">TaskMenuEdit</a></li><li data-type='method'><a href="module-Components.html#~TeamMenu">TeamMenu</a></li></ul></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li><a href="module-Config.html">Config</a><ul class='methods'><li data-type='method'><a href="module-Config.html#~clearProject">clearProject</a></li><li data-type='method'><a href="module-Config.html#~clearTask">clearTask</a></li><li data-type='method'><a href="module-Config.html#~clearUser">clearUser</a></li><li data-type='method'><a href="module-Config.html#~setActualProjects">setActualProjects</a></li><li data-type='method'><a href="module-Config.html#~setCompletedProjects">setCompletedProjects</a></li><li data-type='method'><a href="module-Config.html#~setDoneTasks">setDoneTasks</a></li><li data-type='method'><a href="module-Config.html#~setInProgressTasks">setInProgressTasks</a></li><li data-type='method'><a href="module-Config.html#~setIsLoading">setIsLoading</a></li><li data-type='method'><a href="module-Config.html#~setLoading">setLoading</a></li><li data-type='method'><a href="module-Config.html#~setLoading">setLoading</a></li><li data-type='method'><a href="module-Config.html#~setProject">setProject</a></li><li data-type='method'><a href="module-Config.html#~setTask">setTask</a></li><li data-type='method'><a href="module-Config.html#~setToReviewTasks">setToReviewTasks</a></li><li data-type='method'><a href="module-Config.html#~setTodoTasks">setTodoTasks</a></li><li data-type='method'><a href="module-Config.html#~setUser">setUser</a></li></ul></li><li></li><li></li><li></li><li><a href="module-Contexts.html">Contexts</a></li><li></li><li><a href="module-Hooks.html">Hooks</a></li><li><a href="module-Layouts.html">Layouts</a><ul class='methods'><li data-type='method'><a href="module-Layouts.html#~LayoutAuth">LayoutAuth</a></li><li data-type='method'><a href="module-Layouts.html#~LayoutPrivate">LayoutPrivate</a></li><li data-type='method'><a href="module-Layouts.html#~LayoutPublic">LayoutPublic</a></li></ul></li><li></li><li></li><li><a href="module-Modals.html">Modals</a><ul class='methods'><li data-type='method'><a href="module-Modals.html#~ConfirmModal">ConfirmModal</a></li><li data-type='method'><a href="module-Modals.html#~FormModal">FormModal</a></li><li data-type='method'><a href="module-Modals.html#~Modal">Modal</a></li></ul></li><li></li><li></li><li><a href="module-Pages.html">Pages</a><ul class='methods'><li data-type='method'><a href="module-Pages.html#~ContactUs">ContactUs</a></li><li data-type='method'><a href="module-Pages.html#~FormUserProfile">FormUserProfile</a></li><li data-type='method'><a href="module-Pages.html#~Home">Home</a></li><li data-type='method'><a href="module-Pages.html#~Login">Login</a></li><li data-type='method'><a href="module-Pages.html#~NotFound">NotFound</a></li><li data-type='method'><a href="module-Pages.html#~ProyectInfo">ProyectInfo</a></li><li data-type='method'><a href="module-Pages.html#~Register">Register</a></li><li data-type='method'><a href="module-Pages.html#~UserProfile">UserProfile</a></li></ul></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li><a href="module-Router.html">Router</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">pages/ProyectInfo.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Pages
+ * @category Routes
+ */
+
+import React, { useEffect } from "react";
+import bee from "../assets/bee.png";
+import beeDark from "../assets/beedark.png";
+import EditMenuProject from "../components/EditMenuProject";
+import TeamMenu from "../components/TeamMenu";
+import { useProjectStore } from "../config/projectStore";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import useAxiosStore from "../hooks/useAxios";
+import BoardTask from "../components/BoardTask";
+import { useTheme } from "../context/ThemeContext";
+import { useUsersStore } from "../config/usersStore";
+import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
+
+/**
+ * @page
+ * Componente ProyectInfo
+ *
+ * Este componente muestra la información detallada de un proyecto específico,
+ * incluyendo su descripción, fechas, administrador, y tableros de tareas.
+ *
+ * @returns {JSX.Element} Página de información detallada del proyecto
+ */
+const ProyectInfo = () => {
+  const { id } = useParams(); // Recuperar ID desde la URL
+  const {
+    project,
+    setProject,
+    loading,
+    setLoading,
+    setTodoTasks,
+    setInProgressTasks,
+    setToReviewTasks,
+    setDoneTasks,
+    todoTasks,
+    inProgressTasks,
+    toReviewTasks,
+    doneTasks,
+  } = useProjectStore();
+  const { fetch: newFetch } = useAxiosStore();
+  const { users, setUsers } = useUsersStore();
+  const { setError, setCollaboratorAdded } = useAddCollaboratorStore();
+  const token = localStorage.getItem("token");
+  const { isDarkMode } = useTheme();
+  const { clearProject } = useProjectStore();
+  const navigate = useNavigate();
+
+  // Efecto para cargar los datos del proyecto y sus tareas
+
+  useEffect(() => {
+    // Función para obtener los datos del proyecto
+
+    async function fetchProjectData() {
+      try {
+        const projectResponse = await newFetch(
+          `${import.meta.env.VITE_BASE_API}tableros/${id}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (projectResponse.error) throw new Error(projectResponse.error);
+        return projectResponse.data;
+      } catch (error) {
+        console.error("Error al obtener el proyecto:", error);
+        throw error;
+      }
+    }
+
+    // Función para obtener los datos de un usuario
+    async function fetchUserData(userId) {
+      try {
+        const userResponse = await newFetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${userId}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (userResponse.error) throw new Error(userResponse.error);
+        return userResponse.data;
+      } catch (error) {
+        console.error(`Error al obtener datos del usuario ${userId}:`, error);
+        throw error;
+      }
+    }
+
+    //Función para obtener las tareas según su estado
+
+    async function fetchTaskData(estado) {
+      try {
+        const response = await newFetch(
+          `${import.meta.env.VITE_BASE_API}tareas/estado`,
+          "POST",
+          { tablero: id, estado },
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+        return response.data;
+      } catch (error) {
+        console.error(`Error al obtener tareas de estado ${estado}:`, error);
+        return [];
+      }
+    }
+
+    //Función principal para obtener todos los datos del proyecto y sus tareas
+
+    async function getProjectAndTasks() {
+      setLoading(true);
+      try {
+        const projectData = await fetchProjectData();
+
+        // Obtener administrador
+        const adminData = await fetchUserData(projectData.administrador);
+
+        // Obtener colaboradores
+        const collaborators = await Promise.all(
+          projectData.colaboradores.map((colaboradorId) =>
+            fetchUserData(colaboradorId)
+          )
+        );
+
+        // Actualizar proyecto con datos completos
+        setProject({
+          ...projectData,
+          administrador: adminData,
+          colaboradores: collaborators.filter(Boolean),
+        });
+
+        // Obtener y establecer tareas según estado
+        const [todo, inProgress, toReview, done] = await Promise.all([
+          fetchTaskData("pendiente"),
+          fetchTaskData("en_proceso"),
+          fetchTaskData("en_revision"),
+          fetchTaskData("completada"),
+        ]);
+
+        setTodoTasks(todo);
+        setInProgressTasks(inProgress);
+        setToReviewTasks(toReview);
+        setDoneTasks(done);
+      } catch (error) {
+        console.error(
+          "Error al cargar los datos del proyecto y tareas:",
+          error
+        );
+      }
+    }
+
+    async function fetchUsers() {
+      try {
+        const response = await newFetch(
+          `${import.meta.env.VITE_BASE_API}usuarios`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+        return response.data;
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      }
+    }
+
+    async function getUsers() {
+      try {
+        const usersData = await fetchUsers();
+        setUsers(usersData);
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (id &amp;&amp; token) {
+      getProjectAndTasks();
+      getUsers();
+    }
+  }, [
+    id,
+    token,
+    newFetch,
+    setProject,
+    setLoading,
+    setTodoTasks,
+    setInProgressTasks,
+    setToReviewTasks,
+    setDoneTasks,
+  ]);
+
+  if (loading) {
+    return &lt;h1>Cargando...&lt;/h1>;
+  }
+
+  return (
+    project &amp;&amp; (
+      &lt;div className="contenedor__info">
+        &lt;header className="info__header">
+          &lt;div className="contenedor__image">
+            &lt;img
+              className="header__image"
+              src={isDarkMode ? beeDark : bee}
+              alt="Logo de WorkHive"
+            />
+            &lt;h1 className="header__titulo">{project.nombre}&lt;/h1>
+          &lt;/div>
+          &lt;TeamMenu
+            teamMembers={[project.administrador, ...project.colaboradores]}
+          />
+        &lt;/header>
+
+        &lt;section className="info__proyecto">
+          &lt;div className="proyecto__descripcion">
+            &lt;h1 className="descripcion__titulo">Descripción de proyecto&lt;/h1>
+            &lt;p className="descripcion__parrafo">{project.descripcion}&lt;/p>
+          &lt;/div>
+
+          &lt;div className="proyecto__fechas">
+            &lt;div className="fechas__descripcion">
+              &lt;p className="fechas__parrafo">
+                &lt;span>Fecha de inicio: &lt;/span>
+                {new Date(project.fechaInicio).toLocaleDateString()}
+              &lt;/p>
+            &lt;/div>
+
+            &lt;div className="fechas__descripcion">
+              &lt;p className="fechas__parrafo">
+                &lt;span>Fecha de fin: &lt;/span>
+                {new Date(project.fechaFin).toLocaleDateString()}
+              &lt;/p>
+            &lt;/div>
+          &lt;/div>
+
+          &lt;div className="proyecto__administrador">
+            &lt;h1 className="administrador__titulo">Administrador&lt;/h1>
+            &lt;p className="administrador__nombre">
+              {project.administrador.nombre}
+            &lt;/p>
+          &lt;/div>
+        &lt;/section>
+
+        &lt;section className="contenedor__tareas">
+          &lt;BoardTask
+            name="TO DO"
+            type="todo"
+            panels={todoTasks}
+            idTablero={id}
+          />
+          &lt;BoardTask
+            name="IN PROGRESS"
+            type="inprogress"
+            panels={inProgressTasks}
+            idTablero={id}
+          />
+          &lt;BoardTask
+            name="TO REVIEW"
+            type="toreview"
+            panels={toReviewTasks}
+            idTablero={id}
+          />
+          &lt;BoardTask
+            name="DONE"
+            type="done"
+            panels={doneTasks}
+            idTablero={id}
+          />
+        &lt;/section>
+
+        &lt;EditMenuProject
+          id={id}
+          onAddPerson={async (email) => {
+            try {
+              const user = users.find((u) => u.email === email);
+              if (user) {
+                if (project.administrador._id === user._id) {
+                  setError("El usuario ya está en el proyecto");
+                  throw "El usuario ya está en el proyecto";
+                } else {
+                  const colaborador = project.colaboradores.find(
+                    (u) => u._id === user._id
+                  );
+                  if (colaborador) {
+                    setError("El usuario ya está en el proyecto");
+                    throw "El usuario ya está en el proyecto";
+                  } else {
+                    const newCollaborators = [...project.colaboradores, user];
+                    setProject({ ...project, colaboradores: newCollaborators });
+                    const colaboradorResponse = await newFetch(
+                      import.meta.env.VITE_BASE_API +
+                        `tableros/${id}/colaboradores`,
+                      "POST",
+                      { userId: user._id },
+                      { Authorization: `Bearer ${token}` }
+                    );
+
+                    if (colaboradorResponse.error) {
+                      setError(colaboradorResponse.error);
+                      throw colaboradorResponse.error;
+                    }
+
+                    setCollaboratorAdded(true);
+                  }
+                }
+              } else {
+                setError("El usuario no está registrado");
+                throw "El usuario no está registrado";
+              }
+            } catch (error) {
+              console.error("Error al agregar persona al proyecto:", error);
+            }
+          }}
+          onDeleteProject={async () => {
+            try {
+              const response = await newFetch(
+                import.meta.env.VITE_BASE_API + `tableros/${id}`,
+                "DELETE",
+                null,
+                { Authorization: `Bearer ${token}` }
+              );
+
+              if (response.error) throw new Error(response.error);
+
+              clearProject();
+
+              navigate("/usuario");
+            } catch (error) {
+              console.error("Error al eliminar proyecto:", error);
+            }
+          }}
+        />
+      &lt;/div>
+    )
+  );
+};
+
+export default ProyectInfo;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Tue Jan 28 2025 14:06:48 GMT+0100 (hora estándar de Europa central) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

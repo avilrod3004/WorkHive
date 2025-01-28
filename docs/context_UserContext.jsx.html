@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>context/UserContext.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Components.html">Components</a><ul class='methods'><li data-type='method'><a href="module-Components.html#~Board">Board</a></li><li data-type='method'><a href="module-Components.html#~BoardTask">BoardTask</a></li><li data-type='method'><a href="module-Components.html#~EditMenuProject">EditMenuProject</a></li><li data-type='method'><a href="module-Components.html#~Footer">Footer</a></li><li data-type='method'><a href="module-Components.html#~Header">Header</a></li><li data-type='method'><a href="module-Components.html#~Panel">Panel</a></li><li data-type='method'><a href="module-Components.html#~PanelTarea">PanelTarea</a></li><li data-type='method'><a href="module-Components.html#~TaskMenuEdit">TaskMenuEdit</a></li><li data-type='method'><a href="module-Components.html#~TeamMenu">TeamMenu</a></li></ul></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li><a href="module-Config.html">Config</a><ul class='methods'><li data-type='method'><a href="module-Config.html#~clearProject">clearProject</a></li><li data-type='method'><a href="module-Config.html#~clearTask">clearTask</a></li><li data-type='method'><a href="module-Config.html#~clearUser">clearUser</a></li><li data-type='method'><a href="module-Config.html#~setActualProjects">setActualProjects</a></li><li data-type='method'><a href="module-Config.html#~setCompletedProjects">setCompletedProjects</a></li><li data-type='method'><a href="module-Config.html#~setDoneTasks">setDoneTasks</a></li><li data-type='method'><a href="module-Config.html#~setInProgressTasks">setInProgressTasks</a></li><li data-type='method'><a href="module-Config.html#~setIsLoading">setIsLoading</a></li><li data-type='method'><a href="module-Config.html#~setLoading">setLoading</a></li><li data-type='method'><a href="module-Config.html#~setLoading">setLoading</a></li><li data-type='method'><a href="module-Config.html#~setProject">setProject</a></li><li data-type='method'><a href="module-Config.html#~setTask">setTask</a></li><li data-type='method'><a href="module-Config.html#~setToReviewTasks">setToReviewTasks</a></li><li data-type='method'><a href="module-Config.html#~setTodoTasks">setTodoTasks</a></li><li data-type='method'><a href="module-Config.html#~setUser">setUser</a></li></ul></li><li></li><li></li><li></li><li><a href="module-Contexts.html">Contexts</a></li><li></li><li><a href="module-Hooks.html">Hooks</a></li><li><a href="module-Layouts.html">Layouts</a><ul class='methods'><li data-type='method'><a href="module-Layouts.html#~LayoutAuth">LayoutAuth</a></li><li data-type='method'><a href="module-Layouts.html#~LayoutPrivate">LayoutPrivate</a></li><li data-type='method'><a href="module-Layouts.html#~LayoutPublic">LayoutPublic</a></li></ul></li><li></li><li></li><li><a href="module-Modals.html">Modals</a><ul class='methods'><li data-type='method'><a href="module-Modals.html#~ConfirmModal">ConfirmModal</a></li><li data-type='method'><a href="module-Modals.html#~FormModal">FormModal</a></li><li data-type='method'><a href="module-Modals.html#~Modal">Modal</a></li></ul></li><li></li><li></li><li><a href="module-Pages.html">Pages</a><ul class='methods'><li data-type='method'><a href="module-Pages.html#~ContactUs">ContactUs</a></li><li data-type='method'><a href="module-Pages.html#~FormUserProfile">FormUserProfile</a></li><li data-type='method'><a href="module-Pages.html#~Home">Home</a></li><li data-type='method'><a href="module-Pages.html#~Login">Login</a></li><li data-type='method'><a href="module-Pages.html#~NotFound">NotFound</a></li><li data-type='method'><a href="module-Pages.html#~ProyectInfo">ProyectInfo</a></li><li data-type='method'><a href="module-Pages.html#~Register">Register</a></li><li data-type='method'><a href="module-Pages.html#~UserProfile">UserProfile</a></li></ul></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li><a href="module-Router.html">Router</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">context/UserContext.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Contexts
+ * @category State
+ */
+
+// UserContext.js
+import React, { createContext, useEffect } from "react";
+import { useUserStore } from "../config/userStore";
+import useAxiosStore from "../hooks/useAxios";
+import { jwtDecode } from "jwt-decode";
+
+/**
+ * @context
+ * Contexto para gestionar la información del usuario.
+ * @type {React.Context&lt;{user: Object|null, setUser: Function}>}
+ */
+const UserContext = createContext();
+
+export const UserProvider = ({ children }) => {
+  const { setUser, clearUser, user } = useUserStore();
+  const { fetch } = useAxiosStore();
+
+  useEffect(() => {
+    /**
+     * Verifica el token almacenado y actualiza el estado del usuario.
+     * @async
+     */
+    const verifyToken = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        clearUser();
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          import.meta.env.VITE_BASE_API + "usuarios/verify-token",
+          "POST",
+          null,
+          {
+            Authorization: `Bearer ${token}`,
+          }
+        );
+
+        if (response.error === null) {
+          // Decodifica el token para obtener los datos del usuario
+          const decodedToken = jwtDecode(token);
+          const { id, nombre, rol } = decodedToken;
+          setUser({ id, nombre, rol }); // Actualiza el usuario en Zustand con los datos del token
+        } else {
+          localStorage.removeItem("token");
+          clearUser();
+        }
+      } catch (error) {
+        console.error("Error verifying token:", error);
+        localStorage.removeItem("token");
+        clearUser();
+      }
+    };
+
+    verifyToken();
+  }, []);
+
+  return (
+    &lt;UserContext.Provider value={{ user, setUser }}>
+      {children}
+    &lt;/UserContext.Provider>
+  );
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Tue Jan 28 2025 14:06:48 GMT+0100 (hora estándar de Europa central) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
