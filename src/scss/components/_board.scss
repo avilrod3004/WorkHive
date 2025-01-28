@@ -6,73 +6,74 @@
   
 .tablero__todo {
       width: 30rem;
-      min-width: 10rem;
+      min-width: 6rem;
+      padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--todo-panel);
             color: var(--black-text);
             padding: 2rem;
             text-align:center;
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
       }
 }
   
 .tablero__inprogress {
       width: 30rem;
-      min-width: 10rem;
+      min-width: 6rem;
+      padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--inprogress-panel);
             color: var(--black-text);
             padding: 2rem;
             text-align:center;
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
       }
 }
   
 .tablero__toreview {
       width: 30rem;
-      min-width: 10rem;
+      min-width: 6rem;
+      padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--toreview-panel);
             color: var(--black-text);
             padding: 2rem;
             text-align:center;
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
       }
 }
   
 .tablero__done {
       width: 30rem;
-      min-width: 10rem;
+      min-width: 6rem;
+      padding: 1rem;
       .tablero__title{
             @include description-text;
             background-color: var(--done-panel);
             color: var(--black-text);
             padding: 2rem;
             text-align:center;
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
       }
 }
 
-.contenedor__tablero {
-      display: flex;
-      flex-direction: row;
-}
 
 .tablero__panels {
       display:flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: -4rem;
+      gap: 1rem;
+      padding: 0 4rem;
 }
 
 @media (max-width: 1200px){
       .tablero__panels{
             align-items: center;
             justify-content:space-around;
-            gap: 8rem;
+            gap: 4rem;
       }
 }
 
