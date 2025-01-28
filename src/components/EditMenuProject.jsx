@@ -2,7 +2,7 @@
  * @module Components
  * @category UI
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -13,6 +13,7 @@ import { brown } from "@mui/material/colors";
 import FormModal from "../modals/FormModal.jsx";
 import * as Yup from "yup";
 import ConfirmModal from "../modals/ConfirmModal.jsx";
+import { useAddCollaboratorStore } from "../config/addCollaboratorStore.jsx";
 
 /**
  * Componente de menú de edición para proyectos.
@@ -38,6 +39,8 @@ const EditMenuProject = ({
   const [modalAddColaboratorOpen, setmodalAddColaboratorOpen] = useState(false);
   const [modalEditProjectOpen, setmodalEditProjectOpen] = useState(false);
   const [modalDeleteProjectOpen, setmodalDeleteProjectOpen] = useState(false);
+  const { error, clearError, setCollaboratorAdded, collaboratorAdded } =
+    useAddCollaboratorStore();
 
   const validationSchemaNewTask = Yup.object().shape({
     name: Yup.string()
@@ -55,16 +58,13 @@ const EditMenuProject = ({
   });
 
   const validationSchemaAddColaborator = Yup.object().shape({
-    name: Yup.string().trim().required("El campo 'Nombre' es obligatorio"),
+    email: Yup.string().trim().required("El campo 'Email' es obligatorio"),
   });
 
   const validationSchemaEditProject = Yup.object().shape({
     name: Yup.string()
       .trim()
       .required("El campo 'Nombre proyecto' es obligatorio"),
-    admin: Yup.string()
-      .trim()
-      .required("El campo 'Administrador' es obligatorio"),
     description: Yup.string()
       .trim()
       .required("El campo 'Descripción' es obligatorio."),
@@ -88,7 +88,10 @@ const EditMenuProject = ({
       <button
         className="menu__button"
         title="Añadir colaborador"
-        onClick={() => setmodalAddColaboratorOpen(true)}
+        onClick={() => {
+          setmodalAddColaboratorOpen(true);
+          clearError();
+        }}
       >
         <PersonAddAlt1Icon />
       </button>
@@ -221,29 +224,51 @@ const EditMenuProject = ({
           email: "",
         }}
         validationSchema={validationSchemaAddColaborator}
-        onSubmit={(values) => {
-          setmodalAddColaboratorOpen(false);
+        onSubmit={(values, { setSubmitting }) => {
+          onAddPerson(values.email);
+          setSubmitting(false);
         }}
         title="Añadir colaborador"
       >
-        {({ values, handleChange, handleBlur, errors, touched }) => (
-          <>
-            <label htmlFor="name" className="formulario__label">
-              Nombre
-              <input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.name && touched.name && (
-                <p className="formulario__error">* {errors.name}</p>
-              )}
-            </label>
-          </>
-        )}
+        {({
+          values,
+          handleChange: originalHandleChange,
+          handleBlur,
+          errors,
+          touched,
+        }) => {
+          const handleChange = (e) => {
+            clearError();
+            setCollaboratorAdded(false);
+            originalHandleChange(e);
+          };
+
+          useEffect(() => {
+            if (error === null && collaboratorAdded) {
+              setmodalAddColaboratorOpen(false);
+            }
+          }, [error]);
+
+          return (
+            <>
+              <label htmlFor="email" className="formulario__label">
+                Email
+                <input
+                  type="text"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.email && touched.email && (
+                  <p className="formulario__error">* {errors.email}</p>
+                )}
+                {error !== null && <p className="formulario__error">{error}</p>}
+              </label>
+            </>
+          );
+        }}
       </FormModal>
 
       {/* Modal para editar los datos del proyecto */}
@@ -252,7 +277,6 @@ const EditMenuProject = ({
         onClose={() => setmodalEditProjectOpen(false)}
         initialValues={{
           name: "",
-          admin: "",
           dateIni: "",
           dateEnd: "",
           description: "",
@@ -277,21 +301,6 @@ const EditMenuProject = ({
               />
               {errors.name && touched.name && (
                 <p className="formulario__error">* {errors.name}</p>
-              )}
-            </label>
-
-            <label htmlFor="admin" className="formulario__label">
-              Administrador
-              <input
-                type="text"
-                name="admin"
-                value={values.admin}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.admin && touched.admin && (
-                <p className="formulario__error">* {errors.admin}</p>
               )}
             </label>
 
@@ -349,6 +358,8 @@ const EditMenuProject = ({
         message="¿Estas seguro de que quieres eliminar el proyecto?"
         onConfirm={() => {
           setmodalDeleteProjectOpen(false);
+
+          onDeleteProject(id);
         }}
       />
     </div>

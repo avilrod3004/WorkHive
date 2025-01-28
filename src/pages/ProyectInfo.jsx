@@ -5,22 +5,24 @@
 
 import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
-import beeDark from "../assets/beedark.png"
-import Menu from "../components/EditMenuProject";
+import beeDark from "../assets/beedark.png";
+import EditMenuProject from "../components/EditMenuProject";
 import TeamMenu from "../components/TeamMenu";
 import { useProjectStore } from "../config/projectStore";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import useAxiosStore from "../hooks/useAxios";
 import BoardTask from "../components/BoardTask";
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
+import { useUsersStore } from "../config/usersStore";
+import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
 
 /**
  * @page
  * Componente ProyectInfo
- * 
+ *
  * Este componente muestra la información detallada de un proyecto específico,
  * incluyendo su descripción, fechas, administrador, y tableros de tareas.
- * 
+ *
  * @returns {JSX.Element} Página de información detallada del proyecto
  */
 const ProyectInfo = () => {
@@ -39,18 +41,22 @@ const ProyectInfo = () => {
     toReviewTasks,
     doneTasks,
   } = useProjectStore();
-  const { fetch } = useAxiosStore();
+  const { fetch: newFetch } = useAxiosStore();
+  const { users, setUsers } = useUsersStore();
+  const { setError, setCollaboratorAdded } = useAddCollaboratorStore();
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
+  const { clearProject } = useProjectStore();
+  const navigate = useNavigate();
 
-// Efecto para cargar los datos del proyecto y sus tareas
+  // Efecto para cargar los datos del proyecto y sus tareas
 
   useEffect(() => {
     // Función para obtener los datos del proyecto
 
     async function fetchProjectData() {
       try {
-        const projectResponse = await fetch(
+        const projectResponse = await newFetch(
           `${import.meta.env.VITE_BASE_API}tableros/${id}`,
           "GET",
           null,
@@ -67,7 +73,7 @@ const ProyectInfo = () => {
     // Función para obtener los datos de un usuario
     async function fetchUserData(userId) {
       try {
-        const userResponse = await fetch(
+        const userResponse = await newFetch(
           `${import.meta.env.VITE_BASE_API}usuarios/${userId}`,
           "GET",
           null,
@@ -85,7 +91,7 @@ const ProyectInfo = () => {
 
     async function fetchTaskData(estado) {
       try {
-        const response = await fetch(
+        const response = await newFetch(
           `${import.meta.env.VITE_BASE_API}tareas/estado`,
           "POST",
           { tablero: id, estado },
@@ -140,16 +146,43 @@ const ProyectInfo = () => {
           "Error al cargar los datos del proyecto y tareas:",
           error
         );
+      }
+    }
+
+    async function fetchUsers() {
+      try {
+        const response = await newFetch(
+          `${import.meta.env.VITE_BASE_API}usuarios`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+        return response.data;
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      }
+    }
+
+    async function getUsers() {
+      try {
+        const usersData = await fetchUsers();
+        setUsers(usersData);
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
       } finally {
         setLoading(false);
       }
     }
 
-    if (id && token) getProjectAndTasks();
+    if (id && token) {
+      getProjectAndTasks();
+      getUsers();
+    }
   }, [
     id,
     token,
-    fetch,
+    newFetch,
     setProject,
     setLoading,
     setTodoTasks,
@@ -166,8 +199,12 @@ const ProyectInfo = () => {
     project && (
       <div className="contenedor__info">
         <header className="info__header">
-          <div className='contenedor__image'>
-            <img className="header__image" src={isDarkMode ? beeDark : bee} alt="Logo de WorkHive" />
+          <div className="contenedor__image">
+            <img
+              className="header__image"
+              src={isDarkMode ? beeDark : bee}
+              alt="Logo de WorkHive"
+            />
             <h1 className="header__titulo">{project.nombre}</h1>
           </div>
           <TeamMenu
@@ -206,33 +243,96 @@ const ProyectInfo = () => {
         </section>
 
         <section className="contenedor__tareas">
-            <BoardTask
-                name="TO DO"
-                type='todo'
-                panels={todoTasks}
-                idTablero={id}
-            />
-            <BoardTask
-                name="IN PROGRESS"
-                type='inprogress'
-                panels={inProgressTasks}
-                idTablero={id}
-            />
-            <BoardTask
-                name="TO REVIEW"
-                type='toreview'
-                panels={toReviewTasks}
-                idTablero={id}
-            />
-            <BoardTask
-                name="DONE"
-                type='done'
-                panels={doneTasks}
-                idTablero={id}
-            />
+          <BoardTask
+            name="TO DO"
+            type="todo"
+            panels={todoTasks}
+            idTablero={id}
+          />
+          <BoardTask
+            name="IN PROGRESS"
+            type="inprogress"
+            panels={inProgressTasks}
+            idTablero={id}
+          />
+          <BoardTask
+            name="TO REVIEW"
+            type="toreview"
+            panels={toReviewTasks}
+            idTablero={id}
+          />
+          <BoardTask
+            name="DONE"
+            type="done"
+            panels={doneTasks}
+            idTablero={id}
+          />
         </section>
 
-        <Menu />
+        <EditMenuProject
+          id={id}
+          onAddPerson={async (email) => {
+            try {
+              const user = users.find((u) => u.email === email);
+              if (user) {
+                if (project.administrador._id === user._id) {
+                  setError("El usuario ya está en el proyecto");
+                  throw "El usuario ya está en el proyecto";
+                } else {
+                  const colaborador = project.colaboradores.find(
+                    (u) => u._id === user._id
+                  );
+                  if (colaborador) {
+                    setError("El usuario ya está en el proyecto");
+                    throw "El usuario ya está en el proyecto";
+                  } else {
+                    const newCollaborators = [...project.colaboradores, user];
+                    setProject({ ...project, colaboradores: newCollaborators });
+                    const colaboradorResponse = await newFetch(
+                      import.meta.env.VITE_BASE_API +
+                        `tableros/${id}/colaboradores`,
+                      "POST",
+                      { userId: user._id },
+                      { Authorization: `Bearer ${token}` }
+                    );
+
+                    console.log(colaboradorResponse);
+
+                    if (colaboradorResponse.error) {
+                      setError(colaboradorResponse.error);
+                      throw colaboradorResponse.error;
+                    }
+
+                    setCollaboratorAdded(true);
+                  }
+                }
+              } else {
+                setError("El usuario no está registrado");
+                throw "El usuario no está registrado";
+              }
+            } catch (error) {
+              console.error("Error al agregar persona al proyecto:", error);
+            }
+          }}
+          onDeleteProject={async () => {
+            try {
+              const response = await newFetch(
+                import.meta.env.VITE_BASE_API + `tableros/${id}`,
+                "DELETE",
+                null,
+                { Authorization: `Bearer ${token}` }
+              );
+
+              if (response.error) throw new Error(response.error);
+
+              clearProject();
+
+              navigate("/usuario");
+            } catch (error) {
+              console.error("Error al eliminar proyecto:", error);
+            }
+          }}
+        />
       </div>
     )
   );

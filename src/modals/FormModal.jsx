@@ -2,12 +2,12 @@
  *  @module Modals
  * @category UI
  */
-import React from 'react';
+import React from "react";
 import Modal from "./Modal.jsx";
-import {Formik} from "formik";
-import Bee from "../assets/bee.png"
-import DarkBee from "../assets/beedark.png"
-import {useTheme} from "../context/ThemeContext.jsx";
+import { Formik } from "formik";
+import Bee from "../assets/bee.png";
+import DarkBee from "../assets/beedark.png";
+import { useTheme } from "../context/ThemeContext.jsx";
 
 /**
  * @modal
@@ -22,36 +22,63 @@ import {useTheme} from "../context/ThemeContext.jsx";
  * @param {Function} props.children - Función render prop para personalizar el contenido del formulario. Recibe un objeto con las propiedades de Formik (`values`, `handleChange`, `handleBlur`, `errors`, `touched`).
  * @returns {React.ReactElement|null} El componente del modal con el formulario o `null` si no está abierto.
  */
-const FormModal = ({isOpen, onClose, initialValues, validationSchema, onSubmit, children, title}) => {
-    const { isDarkMode } = useTheme();
+const FormModal = ({
+  isOpen,
+  onClose,
+  initialValues,
+  validationSchema,
+  onSubmit,
+  children,
+  title,
+}) => {
+  const { isDarkMode } = useTheme();
 
-    return (
-        <Modal isOpen={isOpen}>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-            >
-                {
-                    ({values, handleChange, handleBlur, handleSubmit, resetForm, isSubmitting, errors, touched}) => (
-                        <form onSubmit={handleSubmit} className="modal-form__formulario">
-                            <header className="modal-form__header">
-                                <img src={isDarkMode ? DarkBee : Bee} alt="" className="modal__abeja"/>
-                                <p className="modal-form__titulo">{title}</p>
-                            </header>
+  return (
+    <Modal isOpen={isOpen}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          resetForm,
+          isSubmitting,
+          errors,
+          touched,
+        }) => (
+          <form onSubmit={handleSubmit} className="modal-form__formulario">
+            <header className="modal-form__header">
+              <img
+                src={isDarkMode ? DarkBee : Bee}
+                alt=""
+                className="modal__abeja"
+              />
+              <p className="modal-form__titulo">{title}</p>
+            </header>
 
-                            {children({values, handleChange, handleBlur, errors, touched})}
+            {children({ values, handleChange, handleBlur, errors, touched })}
 
-                            <div className="modal__botones">
-                                <button onClick={onClose} className="botones-modal__cancelar">Cancelar</button>
-                                <button disabled={isSubmitting} type="submit" className="botones-modal__confirmar">Confirmar</button>
-                            </div>
-                        </form>
-                    )
-                }
-            </Formik>
-        </Modal>
-    );
+            <div className="modal__botones">
+              <button onClick={onClose} className="botones-modal__cancelar">
+                Cancelar
+              </button>
+              <button
+                disabled={isSubmitting}
+                type="submit"
+                className="botones-modal__confirmar"
+              >
+                Confirmar
+              </button>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </Modal>
+  );
 };
 
 export default FormModal;
