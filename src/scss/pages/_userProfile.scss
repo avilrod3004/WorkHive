@@ -46,7 +46,8 @@ a {
 }
 
 .images__user{
-    width: 45%;
+    max-width: 45%;
+    min-width: 180px;
     height: auto;
     border-radius: 50%;
     object-fit: cover;
@@ -71,7 +72,7 @@ a {
     margin: 1rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items:start;
     justify-content: space-around;
     gap: 6rem;
     background-color: var(--fondo-color);
@@ -80,6 +81,13 @@ a {
 @media (max-width: 900px){
     .contenedor__proyectos{
           flex-direction: column;
+          align-items: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .usuario__lista{
+        flex-direction: column;
     }
 }
 

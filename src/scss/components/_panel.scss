@@ -11,8 +11,8 @@
       position: relative;
 	width: 26vmin;
 	height: 24vmin;
-      min-width: 100px;
-      min-height: 80px;
+      min-width: 150px;
+      min-height: 120px;
 	background-color:var(--todo-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
@@ -23,8 +23,8 @@
       position: relative;
 	width: 26vmin;
 	height: 24vmin;
-      min-width: 100px;
-      min-height: 80px;
+      min-width: 150px;
+      min-height: 125px;
 	background-color:var(--inprogress-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
@@ -35,8 +35,8 @@
       position: relative;
 	width: 26vmin;
 	height: 24vmin;
-      min-width: 100px;
-      min-height: 80px;
+      min-width: 150px;
+      min-height: 125px;
 	background-color:var(--toreview-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
@@ -47,8 +47,8 @@
       position: relative;
 	width: 26vmin;
 	height: 24vmin;
-      min-width: 100px;
-      min-height: 80px;
+      min-width: 150px;
+      min-height: 125px;
 	background-color:var(--done-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
@@ -100,23 +100,23 @@
 @media (max-width: 1200px){
       .panel__todo:nth-child(even){
             align-self: center;
-            margin: 1rem;
+            margin: 0;
       }
       
       .panel__inprogress:nth-child(even){
             align-self: center;
-            margin: 1rem;
+            margin: 0;
       }
       
         
       .panel__toreview:nth-child(even){
             align-self: center;
-            margin: 1rem;
+            margin: 0;
       }
       
       .panel__done:nth-child(even){
             align-self: center;
-            margin: 1rem;
+            margin: 0;
       }
 }
   
@@ -125,3 +125,6 @@
 	height: 25vmin;
 }
   
+.panel__done:hover, .panel__inprogress:hover, .panel__todo:hover, .panel__toreview:hover {
+      background-color: #d8b68f;
+}

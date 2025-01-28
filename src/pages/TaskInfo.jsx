@@ -6,11 +6,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
+import beeDark from "../assets/beedark.png";
 import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
 import { useTaskStore } from "../config/taskStore";
 import * as Yup from "yup";
 import FormModal from "../modals/FormModal";
+import AddIcon from "@mui/icons-material/Add";
+import { useTheme } from '../context/ThemeContext'
 
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
@@ -18,6 +21,8 @@ const TaskInfo = () => {
   const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
   const [modalCommentOpen, setModalCommentOpen] = useState(false);
+
+  const { isDarkMode } = useTheme();
 
   const validationSchemaComment = Yup.object().shape({
     message: Yup.string()
@@ -94,7 +99,7 @@ const TaskInfo = () => {
     task && (
       <div className="contenedor__info">
         <header className="info__header">
-          <img className="header__image" src={bee} alt="Logo de WorkHive" />
+          <img className="header__image" src={isDarkMode ? beeDark : bee}  alt="Logo de WorkHive" />
           <h1 className="header__titulo">{task.nombre}</h1>
           <MenuTask />
           <select
@@ -166,15 +171,15 @@ const TaskInfo = () => {
         </section>
 
         <section className="contenedor__comentarios">
-          <h1 className="comentarios__titulo">Comentarios</h1>
+          <h1 className="comentarios__titulo">COMENTARIOS</h1>
 
           <ul className="comentarios__lista">
             {task.comentarios.map((comentario) => (
-              <li key={comentario._id}>
-                <article>
-                  <h1>{comentario.usuario}</h1>
-                  <p>{comentario.mensaje}</p>
-                  <p>
+              <li key={comentario._id} className="lista__item">
+                <article className="item__section">
+                  <h1 className="section__titulo">{comentario.usuario}</h1>
+                  <p className="section__mensaje">{comentario.mensaje}</p>
+                  <p className="section__fecha">
                     {new Date(comentario.fecha).toLocaleDateString()}{" "}
                     {new Date(comentario.fecha).toLocaleTimeString()}
                   </p>
@@ -182,10 +187,10 @@ const TaskInfo = () => {
               </li>
             ))}
 
-            <article>
-              <p>AGREGAR COMENTARIO</p>
-              <a href="#" onClick={() => setModalCommentOpen(true)}>
-                <img src="" alt="Agregar comentario" />
+            <article className="item__agregar">
+              <p className="agregar__titulo">Agregar comentario</p>
+              <a className="agregar__enlace" href="#" onClick={() => setModalCommentOpen(true)}>
+              <AddIcon />
               </a>
             </article>
           </ul>
