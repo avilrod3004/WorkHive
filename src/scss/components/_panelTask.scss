@@ -16,7 +16,6 @@
 	background-color:var(--todo-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -5rem;
 }
   
 .panelTask__inprogress {
@@ -28,7 +27,6 @@
 	background-color:var(--inprogress-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -5rem;
 }
   
 .panelTask__toreview {
@@ -40,7 +38,6 @@
 	background-color:var(--toreview-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -5rem;
 }
   
 .panelTask__done {
@@ -52,7 +49,6 @@
 	background-color:var(--done-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -5rem;
 }
 
 .inside {
@@ -100,23 +96,19 @@
 @media (max-width: 1600px){
       .panelTask__todo:nth-child(even){
             align-self: center;
-            margin: 1rem;
       }
       
       .panelTask__inprogress:nth-child(even){
             align-self: center;
-            margin: 1rem;
       }
       
         
       .panelTask__toreview:nth-child(even){
             align-self: center;
-            margin: 1rem;
       }
       
       .panelTask__done:nth-child(even){
             align-self: center;
-            margin: 1rem;
       }
 }
 
