@@ -1,8 +1,32 @@
-# React + Vite
+![logo WORKHIVE](./src/assets/logo.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# WorkHive: Gestor de Tareas Colaborativo
 
-Currently, two official plugins are available:
+## 📋 Descripción del Proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+WorkHive es una herramienta digital para organizar, crear y colaborar en proyectos de manera visual e interactiva, con gestión avanzada de permisos de usuarios.
+
+## ✨ Características Principales
+
+- 🚀 Gestión completa de proyectos y tareas
+- 🤝 Colaboración en tiempo real
+- 🔐 Sistema de roles y permisos
+- 📊 Panel de proyecto y tareas
+- 💻 Interfaz moderna e intuitiva
+
+## 🛠 Tecnologías
+
+- MongoDB
+- Express.js
+- React
+- Node.js
+
+## 👥 Desarrolladores
+
+- Aitana Villate Rodríguez
+- Ángel Manuel Pereira Rodríguez
+- Marta Sánchez Lubián
+
+## 📄 Documentación
+
+Consulta nuestra documentación completa generada con JSDoc [aquí](./docs/index.html)
