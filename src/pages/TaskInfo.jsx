@@ -9,18 +9,7 @@ import bee from "../assets/bee.png";
 import MenuTask from "../components/TaskMenuEdit";
 import useAxiosStore from "../hooks/useAxios";
 import { useTaskStore } from "../config/taskStore";
-import FormModal from "../modals/FormModal.jsx";
-import * as Yup from "yup";
 
-/**
- * @page
- * Componente TaskInfo
- * 
- * Este componente muestra la información detallada de una tarea específica,
- * incluyendo su descripción, estado, prioridad, fecha límite, usuario asignado y comentarios.
- * 
- * @returns {JSX.Element} Página de información detallada de la tarea
- */
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
@@ -30,12 +19,12 @@ const TaskInfo = () => {
 
   const validationSchemaComment = Yup.object().shape({
     message: Yup.string()
-        .trim()
-        .required("El campo 'Comentario' es obligatorio")
-  })
+      .trim()
+      .required("El campo 'Comentario' es obligatorio"),
+  });
 
-   // Efecto para cargar los datos de la tarea
-   
+  // Efecto para cargar los datos de la tarea
+
   useEffect(() => {
     // Función para obtener los datos de la tarea y sus detalles asociados
 
@@ -193,7 +182,7 @@ const TaskInfo = () => {
 
             <article>
               <p>AGREGAR COMENTARIO</p>
-              <a href="#" onClick={ () => setModalCommentOpen(true) }>
+              <a href="#" onClick={() => setModalCommentOpen(true)}>
                 <img src="" alt="Agregar comentario" />
               </a>
             </article>
@@ -202,36 +191,34 @@ const TaskInfo = () => {
 
         {/* Modal para añadir comentarios a una tarea */}
         <FormModal
-            isOpen={modalCommentOpen}
-            onClose={() => setModalCommentOpen(false)}
-            initialValues={{
-              message: "",
-            }}
-            validationSchema={validationSchemaComment}
-            onSubmit={(values) => {
-              setModalCommentOpen(false)
-            }}
-            title="Añadir comentario"
+          isOpen={modalCommentOpen}
+          onClose={() => setModalCommentOpen(false)}
+          initialValues={{
+            message: "",
+          }}
+          validationSchema={validationSchemaComment}
+          onSubmit={(values) => {
+            setModalCommentOpen(false);
+          }}
+          title="Añadir comentario"
         >
-          {
-            ({values, handleChange, handleBlur, errors, touched}) => (
-                <>
-                  <label htmlFor="message" className="formulario__label">
-                    Comentario
-                    <textarea
-                        name="message"
-                        value={values.message}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className="formulario__input"
-                    />
-                    {errors.message && touched.message && (
-                        <p className="formulario__error">* {errors.message}</p>
-                    )}
-                  </label>
-                </>
-            )
-          }
+          {({ values, handleChange, handleBlur, errors, touched }) => (
+            <>
+              <label htmlFor="message" className="formulario__label">
+                Comentario
+                <textarea
+                  name="message"
+                  value={values.message}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.message && touched.message && (
+                  <p className="formulario__error">* {errors.message}</p>
+                )}
+              </label>
+            </>
+          )}
         </FormModal>
       </div>
     )
