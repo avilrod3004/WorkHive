@@ -296,8 +296,6 @@ const ProyectInfo = () => {
                       { Authorization: `Bearer ${token}` }
                     );
 
-                    console.log(colaboradorResponse);
-
                     if (colaboradorResponse.error) {
                       setError(colaboradorResponse.error);
                       throw colaboradorResponse.error;
