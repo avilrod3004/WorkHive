@@ -19,6 +19,7 @@ import * as Yup from "yup";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { brown } from "@mui/material/colors";
 import fotoCambiar from "../assets/margarita.png";
+import Loading from "../components/Loading.jsx";
 
 /**
  * @page
@@ -243,7 +244,7 @@ const UserProfile = () => {
   };
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return <Loading/>;
   }
 
   return (

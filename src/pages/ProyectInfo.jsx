@@ -16,6 +16,7 @@ import { useTheme } from "../context/ThemeContext";
 import { useUsersStore } from "../config/usersStore";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
 import { useAddTaskStore } from "../config/addTaskStore";
+import Loading from "../components/Loading.jsx";
 
 /**
  * @page
@@ -198,7 +199,7 @@ const ProyectInfo = () => {
   ]);
 
   if (loading) {
-    return <h1>Cargando...</h1>;
+    return <Loading/>;
   }
 
   return (
