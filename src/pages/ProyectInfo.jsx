@@ -31,6 +31,7 @@ const ProyectInfo = () => {
     project,
     setProject,
     loading,
+    errorEdit,
     setLoading,
     setTodoTasks,
     setInProgressTasks,
@@ -40,6 +41,8 @@ const ProyectInfo = () => {
     inProgressTasks,
     toReviewTasks,
     doneTasks,
+    setErrorEdit,
+    setProjectEdited,
   } = useProjectStore();
   const { fetch: newFetch } = useAxiosStore();
   const { users, setUsers } = useUsersStore();
@@ -189,6 +192,7 @@ const ProyectInfo = () => {
     setInProgressTasks,
     setToReviewTasks,
     setDoneTasks,
+    setErrorEdit,
   ]);
 
   if (loading) {
@@ -310,6 +314,29 @@ const ProyectInfo = () => {
               }
             } catch (error) {
               console.error("Error al agregar persona al proyecto:", error);
+            }
+          }}
+          onEditProject={async (values) => {
+            try {
+              const updatedProject = await newFetch(
+                import.meta.env.VITE_BASE_API + `tableros/${id}`,
+                "PUT",
+                {
+                  nombre: values.name,
+                  descripcion: values.description,
+                  fechaInicio: values.dateIni,
+                  fechaFin: values.dateEnd,
+                },
+                { Authorization: `Bearer ${token}` }
+              );
+
+              if (updatedProject.data !== null) {
+                setProject(updatedProject.data);
+                setProjectEdited(true);
+              }
+            } catch (error) {
+              console.error("Error al editar proyecto:", error.error.message);
+              setErrorEdit(error.error.message);
             }
           }}
           onDeleteProject={async () => {
