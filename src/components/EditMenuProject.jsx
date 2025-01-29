@@ -14,6 +14,7 @@ import FormModal from "../modals/FormModal.jsx";
 import * as Yup from "yup";
 import ConfirmModal from "../modals/ConfirmModal.jsx";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore.jsx";
+import { useProjectStore } from "../config/projectStore.jsx";
 
 /**
  * Componente de menú de edición para proyectos.
@@ -41,6 +42,14 @@ const EditMenuProject = ({
   const [modalDeleteProjectOpen, setmodalDeleteProjectOpen] = useState(false);
   const { error, clearError, setCollaboratorAdded, collaboratorAdded } =
     useAddCollaboratorStore();
+  const {
+    project,
+    editError,
+    clearEditError,
+    projectEdited,
+    setEditError,
+    setProjectEdited,
+  } = useProjectStore();
 
   const validationSchemaNewTask = Yup.object().shape({
     name: Yup.string()
@@ -68,13 +77,20 @@ const EditMenuProject = ({
     description: Yup.string()
       .trim()
       .required("El campo 'Descripción' es obligatorio."),
-    dateIni: Yup.date()
-      .required("El campo 'Fecha' es obligatorio")
-      .min(new Date(), "La fecha debe ser posterior a la actual"),
+    dateIni: Yup.date().required("El campo 'Fecha' es obligatorio"),
     dateEnd: Yup.date()
       .required("El campo 'Fecha' es obligatorio")
       .min(new Date(), "La fecha debe ser posterior a la actual"),
   });
+
+  const formatDateForInput = (isoDate) => {
+    if (!isoDate) return "";
+    const date = new Date(isoDate);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   return (
     <div className="edit__menu">
@@ -98,7 +114,10 @@ const EditMenuProject = ({
       <button
         className="menu__button"
         title="Editar Proyecto"
-        onClick={() => setmodalEditProjectOpen(true)}
+        onClick={() => {
+          setmodalEditProjectOpen(true);
+          clearEditError();
+        }}
       >
         <BorderColorIcon />
       </button>
@@ -276,79 +295,104 @@ const EditMenuProject = ({
         isOpen={modalEditProjectOpen}
         onClose={() => setmodalEditProjectOpen(false)}
         initialValues={{
-          name: "",
-          dateIni: "",
-          dateEnd: "",
-          description: "",
+          name: project.nombre,
+          dateIni: formatDateForInput(project.fechaInicio),
+          dateEnd: formatDateForInput(project.fechaFin),
+          description: project.descripcion,
         }}
         validationSchema={validationSchemaEditProject}
-        onSubmit={(values) => {
-          setmodalEditProjectOpen(false);
+        onSubmit={(values, { setSubmitting }) => {
+          onEditProject(values);
+          setSubmitting(false);
         }}
         title="Editar proyecto"
       >
-        {({ values, handleChange, handleBlur, errors, touched }) => (
-          <>
-            <label htmlFor="name" className="formulario__label">
-              Nombre proyecto
-              <input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.name && touched.name && (
-                <p className="formulario__error">* {errors.name}</p>
-              )}
-            </label>
+        {({
+          values,
+          handleChange: originalHandleChange,
+          handleBlur,
+          errors,
+          touched,
+        }) => {
+          const handleChange = (e) => {
+            clearEditError();
+            setProjectEdited(false);
+            originalHandleChange(e);
+          };
 
-            <label htmlFor="dateIni" className="formulario__label">
-              Fecha inicio
-              <input
-                type="date"
-                name="dateIni"
-                value={values.dateIni}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.dateIni && touched.dateIni && (
-                <p className="formulario__error">* {errors.dateIni}</p>
-              )}
-            </label>
+          useEffect(() => {
+            if (editError === null && projectEdited) {
+              setmodalEditProjectOpen(false);
+              setProjectEdited(false);
+            }
+          }, [editError, project]);
 
-            <label htmlFor="dateEnd" className="formulario__label">
-              Fecha fin
-              <input
-                type="date"
-                name="dateEnd"
-                value={values.dateEnd}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.dateEnd && touched.dateEnd && (
-                <p className="formulario__error">* {errors.dateEnd}</p>
-              )}
-            </label>
+          return (
+            <>
+              <label htmlFor="name" className="formulario__label">
+                Nombre proyecto
+                <input
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.name && touched.name && (
+                  <p className="formulario__error">* {errors.name}</p>
+                )}
+              </label>
 
-            <label htmlFor="description" className="formulario__label">
-              Descripción
-              <textarea
-                name="description"
-                value={values.description}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.description && touched.description && (
-                <p className="formulario__error">* {errors.description}</p>
-              )}
-            </label>
-          </>
-        )}
+              <label htmlFor="dateIni" className="formulario__label">
+                Fecha inicio
+                <input
+                  type="date"
+                  name="dateIni"
+                  value={values.dateIni}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.dateIni && touched.dateIni && (
+                  <p className="formulario__error">* {errors.dateIni}</p>
+                )}
+              </label>
+
+              <label htmlFor="dateEnd" className="formulario__label">
+                Fecha fin
+                <input
+                  type="date"
+                  name="dateEnd"
+                  value={values.dateEnd}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.dateEnd && touched.dateEnd && (
+                  <p className="formulario__error">* {errors.dateEnd}</p>
+                )}
+              </label>
+
+              <label htmlFor="description" className="formulario__label">
+                Descripción
+                <textarea
+                  name="description"
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.description && touched.description && (
+                  <p className="formulario__error">* {errors.description}</p>
+                )}
+                {editError !== null && (
+                  <p className="formulario__error">* {editError}</p>
+                )}
+              </label>
+            </>
+          );
+        }}
       </FormModal>
 
       {/* Modal para confirmar si el usuario quiere eliminar el proyecto */}

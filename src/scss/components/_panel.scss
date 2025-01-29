@@ -16,7 +16,6 @@
 	background-color:var(--todo-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
 }
   
 .panel__inprogress {
@@ -28,7 +27,6 @@
 	background-color:var(--inprogress-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
 }
   
 .panel__toreview {
@@ -40,7 +38,6 @@
 	background-color:var(--toreview-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
 }
   
 .panel__done {
@@ -52,7 +49,6 @@
 	background-color:var(--done-panel);
       -webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-      margin-top: -4rem;
 }
 
 .inside {
@@ -100,24 +96,21 @@
 @media (max-width: 1200px){
       .panel__todo:nth-child(even){
             align-self: center;
-            margin: 0;
       }
       
       .panel__inprogress:nth-child(even){
             align-self: center;
-            margin: 0;
       }
       
         
       .panel__toreview:nth-child(even){
             align-self: center;
-            margin: 0;
       }
       
       .panel__done:nth-child(even){
             align-self: center;
-            margin: 0;
       }
+
 }
   
 .panel__done:active, .panel__inprogress:active, .panel__todo:active, .panel__toreview:active {
