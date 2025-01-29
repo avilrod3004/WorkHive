@@ -15,6 +15,7 @@ import BoardTask from "../components/BoardTask";
 import { useTheme } from "../context/ThemeContext";
 import { useUsersStore } from "../config/usersStore";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
+import Loading from "../components/Loading.jsx";
 
 /**
  * @page
@@ -192,7 +193,7 @@ const ProyectInfo = () => {
   ]);
 
   if (loading) {
-    return <h1>Cargando...</h1>;
+    return <Loading/>;
   }
 
   return (
