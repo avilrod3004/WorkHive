@@ -3,14 +3,10 @@
  * @category UI
  */
 import React, { useEffect, useState } from "react";
-import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import fotoCambiar from "../assets/margarita.png";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { brown } from "@mui/material/colors";
 import FormModal from "../modals/FormModal.jsx";
 import * as Yup from "yup";
 import ConfirmModal from "../modals/ConfirmModal.jsx";

@@ -7,11 +7,8 @@ import React, { useEffect } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
 import EditMenuProject from "../components/EditMenuProject";
-import beeDark from "../assets/beedark.png";
-import EditMenuProject from "../components/EditMenuProject";
 import TeamMenu from "../components/TeamMenu";
 import { useProjectStore } from "../config/projectStore";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import useAxiosStore from "../hooks/useAxios";
 import BoardTask from "../components/BoardTask";
@@ -62,7 +59,7 @@ const ProyectInfo = () => {
   const { setFetchError } = useFetchErrorStore();
   const navigate = useNavigate();
 
-    // Efecto para cargar los datos del proyecto y sus tareas
+  // Efecto para cargar los datos del proyecto y sus tareas
 
   useEffect(() => {
     // Función para obtener los datos del proyecto
@@ -219,6 +216,7 @@ const ProyectInfo = () => {
               src={isDarkMode ? beeDark : bee}
               alt="Logo de WorkHive"
             />
+          </div>
           <div className="contenedor__image">
             <img
               className="header__image"
@@ -263,30 +261,6 @@ const ProyectInfo = () => {
         </section>
 
         <section className="contenedor__tareas">
-          <BoardTask
-            name="TO DO"
-            type="todo"
-            panels={todoTasks}
-            idTablero={id}
-          />
-          <BoardTask
-            name="IN PROGRESS"
-            type="inprogress"
-            panels={inProgressTasks}
-            idTablero={id}
-          />
-          <BoardTask
-            name="TO REVIEW"
-            type="toreview"
-            panels={toReviewTasks}
-            idTablero={id}
-          />
-          <BoardTask
-            name="DONE"
-            type="done"
-            panels={doneTasks}
-            idTablero={id}
-          />
           <BoardTask
             name="TO DO"
             type="todo"
