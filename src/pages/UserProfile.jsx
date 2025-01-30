@@ -207,6 +207,7 @@ const UserProfile = () => {
 
   const handleEditProfileSubmit = async (values) => {
     try {
+      setIsLoading(true);
       if (user) {
         const formData = new FormData();
         formData.append("nombre", values.name);
@@ -240,6 +241,7 @@ const UserProfile = () => {
       console.error("Error al actualizar el perfil:", error);
     } finally {
       setmodalEditProfileOpen(false);
+      setIsLoading(false);
     }
   };
 
