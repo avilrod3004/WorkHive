@@ -18,8 +18,8 @@
 /* COMENTARIOS */
 
 .contenedor__comentarios {
-    margin: 0 auto;
-    min-width: 70%;
+    margin: 1rem auto;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -34,27 +34,21 @@
 }
 
 .comentarios__lista {
+    width: 60%;
     display: flex;
-    flex-direction: row;
-    gap:2rem;
+    flex-wrap: wrap;
+    justify-content:center;
+    gap: 1rem;
+    margin: 1rem;
 }
 
 .item__section {
-    max-width: 100%;
-    height: auto;
+    max-width: 50vh;
     background-color: var(--secondary-color);
     border-radius: 10px;
-    padding:2rem;
-
-    &:nth-child(odd) {
-        align-self: flex-start; 
-    }
-
-    &:nth-child(even) {
-        align-self: flex-end; 
-    }
+    padding: 1rem;
+    text-overflow: ellipsis ellipsis;
 }
-
 
 .section__titulo{
     @include middle-text(700);
@@ -65,8 +59,8 @@
 
 .section__mensaje, .section__fecha{
     @include description-text;
-    margin: 1rem;
     color: var(--black-text);
+    padding: 0.2rem;
 }
 
 .item__agregar{

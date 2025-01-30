@@ -1,77 +1,75 @@
-@import '../utilities/variables';
-@import '../utilities/mixins';
-
+@import "../utilities/variables";
+@import "../utilities/mixins";
 
 // Estilos borde del panel
-  
+
 .tableroTask__todo {
-      width: 40rem;
-      min-width: 10rem;
-      padding: 1rem;
-      .tablero__titleTask{
-            @include description-text;
-            background-color: var(--todo-panel);
-            color: var(--black-text);
-            padding: 2rem;
-            text-align:center;
-            margin-bottom: 4rem;
-      }
-}
-  
-.tableroTask__inprogress {
-      width: 40rem;
-      min-width: 10rem;
-      padding: 1rem;
-      .tablero__titleTask{
-            @include description-text;
-            background-color: var(--inprogress-panel);
-            color: var(--black-text);
-            padding: 2rem;
-            text-align:center;
-            margin-bottom: 4rem;
-      }
-}
-  
-.tableroTask__toreview {
-      width: 40rem;
-      min-width: 10rem;
-      padding: 1rem;
-      .tablero__titleTask{
-            @include description-text;
-            background-color: var(--toreview-panel);
-            color: var(--black-text);
-            padding: 2rem;
-            text-align:center;
-            margin-bottom: 4rem;
-      }
-}
-  
-.tableroTask__done {
-      width: 40rem;
-      min-width: 10rem;
-      padding: 1rem;
-      .tablero__titleTask{
-            @include description-text;
-            background-color: var(--done-panel);
-            color: var(--black-text);
-            padding: 2rem;
-            text-align:center;
-            margin-bottom: 4rem;
-      }
+  width: 40rem;
+  min-width: 10rem;
+  padding: 1rem;
+  .tablero__titleTask {
+    @include description-text;
+    background-color: var(--todo-panel);
+    color: var(--black-text);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
 }
 
+.tableroTask__inprogress {
+  width: 40rem;
+  min-width: 10rem;
+  padding: 1rem;
+  .tablero__titleTask {
+    @include description-text;
+    background-color: var(--inprogress-panel);
+    color: var(--black-text);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+}
+
+.tableroTask__toreview {
+  width: 40rem;
+  min-width: 10rem;
+  padding: 1rem;
+  .tablero__titleTask {
+    @include description-text;
+    background-color: var(--toreview-panel);
+    color: var(--black-text);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+}
+
+.tableroTask__done {
+  width: 40rem;
+  min-width: 10rem;
+  padding: 1rem;
+  .tablero__titleTask {
+    @include description-text;
+    background-color: var(--done-panel);
+    color: var(--black-text);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+}
 
 .tablero__panelsTask {
-      display:flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
-@media (max-width: 1200px){
-      .tablero__panelsTask{
-            align-items: center;
-            justify-content:space-around;
-            gap: 6rem;
-      }
+@media (max-width: 1200px) {
+  .tablero__panelsTask {
+    align-items: center;
+    justify-content: space-around;
+    gap: 6rem;
+  }
 }

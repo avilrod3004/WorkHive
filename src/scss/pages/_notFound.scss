@@ -92,7 +92,7 @@
         transform: translate(100%, -400%) scaleX(1);
     }
     50% {
-        transform: translate(300%, -500%) scaleX(1); 
+        transform: translate(600%, -700%) scaleX(1); 
     }
 
     70% {
@@ -100,7 +100,7 @@
     }
     
     100% {
-        transform: translate(2300%, -1400%) scaleX(1);
+        transform: translate(3000%, -1400%) scaleX(1);
         opacity: 1;
     }
 }

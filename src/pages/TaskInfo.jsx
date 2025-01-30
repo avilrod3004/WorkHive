@@ -186,14 +186,13 @@ const TaskInfo = () => {
                 </article>
               </li>
             ))}
-
-            <article className="item__agregar">
+          </ul>
+          <article className="item__agregar">
               <p className="agregar__titulo">Agregar comentario</p>
               <a className="agregar__enlace" href="#" onClick={() => setModalCommentOpen(true)}>
               <AddIcon />
               </a>
             </article>
-          </ul>
         </section>
 
         {/* Modal para añadir comentarios a una tarea */}
