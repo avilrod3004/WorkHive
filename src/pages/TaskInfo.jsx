@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
 import MenuTask from "../components/TaskMenuEdit";
@@ -13,15 +13,33 @@ import { useTaskStore } from "../config/taskStore";
 import * as Yup from "yup";
 import FormModal from "../modals/FormModal";
 import AddIcon from "@mui/icons-material/Add";
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
+import { useEditTaskStore } from "../config/editTaskStore";
+import { useUsersStore } from "../config/usersStore";
+import { useProjectStore } from "../config/projectStore";
+import { useUserStore } from "../config/userStore";
 import Loading from "../components/Loading.jsx";
 
 const TaskInfo = () => {
-  const { idTarea } = useParams(); // `idTarea` para la tarea específica
+  const { idTarea, idTablero } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
-  const { task, loading, setTask, setLoading } = useTaskStore();
+  const { task, setTask } = useTaskStore();
+  const { setTaskEdited, setEditTaskError, taskEdited } = useEditTaskStore();
+  const { setUsers } = useUsersStore();
+  const { user } = useUserStore();
+  const {
+    setProject,
+    loading,
+    setLoading,
+    setTodoTasks,
+    setInProgressTasks,
+    setToReviewTasks,
+    setDoneTasks,
+  } = useProjectStore();
   const token = localStorage.getItem("token");
   const [modalCommentOpen, setModalCommentOpen] = useState(false);
+  const [commentAdded, setCommentAdded] = useState(false);
+  const navigate = useNavigate();
 
   const { isDarkMode } = useTheme();
 
@@ -34,6 +52,126 @@ const TaskInfo = () => {
   // Efecto para cargar los datos de la tarea
 
   useEffect(() => {
+    // Función para obtener los datos del proyecto
+
+    async function fetchProjectData() {
+      try {
+        const projectResponse = await fetch(
+          `${import.meta.env.VITE_BASE_API}tableros/${idTablero}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (projectResponse.error) throw new Error(projectResponse.error);
+        return projectResponse.data;
+      } catch (error) {
+        console.error("Error al obtener el proyecto:", error);
+        throw error;
+      }
+    }
+
+    // Función para obtener los datos de un usuario
+    async function fetchUserData(userId) {
+      try {
+        const userResponse = await fetch(
+          `${import.meta.env.VITE_BASE_API}usuarios/${userId}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (userResponse.error) throw new Error(userResponse.error);
+        return userResponse.data;
+      } catch (error) {
+        console.error(`Error al obtener datos del usuario ${userId}:`, error);
+        throw error;
+      }
+    }
+
+    //Función para obtener las tareas según su estado
+
+    async function fetchTaskData(estado) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_API}tareas/estado`,
+          "POST",
+          { tablero: idTablero, estado },
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+        return response.data;
+      } catch (error) {
+        console.error(`Error al obtener tareas de estado ${estado}:`, error);
+        return [];
+      }
+    }
+
+    //Función principal para obtener todos los datos del proyecto y sus tareas
+
+    async function getProjectAndTasks() {
+      setLoading(true);
+      try {
+        const projectData = await fetchProjectData();
+
+        // Obtener administrador
+        const adminData = await fetchUserData(projectData.administrador);
+
+        // Obtener colaboradores
+        const collaborators = await Promise.all(
+          projectData.colaboradores.map((colaboradorId) =>
+            fetchUserData(colaboradorId)
+          )
+        );
+
+        // Actualizar proyecto con datos completos
+        setProject({
+          ...projectData,
+          administrador: adminData,
+          colaboradores: collaborators.filter(Boolean),
+        });
+
+        // Obtener y establecer tareas según estado
+        const [todo, inProgress, toReview, done] = await Promise.all([
+          fetchTaskData("pendiente"),
+          fetchTaskData("en_proceso"),
+          fetchTaskData("en_revision"),
+          fetchTaskData("completada"),
+        ]);
+
+        setTodoTasks(todo);
+        setInProgressTasks(inProgress);
+        setToReviewTasks(toReview);
+        setDoneTasks(done);
+      } catch (error) {
+        console.error(
+          "Error al cargar los datos del proyecto y tareas:",
+          error
+        );
+      }
+    }
+
+    async function fetchUsers() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_API}usuarios`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        if (response.error) throw new Error(response.error);
+        return response.data;
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      }
+    }
+
+    async function getUsers() {
+      try {
+        const usersData = await fetchUsers();
+        setUsers(usersData);
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      }
+    }
     // Función para obtener los datos de la tarea y sus detalles asociados
 
     async function fetchTask() {
@@ -66,7 +204,11 @@ const TaskInfo = () => {
               null,
               { Authorization: `Bearer ${token}` }
             );
-            return { ...comentario, usuario: usuarioResponse.data.nombre };
+            return {
+              ...comentario,
+              usuarioNombre: usuarioResponse.data.nombre,
+              usuario: usuarioResponse.data._id,
+            };
           })
         );
 
@@ -74,6 +216,7 @@ const TaskInfo = () => {
         setTask({
           ...fetchedTask,
           asignadoA: assignedUser.nombre,
+          asignadoAId: assignedUser._id,
           comentarios: comentariosUsuarios,
         });
       } catch (error) {
@@ -83,13 +226,18 @@ const TaskInfo = () => {
       }
     }
 
+    if (idTablero && token) {
+      getProjectAndTasks();
+      getUsers();
+    }
+
     if (idTarea && token) {
       fetchTask();
     }
-  }, [idTarea, token, fetch]);
+  }, [idTarea, token, fetch, setLoading, taskEdited, commentAdded]);
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (!task) {
@@ -175,25 +323,34 @@ const TaskInfo = () => {
           <h1 className="comentarios__titulo">COMENTARIOS</h1>
 
           <ul className="comentarios__lista">
-            {task.comentarios.map((comentario) => (
-              <li key={comentario._id} className="lista__item">
-                <article className="item__section">
-                  <h1 className="section__titulo">{comentario.usuario}</h1>
-                  <p className="section__mensaje">{comentario.mensaje}</p>
-                  <p className="section__fecha">
-                    {new Date(comentario.fecha).toLocaleDateString()}{" "}
-                    {new Date(comentario.fecha).toLocaleTimeString()}
-                  </p>
-                </article>
-              </li>
-            ))}
+            {task.comentarios
+              .slice()
+              .reverse()
+              .map((comentario) => (
+                <li key={comentario._id} className="lista__item">
+                  <article className="item__section">
+                    <h1 className="section__titulo">
+                      {comentario.usuarioNombre}
+                    </h1>
+                    <p className="section__mensaje">{comentario.mensaje}</p>
+                    <p className="section__fecha">
+                      {new Date(comentario.fecha).toLocaleDateString()}{" "}
+                      {new Date(comentario.fecha).toLocaleTimeString()}
+                    </p>
+                  </article>
+                </li>
+              ))}
           </ul>
           <article className="item__agregar">
-              <p className="agregar__titulo">Agregar comentario</p>
-              <a className="agregar__enlace" href="#" onClick={() => setModalCommentOpen(true)}>
+            <p className="agregar__titulo">Agregar comentario</p>
+            <a
+              className="agregar__enlace"
+              href="#"
+              onClick={() => setModalCommentOpen(true)}
+            >
               <AddIcon />
-              </a>
-            </article>
+            </a>
+          </article>
         </section>
 
         {/* Modal para añadir comentarios a una tarea */}
@@ -204,8 +361,44 @@ const TaskInfo = () => {
             message: "",
           }}
           validationSchema={validationSchemaComment}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             setModalCommentOpen(false);
+            setCommentAdded(false);
+            try {
+              const commentResponse = await fetch(
+                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                "PUT",
+                {
+                  comentarios: [
+                    ...task.comentarios,
+                    {
+                      usuario: user._id || user.id,
+                      mensaje: values.message,
+                      fecha: new Date(),
+                    },
+                  ],
+                },
+                {
+                  Authorization: `Bearer ${token}`,
+                }
+              );
+
+              if (commentResponse.error) throw commentResponse.error;
+              setTask({
+                ...task,
+                comentarios: [
+                  ...task.comentarios,
+                  {
+                    usuario: user._id,
+                    mensaje: values.message,
+                    fecha: new Date(),
+                  },
+                ],
+              });
+              setCommentAdded(true);
+            } catch (error) {
+              console.error("Error al crear el comentario:", error);
+            }
           }}
           title="Añadir comentario"
         >

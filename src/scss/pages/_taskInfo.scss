@@ -2,6 +2,25 @@
 @import '../utilities/variables';
 
 /* HEADER */
+.info__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header__tittle {
+    display: flex;
+    flex-direction: row;
+    gap: 1.4rem;
+}
+
+.header__menuu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.4rem;
+}
+
 .header__estado,
 .header__prioridad {
     @include description-text();
@@ -9,6 +28,7 @@
     background-color: var(--fondo-menu);
     border: 1px solid var(--icono-menu);
     border-radius: 10px;
+    padding: 0.5rem;
 }
 
 .header__image {
@@ -34,33 +54,70 @@
 }
 
 .comentarios__lista {
-    width: 60%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:center;
+    width: 80%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
     gap: 1rem;
-    margin: 1rem;
+    padding: 1rem;
+}
+
+.lista__item {
+    background-color: var(--fondo-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para el primer comentario */
+.lista__item:nth-child(4n+1) {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+/* Estilos para el segundo comentario */
+.lista__item:nth-child(4n+2) {
+    grid-row: span 3;
+    grid-column-start: 3;
+}
+
+/* Estilos para el tercer comentario (más alto) */
+.lista__item:nth-child(4n+3) {
+    grid-row: span 6;
+    grid-column-start: 4;
+}
+
+/* Estilos para el cuarto comentario (ancho) */
+.lista__item:nth-child(4n) {
+    grid-column: span 3;
+    grid-row: span 3;
 }
 
 .item__section {
-    max-width: 50vh;
-    background-color: var(--secondary-color);
+    height: 100%;   
+    background-color: var(--fondo-color);
+    border:3px solid var(--secondary-color);
     border-radius: 10px;
+
     padding: 1rem;
-    text-overflow: ellipsis ellipsis;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .section__titulo{
     @include middle-text(700);
-    margin-bottom: 1rem;
-    padding: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
     color: var(--black-text);
 }
 
 .section__mensaje, .section__fecha{
     @include description-text;
     color: var(--black-text);
-    padding: 0.2rem;
+    padding: 0.5rem;
+    flex-grow: 1;
+    overflow:hidden;
 }
 
 .item__agregar{
@@ -68,9 +125,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 10px;
     padding: 2rem;
+}
+
+.item__agregar:hover {
+    border: 2px solid var(--secondary-color);
 }
 
 .agregar__titulo{
@@ -79,13 +140,25 @@
     color: var(--black-text);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
     .comentarios__lista {
+        display:flex;
         flex-direction: column;
     }
     .info__header {
         display: flex;
         flex-direction: column;
         gap: 2rem;
+    }
+}
+
+@media (max-width:450px){
+    .header__tittle{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header__menuu {
+        flex-direction: column;
     }
 }

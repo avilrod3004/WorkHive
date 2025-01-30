@@ -17,14 +17,16 @@ import { useUsersStore } from "../config/usersStore";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
 import Loading from "../components/Loading.jsx";
 import { useAddTaskStore } from "../config/addTaskStore";
-import {useFetchErrorStore} from "../config/errorStore.jsx";
+import { useFetchErrorStore } from "../config/errorStore.jsx";
 
 /**
  * @page
  * Componente ProyectInfo
  *
+ *
  * Este componente muestra la información detallada de un proyecto específico,
  * incluyendo su descripción, fechas, administrador, y tableros de tareas.
+ *
  *
  * @returns {JSX.Element} Página de información detallada del proyecto
  */
@@ -73,7 +75,7 @@ const ProyectInfo = () => {
         if (projectResponse.error) throw new Error(projectResponse.error);
         return projectResponse.data;
       } catch (error) {
-        setFetchError("Error al obtener el proyecto")
+        setFetchError("Error al obtener el proyecto");
         throw error;
       }
     }
@@ -90,7 +92,7 @@ const ProyectInfo = () => {
         if (userResponse.error) throw new Error(userResponse.error);
         return userResponse.data;
       } catch (error) {
-        setFetchError(`Error al obtener datos del usuario ${userId}`)
+        setFetchError(`Error al obtener datos del usuario ${userId}`);
         throw error;
       }
     }
@@ -151,7 +153,7 @@ const ProyectInfo = () => {
         setDoneTasks(done);
       } catch (error) {
         setFetchError("Error al cargar los datos del proyecto y tareas");
-        navigate("/notfound")
+        navigate("/notfound");
       } finally {
         setLoading(false);
       }
@@ -168,7 +170,7 @@ const ProyectInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        setFetchError("Error al obtener los usuarios")
+        setFetchError("Error al obtener los usuarios");
       }
     }
 
@@ -177,7 +179,7 @@ const ProyectInfo = () => {
         const usersData = await fetchUsers();
         setUsers(usersData);
       } catch (error) {
-        setFetchError("Error al obtener los usuarios")
+        setFetchError("Error al obtener los usuarios");
       }
     }
 
@@ -300,7 +302,6 @@ const ProyectInfo = () => {
                 setTaskAdded(true);
               }
             } catch (error) {
-
             } finally {
               setLoading(false);
             }
@@ -344,7 +345,6 @@ const ProyectInfo = () => {
                 throw "El usuario no está registrado";
               }
             } catch (error) {
-
             } finally {
               setLoading(false);
             }
@@ -391,9 +391,7 @@ const ProyectInfo = () => {
               clearProject();
 
               navigate("/usuario");
-            } catch (error) {
-
-            }
+            } catch (error) {}
           }}
         />
       </div>

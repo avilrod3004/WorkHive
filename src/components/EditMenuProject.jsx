@@ -7,9 +7,6 @@ import AddIcon from "@mui/icons-material/Add";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import fotoCambiar from "../assets/margarita.png";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { brown } from "@mui/material/colors";
 import FormModal from "../modals/FormModal.jsx";
 import * as Yup from "yup";
 import ConfirmModal from "../modals/ConfirmModal.jsx";
@@ -59,7 +56,7 @@ const EditMenuProject = ({
       .required("El campo 'Nombre proyecto' es obligatorio"),
     asigned: Yup.string()
       .trim()
-      .required("El campo 'Asigando a' es obligatorio"),
+      .required("El campo 'Asignado a' es obligatorio"),
     dateEnd: Yup.date()
       .required("El campo 'Fecha' es obligatorio")
       .min(new Date(), "La fecha debe ser posterior a la actual"),
@@ -166,8 +163,6 @@ const EditMenuProject = ({
           };
 
           useEffect(() => {
-            console.log(addTaskError);
-            console.log(taskAdded);
             if (addTaskError === null && taskAdded) {
               setmodalNewTaskOpen(false);
               setTaskAdded(false);
@@ -307,8 +302,9 @@ const EditMenuProject = ({
           useEffect(() => {
             if (error === null && collaboratorAdded) {
               setmodalAddColaboratorOpen(false);
+              setCollaboratorAdded(false);
             }
-          }, [error]);
+          }, [error, collaboratorAdded]);
 
           return (
             <>
