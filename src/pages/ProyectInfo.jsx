@@ -280,6 +280,7 @@ const ProyectInfo = () => {
           id={id}
           onAddTask={async (values) => {
             try {
+              setLoading(true);
               const response = await newFetch(
                 import.meta.env.VITE_BASE_API + "tareas",
                 "POST",
@@ -300,10 +301,13 @@ const ProyectInfo = () => {
               }
             } catch (error) {
               console.log(error.error.message);
+            } finally {
+              setLoading(false);
             }
           }}
           onAddPerson={async (email) => {
             try {
+              setLoading(true);
               const user = users.find((u) => u.email === email);
               if (user) {
                 if (project.administrador._id === user._id) {
@@ -341,10 +345,13 @@ const ProyectInfo = () => {
               }
             } catch (error) {
               console.error("Error al agregar persona al proyecto:", error);
+            } finally {
+              setLoading(false);
             }
           }}
           onEditProject={async (values) => {
             try {
+              setLoading(true);
               const updatedProject = await newFetch(
                 import.meta.env.VITE_BASE_API + `tableros/${id}`,
                 "PUT",
@@ -366,6 +373,8 @@ const ProyectInfo = () => {
             } catch (error) {
               console.error("Error al editar proyecto:", error.error.message);
               setErrorEdit(error.error.message);
+            } finally {
+              setLoading(false);
             }
           }}
           onDeleteProject={async () => {
