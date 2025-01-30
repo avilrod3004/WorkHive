@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import ConfirmModal from "../modals/ConfirmModal.jsx";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore.jsx";
 import { useProjectStore } from "../config/projectStore.jsx";
+import { useAddTaskStore } from "../config/addTaskStore.jsx";
 
 /**
  * Componente de menú de edición para proyectos.
@@ -42,12 +43,13 @@ const EditMenuProject = ({
   const [modalDeleteProjectOpen, setmodalDeleteProjectOpen] = useState(false);
   const { error, clearError, setCollaboratorAdded, collaboratorAdded } =
     useAddCollaboratorStore();
+  const { taskAdded, addTaskError, setTaskAdded, clearAddTaskError } =
+    useAddTaskStore();
   const {
     project,
     editError,
     clearEditError,
     projectEdited,
-    setEditError,
     setProjectEdited,
   } = useProjectStore();
 
@@ -97,7 +99,10 @@ const EditMenuProject = ({
       <button
         className="menu__button"
         title="Añadir tarea"
-        onClick={() => setmodalNewTaskOpen(true)}
+        onClick={() => {
+          setmodalNewTaskOpen(true);
+          clearAddTaskError();
+        }}
       >
         <AddIcon />
       </button>
@@ -141,98 +146,135 @@ const EditMenuProject = ({
           description: "",
         }}
         validationSchema={validationSchemaNewTask}
-        onSubmit=":)"
+        onSubmit={(values, { setSubmitting }) => {
+          onAddTask(values);
+          setSubmitting(false);
+        }}
         title="Añadir tarea"
       >
-        {({ values, handleChange, handleBlur, errors, touched }) => (
-          <>
-            <label htmlFor="name" className="formulario__label">
-              Nombre tarea
-              <input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.name && touched.name && (
-                <p className="formulario__error">* {errors.name}</p>
-              )}
-            </label>
+        {({
+          values,
+          handleChange: originalHandleChange,
+          handleBlur,
+          errors,
+          touched,
+        }) => {
+          const handleChange = (e) => {
+            clearAddTaskError();
+            setTaskAdded(false);
+            originalHandleChange(e);
+          };
 
-            <label htmlFor="asigned" className="formulario__label">
-              Asignado a
-              <select
-                id="asigned"
-                name="asigned"
-                value={values.asigned}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              >
-                <option value="" disabled selected>
-                  Selecciona una opción
-                </option>
-                <option value="No">No</option>
-                <option value="cuentes">cuentes</option>
-                <option value="con">con</option>
-                <option value="migo">migo</option>
-              </select>
-              {errors.asigned && touched.asigned && (
-                <p className="formulario__error">* {errors.asigned}</p>
-              )}
-            </label>
+          useEffect(() => {
+            console.log(addTaskError);
+            console.log(taskAdded);
+            if (addTaskError === null && taskAdded) {
+              setmodalNewTaskOpen(false);
+              setTaskAdded(false);
+            }
+          }, [addTaskError, taskAdded]);
 
-            <label htmlFor="priority" className="formulario__label">
-              Prioridad
-              <select
-                id="priority"
-                name="priority"
-                value={values.priority}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              >
-                <option value="baja">Baja</option>
-                <option value="media">Media</option>
-                <option value="alta">Alta</option>
-              </select>
-              {errors.priority && touched.priority && (
-                <p className="formulario__error">* {errors.priority}</p>
-              )}
-            </label>
+          return (
+            <>
+              <label htmlFor="name" className="formulario__label">
+                Nombre tarea
+                <input
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.name && touched.name && (
+                  <p className="formulario__error">* {errors.name}</p>
+                )}
+              </label>
 
-            <label htmlFor="dateEnd" className="formulario__label">
-              Fecha limite
-              <input
-                type="date"
-                name="dateEnd"
-                value={values.dateEnd}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.dateEnd && touched.dateEnd && (
-                <p className="formulario__error">* {errors.dateEnd}</p>
-              )}
-            </label>
+              <label htmlFor="asigned" className="formulario__label">
+                Asignado a
+                <select
+                  id="asigned"
+                  name="asigned"
+                  value={values.asigned}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                >
+                  <option value="" disabled defaultChecked>
+                    Selecciona una opción
+                  </option>
+                  <option
+                    key={project.administrador._id}
+                    value={project.administrador._id}
+                  >
+                    {project.administrador.nombre}
+                  </option>
+                  {project.colaboradores &&
+                    project.colaboradores.map((colaborador, index) => (
+                      <option key={index} value={colaborador._id}>
+                        {colaborador.nombre}
+                      </option>
+                    ))}
+                </select>
+                {errors.asigned && touched.asigned && (
+                  <p className="formulario__error">* {errors.asigned}</p>
+                )}
+              </label>
 
-            <label htmlFor="description" className="formulario__label">
-              Descripción
-              <textarea
-                name="description"
-                value={values.description}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className="formulario__input"
-              />
-              {errors.description && touched.description && (
-                <p className="formulario__error">* {errors.description}</p>
-              )}
-            </label>
-          </>
-        )}
+              <label htmlFor="priority" className="formulario__label">
+                Prioridad
+                <select
+                  id="priority"
+                  name="priority"
+                  value={values.priority}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                >
+                  <option value="baja">Baja</option>
+                  <option value="media">Media</option>
+                  <option value="alta">Alta</option>
+                </select>
+                {errors.priority && touched.priority && (
+                  <p className="formulario__error">* {errors.priority}</p>
+                )}
+              </label>
+
+              <label htmlFor="dateEnd" className="formulario__label">
+                Fecha limite
+                <input
+                  type="date"
+                  name="dateEnd"
+                  value={values.dateEnd}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.dateEnd && touched.dateEnd && (
+                  <p className="formulario__error">* {errors.dateEnd}</p>
+                )}
+              </label>
+
+              <label htmlFor="description" className="formulario__label">
+                Descripción
+                <textarea
+                  name="description"
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="formulario__input"
+                />
+                {errors.description && touched.description && (
+                  <p className="formulario__error">* {errors.description}</p>
+                )}
+                {addTaskError && (
+                  <p className="formulario__error">* {addTaskError}</p>
+                )}
+              </label>
+            </>
+          );
+        }}
       </FormModal>
 
       {/* Modal para añadir colaboradores al proyecto */}

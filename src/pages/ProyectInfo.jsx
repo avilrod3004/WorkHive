@@ -15,6 +15,7 @@ import BoardTask from "../components/BoardTask";
 import { useTheme } from "../context/ThemeContext";
 import { useUsersStore } from "../config/usersStore";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
+import { useAddTaskStore } from "../config/addTaskStore";
 
 /**
  * @page
@@ -47,6 +48,7 @@ const ProyectInfo = () => {
   const { fetch: newFetch } = useAxiosStore();
   const { users, setUsers } = useUsersStore();
   const { setError, setCollaboratorAdded } = useAddCollaboratorStore();
+  const { setTaskAdded } = useAddTaskStore();
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
   const { clearProject } = useProjectStore();
@@ -275,6 +277,30 @@ const ProyectInfo = () => {
 
         <EditMenuProject
           id={id}
+          onAddTask={async (values) => {
+            try {
+              const response = await newFetch(
+                import.meta.env.VITE_BASE_API + "tareas",
+                "POST",
+                {
+                  nombre: values.name,
+                  descripcion: values.description,
+                  tablero: id,
+                  asignadoA: values.asigned,
+                  fechaLimite: values.dateEnd,
+                },
+                { Authorization: `Bearer ${token}` }
+              );
+              if (response.error) throw response.error;
+
+              if (response.data) {
+                setTodoTasks([...todoTasks, response.data]);
+                setTaskAdded(true);
+              }
+            } catch (error) {
+              console.log(error.error.message);
+            }
+          }}
           onAddPerson={async (email) => {
             try {
               const user = users.find((u) => u.email === email);
@@ -329,6 +355,8 @@ const ProyectInfo = () => {
                 },
                 { Authorization: `Bearer ${token}` }
               );
+
+              if (updatedProject.error) throw updatedProject.error;
 
               if (updatedProject.data !== null) {
                 setProject(updatedProject.data);

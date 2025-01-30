@@ -3,7 +3,6 @@
  * @category Routes
  */
 
-
 import React, { useEffect, useState } from "react";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
@@ -24,7 +23,7 @@ import fotoCambiar from "../assets/margarita.png";
 /**
  * @page
  * Componente UserProfile
- * 
+ *
  * Este componente muestra la página de perfil del usuario, incluyendo su información personal,
  * proyectos actuales y proyectos completados. También proporciona funcionalidad para editar el
  * perfil del usuario y crear nuevos proyectos.
@@ -61,9 +60,7 @@ const UserProfile = () => {
     description: Yup.string()
       .trim()
       .required("El campo 'Descripción' es obligatorio."),
-    dateIni: Yup.date()
-      .required("El campo 'Fecha' es obligatorio")
-      .min(new Date(), "La fecha debe ser posterior a la actual"),
+    dateIni: Yup.date().required("El campo 'Fecha' es obligatorio"),
     dateEnd: Yup.date()
       .required("El campo 'Fecha' es obligatorio")
       .min(new Date(), "La fecha debe ser posterior a la actual"),
@@ -80,8 +77,7 @@ const UserProfile = () => {
       .required("El campo 'Email' es obligatorio"),
   });
 
-
-   // Obtiene los datos del usuario actual desde la API
+  // Obtiene los datos del usuario actual desde la API
 
   async function getUser() {
     try {
@@ -165,8 +161,8 @@ const UserProfile = () => {
     }
   }
 
-   //Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
-   
+  //Hook de efecto para obtener los datos del usuario y los proyectos al montar el componente
+
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
@@ -206,8 +202,8 @@ const UserProfile = () => {
     }
   };
 
-   // Maneja el envío del formulario de edición de perfil
-  
+  // Maneja el envío del formulario de edición de perfil
+
   const handleEditProfileSubmit = async (values) => {
     try {
       if (user) {
