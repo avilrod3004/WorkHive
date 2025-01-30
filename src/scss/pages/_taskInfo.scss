@@ -34,33 +34,68 @@
 }
 
 .comentarios__lista {
-    width: 60%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:center;
+    width: 80%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, auto);
     gap: 1rem;
-    margin: 1rem;
+    padding: 1rem;
+}
+
+.lista__item {
+    background-color: var(--fondo-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para el primer comentario */
+.lista__item:nth-child(n+1) {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+/* Estilos para el segundo comentario */
+.lista__item:nth-child(n+2) {
+    grid-row: span 3;
+    grid-column-start: 3;
+}
+
+/* Estilos para el tercer comentario (más alto) */
+.lista__item:nth-child(n+3) {
+    grid-row: span 6;
+    grid-column-start: 4;
+}
+
+/* Estilos para el cuarto comentario (ancho) */
+.lista__item:nth-child(n+4) {
+    grid-column: span 3;
+    grid-row: span 3;
 }
 
 .item__section {
-    max-width: 50vh;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
+    height: 100%;   
+    background-color: var(--todo-panel);
     padding: 1rem;
-    text-overflow: ellipsis ellipsis;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .section__titulo{
     @include middle-text(700);
-    margin-bottom: 1rem;
-    padding: 1rem;
-    color: var(--black-text);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    color: #212121;
 }
 
 .section__mensaje, .section__fecha{
     @include description-text;
-    color: var(--black-text);
-    padding: 0.2rem;
+    color: #212121;
+    padding: 0.5rem;
+    flex-grow: 1;
+    overflow:hidden;
 }
 
 .item__agregar{
@@ -68,7 +103,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 10px;
     padding: 2rem;
 }
@@ -79,8 +114,9 @@
     color: var(--black-text);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
     .comentarios__lista {
+        display:flex;
         flex-direction: column;
     }
     .info__header {

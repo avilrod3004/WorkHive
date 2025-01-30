@@ -174,7 +174,7 @@ const TaskInfo = () => {
           <h1 className="comentarios__titulo">COMENTARIOS</h1>
 
           <ul className="comentarios__lista">
-            {task.comentarios.map((comentario) => (
+            {task.comentarios.slice().reverse().map((comentario) => (
               <li key={comentario._id} className="lista__item">
                 <article className="item__section">
                   <h1 className="section__titulo">{comentario.usuario}</h1>
