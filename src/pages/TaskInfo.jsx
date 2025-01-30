@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import bee from "../assets/bee.png";
 import beeDark from "../assets/beedark.png";
 import MenuTask from "../components/TaskMenuEdit";
@@ -13,14 +13,15 @@ import { useTaskStore } from "../config/taskStore";
 import * as Yup from "yup";
 import FormModal from "../modals/FormModal";
 import AddIcon from "@mui/icons-material/Add";
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
 
 const TaskInfo = () => {
-  const { idTarea } = useParams(); // `idTarea` para la tarea específica
+  const { idTarea, idTablero } = useParams(); // `idTarea` para la tarea específica
   const { fetch } = useAxiosStore();
   const { task, loading, setTask, setLoading } = useTaskStore();
   const token = localStorage.getItem("token");
   const [modalCommentOpen, setModalCommentOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { isDarkMode } = useTheme();
 
@@ -99,9 +100,33 @@ const TaskInfo = () => {
     task && (
       <div className="contenedor__info">
         <header className="info__header">
-          <img className="header__image" src={isDarkMode ? beeDark : bee}  alt="Logo de WorkHive" />
+          <img
+            className="header__image"
+            src={isDarkMode ? beeDark : bee}
+            alt="Logo de WorkHive"
+          />
           <h1 className="header__titulo">{task.nombre}</h1>
-          <MenuTask />
+          <MenuTask
+            onDeleteTask={async () => {
+              try {
+                const deleteResponse = await fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "DELETE",
+                  null,
+                  { Authorization: `Bearer ${token}` }
+                );
+
+                if (deleteResponse.error) throw deleteResponse.error;
+
+                navigate(`/usuario/tablero/${idTablero}`);
+              } catch (error) {
+                console.error(
+                  "Error al eliminar la tarea:",
+                  error.error.message
+                );
+              }
+            }}
+          />
           <select
             className="header__estado"
             name="estado"
@@ -189,8 +214,12 @@ const TaskInfo = () => {
 
             <article className="item__agregar">
               <p className="agregar__titulo">Agregar comentario</p>
-              <a className="agregar__enlace" href="#" onClick={() => setModalCommentOpen(true)}>
-              <AddIcon />
+              <a
+                className="agregar__enlace"
+                href="#"
+                onClick={() => setModalCommentOpen(true)}
+              >
+                <AddIcon />
               </a>
             </article>
           </ul>

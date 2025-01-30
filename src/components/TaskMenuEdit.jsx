@@ -169,6 +169,7 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
         message="¿Estas seguro de que quieres eliminar la tarea?"
         onConfirm={() => {
           setModalDeleteTaskOpen(false);
+          onDeleteTask(id);
         }}
       />
     </div>
