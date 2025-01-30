@@ -59,7 +59,7 @@ const EditMenuProject = ({
       .required("El campo 'Nombre proyecto' es obligatorio"),
     asigned: Yup.string()
       .trim()
-      .required("El campo 'Asigando a' es obligatorio"),
+      .required("El campo 'Asignado a' es obligatorio"),
     dateEnd: Yup.date()
       .required("El campo 'Fecha' es obligatorio")
       .min(new Date(), "La fecha debe ser posterior a la actual"),
@@ -166,8 +166,6 @@ const EditMenuProject = ({
           };
 
           useEffect(() => {
-            console.log(addTaskError);
-            console.log(taskAdded);
             if (addTaskError === null && taskAdded) {
               setmodalNewTaskOpen(false);
               setTaskAdded(false);
