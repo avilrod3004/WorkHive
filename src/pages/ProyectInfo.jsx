@@ -191,14 +191,12 @@ const ProyectInfo = () => {
     id,
     token,
     newFetch,
-    newFetch,
     setProject,
     setLoading,
     setTodoTasks,
     setInProgressTasks,
     setToReviewTasks,
     setDoneTasks,
-    setErrorEdit,
     setErrorEdit,
   ]);
 
