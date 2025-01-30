@@ -300,7 +300,7 @@ const ProyectInfo = () => {
                 setTaskAdded(true);
               }
             } catch (error) {
-              console.log(error.error.message);
+
             } finally {
               setLoading(false);
             }
@@ -344,7 +344,7 @@ const ProyectInfo = () => {
                 throw "El usuario no está registrado";
               }
             } catch (error) {
-              console.error("Error al agregar persona al proyecto:", error);
+
             } finally {
               setLoading(false);
             }
@@ -392,7 +392,7 @@ const ProyectInfo = () => {
 
               navigate("/usuario");
             } catch (error) {
-              console.error("Error al eliminar proyecto:", error);
+
             }
           }}
         />
