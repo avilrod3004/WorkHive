@@ -17,6 +17,7 @@ import { useUsersStore } from "../config/usersStore";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
 import Loading from "../components/Loading.jsx";
 import { useAddTaskStore } from "../config/addTaskStore";
+import { useFetchErrorStore } from "../config/errorStore.jsx";
 
 /**
  * @page
@@ -53,6 +54,7 @@ const ProyectInfo = () => {
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
   const { clearProject } = useProjectStore();
+  const { setFetchError } = useFetchErrorStore();
   const navigate = useNavigate();
 
   // Efecto para cargar los datos del proyecto y sus tareas
@@ -71,7 +73,7 @@ const ProyectInfo = () => {
         if (projectResponse.error) throw new Error(projectResponse.error);
         return projectResponse.data;
       } catch (error) {
-        console.error("Error al obtener el proyecto:", error);
+        setFetchError("Error al obtener el proyecto");
         throw error;
       }
     }
@@ -88,7 +90,7 @@ const ProyectInfo = () => {
         if (userResponse.error) throw new Error(userResponse.error);
         return userResponse.data;
       } catch (error) {
-        console.error(`Error al obtener datos del usuario ${userId}:`, error);
+        setFetchError(`Error al obtener datos del usuario ${userId}`);
         throw error;
       }
     }
@@ -106,7 +108,7 @@ const ProyectInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        console.error(`Error al obtener tareas de estado ${estado}:`, error);
+        setFetchError(`Error al obtener tareas de estado ${estado}`);
         return [];
       }
     }
@@ -148,10 +150,8 @@ const ProyectInfo = () => {
         setToReviewTasks(toReview);
         setDoneTasks(done);
       } catch (error) {
-        console.error(
-          "Error al cargar los datos del proyecto y tareas:",
-          error
-        );
+        setFetchError("Error al cargar los datos del proyecto y tareas");
+        navigate("/notfound");
       } finally {
         setLoading(false);
       }
@@ -168,7 +168,7 @@ const ProyectInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+        setFetchError("Error al obtener los usuarios");
       }
     }
 
@@ -177,7 +177,7 @@ const ProyectInfo = () => {
         const usersData = await fetchUsers();
         setUsers(usersData);
       } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+        setFetchError("Error al obtener los usuarios");
       }
     }
 
@@ -280,6 +280,7 @@ const ProyectInfo = () => {
           id={id}
           onAddTask={async (values) => {
             try {
+              setLoading(true);
               const response = await newFetch(
                 import.meta.env.VITE_BASE_API + "tareas",
                 "POST",
@@ -299,11 +300,13 @@ const ProyectInfo = () => {
                 setTaskAdded(true);
               }
             } catch (error) {
-              console.log(error.error.message);
+            } finally {
+              setLoading(false);
             }
           }}
           onAddPerson={async (email) => {
             try {
+              setLoading(true);
               const user = users.find((u) => u.email === email);
               if (user) {
                 if (project.administrador._id === user._id) {
@@ -340,11 +343,13 @@ const ProyectInfo = () => {
                 throw "El usuario no está registrado";
               }
             } catch (error) {
-              console.error("Error al agregar persona al proyecto:", error);
+            } finally {
+              setLoading(false);
             }
           }}
           onEditProject={async (values) => {
             try {
+              setLoading(true);
               const updatedProject = await newFetch(
                 import.meta.env.VITE_BASE_API + `tableros/${id}`,
                 "PUT",
@@ -366,6 +371,8 @@ const ProyectInfo = () => {
             } catch (error) {
               console.error("Error al editar proyecto:", error.error.message);
               setErrorEdit(error.error.message);
+            } finally {
+              setLoading(false);
             }
           }}
           onDeleteProject={async () => {
@@ -382,9 +389,7 @@ const ProyectInfo = () => {
               clearProject();
 
               navigate("/usuario");
-            } catch (error) {
-              console.error("Error al eliminar proyecto:", error.error.message);
-            }
+            } catch (error) {}
           }}
         />
       </div>

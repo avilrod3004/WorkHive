@@ -4,12 +4,13 @@
  */
 
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import margarita from '../assets/margarita.png';
 import margaritaDark from '../assets/margaritaDark.png';
 import bee from '../assets/bee.png';
 import beeDark from '../assets/beedark.png';
 import { useTheme } from '../context/ThemeContext'
+import {useFetchErrorStore} from "../config/errorStore.jsx";
 
 /**
  * @page
@@ -24,6 +25,13 @@ const NotFound = () => {
 //Hook personalizado para obtener el estado del tema
 
   const { isDarkMode } = useTheme();
+  const { fetchError, setFetchError, clearFetchError } = useFetchErrorStore();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+      setError(fetchError);
+      clearFetchError();
+  }, [])
 
   return (
     <section className='contenedor__error'>
@@ -37,6 +45,9 @@ const NotFound = () => {
         <p className='notFound__number'>4</p>
       </div>
       <p className='notFound'>NOT FOUND</p>
+        {
+            error != null && <p>{error}</p>
+        }
       <div className='bee-container'>
         <img 
           className='bee' 

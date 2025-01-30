@@ -1,5 +1,7 @@
 import React from 'react';
 import Flower from "../assets/margarita.png";
+import DarkFlower from "../assets/margaritaDark.png";
+import {useTheme} from "../context/ThemeContext.jsx";
 
 /**
  * Componente de pantalla de carga.
@@ -9,9 +11,11 @@ import Flower from "../assets/margarita.png";
  * @returns {JSX.Element} - Elemento JSX que representa la pantalla de carga.
  */
 const Loading = () => {
+    const { isDarkMode } = useTheme();
+
     return (
         <div className="loading">
-            <img src={Flower} alt="Flor" className="loading__flor" />
+            <img src={isDarkMode ? DarkFlower : Flower} alt="Flor" className="loading__flor" />
             <p className="loading__texto">Cargando...</p>
         </div>
     );
