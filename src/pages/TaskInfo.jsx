@@ -19,6 +19,7 @@ import { useUsersStore } from "../config/usersStore";
 import { useProjectStore } from "../config/projectStore";
 import { useUserStore } from "../config/userStore";
 import Loading from "../components/Loading.jsx";
+import {useFetchErrorStore} from "../config/errorStore.jsx";
 
 const TaskInfo = () => {
   const { idTarea, idTablero } = useParams(); // `idTarea` para la tarea específica
@@ -40,6 +41,7 @@ const TaskInfo = () => {
   const [modalCommentOpen, setModalCommentOpen] = useState(false);
   const [commentAdded, setCommentAdded] = useState(false);
   const navigate = useNavigate();
+  const { setFetchError } = useFetchErrorStore();
 
   const { isDarkMode } = useTheme();
 
@@ -65,7 +67,7 @@ const TaskInfo = () => {
         if (projectResponse.error) throw new Error(projectResponse.error);
         return projectResponse.data;
       } catch (error) {
-        console.error("Error al obtener el proyecto:", error);
+        setFetchError("Error al obtener el proyecto")
         throw error;
       }
     }
@@ -82,7 +84,7 @@ const TaskInfo = () => {
         if (userResponse.error) throw new Error(userResponse.error);
         return userResponse.data;
       } catch (error) {
-        console.error(`Error al obtener datos del usuario ${userId}:`, error);
+        setFetchError(`Error al obtener datos del usuario ${userId}`)
         throw error;
       }
     }
@@ -100,7 +102,7 @@ const TaskInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        console.error(`Error al obtener tareas de estado ${estado}:`, error);
+        setFetchError(`Error al obtener tareas de estado ${estado}`)
         return [];
       }
     }
@@ -142,10 +144,7 @@ const TaskInfo = () => {
         setToReviewTasks(toReview);
         setDoneTasks(done);
       } catch (error) {
-        console.error(
-          "Error al cargar los datos del proyecto y tareas:",
-          error
-        );
+        setFetchError("Error al cargar los datos del proyecto y tareas")
       }
     }
 
@@ -160,7 +159,7 @@ const TaskInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+        setFetchError("Error al obtener los usuarios")
       }
     }
 
@@ -169,7 +168,7 @@ const TaskInfo = () => {
         const usersData = await fetchUsers();
         setUsers(usersData);
       } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+        setFetchError("Error al obtener los usuarios")
       }
     }
     // Función para obtener los datos de la tarea y sus detalles asociados
@@ -220,7 +219,7 @@ const TaskInfo = () => {
           comentarios: comentariosUsuarios,
         });
       } catch (error) {
-        console.error("Error al cargar la tarea:", error);
+        setFetchError("Error al cargar la tarea")
       } finally {
         setLoading(false);
       }
@@ -397,7 +396,6 @@ const TaskInfo = () => {
               });
               setCommentAdded(true);
             } catch (error) {
-              console.error("Error al crear el comentario:", error);
             }
           }}
           title="Añadir comentario"
