@@ -307,8 +307,9 @@ const EditMenuProject = ({
           useEffect(() => {
             if (error === null && collaboratorAdded) {
               setmodalAddColaboratorOpen(false);
+              setCollaboratorAdded(false);
             }
-          }, [error]);
+          }, [error, collaboratorAdded]);
 
           return (
             <>
