@@ -248,9 +248,59 @@ const TaskInfo = () => {
     task && (
       <div className="contenedor__info">
         <header className="info__header">
-          <img className="header__image" src={isDarkMode ? beeDark : bee}  alt="Logo de WorkHive" />
+          <img
+            className="header__image"
+            src={isDarkMode ? beeDark : bee}
+            alt="Logo de WorkHive"
+          />
           <h1 className="header-proyecto__titulo">{task.nombre}</h1>
-          <MenuTask />
+          <MenuTask
+            id={idTarea}
+            onEditTask={async (values) => {
+              try {
+                const editResponse = await fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "PUT",
+                  {
+                    nombre: values.name,
+                    descripcion: values.description,
+                    prioridad: values.priority,
+                    fechaLimite: values.dateEnd,
+                    asignadoA: values.asigned,
+                  },
+                  {
+                    Authorization: `Bearer ${token}`,
+                  }
+                );
+
+                if (editResponse.error) throw editResponse.error;
+
+                setTaskEdited(true);
+              } catch (error) {
+                console.log("Error al editar la tarea:", error.error.message);
+                setEditTaskError(error.error.message);
+              }
+            }}
+            onDeleteTask={async () => {
+              try {
+                const deleteResponse = await fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "DELETE",
+                  null,
+                  { Authorization: `Bearer ${token}` }
+                );
+
+                if (deleteResponse.error) throw deleteResponse.error;
+
+                navigate(`/usuario/tablero/${idTablero}`);
+              } catch (error) {
+                console.error(
+                  "Error al eliminar la tarea:",
+                  error.error.message
+                );
+              }
+            }}
+          />
           <select
             className="header__estado"
             name="estado"
