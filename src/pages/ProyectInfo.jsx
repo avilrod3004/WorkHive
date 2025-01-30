@@ -152,6 +152,8 @@ const ProyectInfo = () => {
           "Error al cargar los datos del proyecto y tareas:",
           error
         );
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -176,8 +178,6 @@ const ProyectInfo = () => {
         setUsers(usersData);
       } catch (error) {
         console.error("Error al obtener los usuarios:", error);
-      } finally {
-        setLoading(false);
       }
     }
 
