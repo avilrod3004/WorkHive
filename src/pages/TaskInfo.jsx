@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import FormModal from "../modals/FormModal";
 import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from '../context/ThemeContext'
+import Loading from "../components/Loading.jsx";
 
 const TaskInfo = () => {
   const { idTarea } = useParams(); // `idTarea` para la tarea específica
@@ -88,7 +89,7 @@ const TaskInfo = () => {
   }, [idTarea, token, fetch]);
 
   if (loading) {
-    return <h1>Cargando...</h1>;
+    return <Loading/>;
   }
 
   if (!task) {
