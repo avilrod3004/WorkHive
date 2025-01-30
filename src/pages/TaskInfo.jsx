@@ -99,56 +99,60 @@ const TaskInfo = () => {
     task && (
       <div className="contenedor__info">
         <header className="info__header">
-          <img className="header__image" src={isDarkMode ? beeDark : bee}  alt="Logo de WorkHive" />
-          <h1 className="header__titulo">{task.nombre}</h1>
-          <MenuTask />
-          <select
-            className="header__estado"
-            name="estado"
-            id="estado"
-            value={task.estado}
-            onChange={(e) => {
-              task.estado = e.target.value;
-              fetch(
-                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
-                "PUT",
-                {
-                  estado: e.target.value,
-                },
-                {
-                  Authorization: `Bearer ${token}`,
-                }
-              );
-            }}
-          >
-            <option value="pendiente">To Do</option>
-            <option value="en_proceso">In Progress</option>
-            <option value="en_revision">To Review</option>
-            <option value="completada">Done</option>
-          </select>
-          <select
-            className="header__prioridad"
-            name="prioridad"
-            id="prioridad"
-            value={task.prioridad}
-            onChange={(e) => {
-              task.prioridad = e.target.value;
-              fetch(
-                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
-                "PUT",
-                {
-                  prioridad: e.target.value,
-                },
-                {
-                  Authorization: `Bearer ${token}`,
-                }
-              );
-            }}
-          >
-            <option value="alta">Alta</option>
-            <option value="media">Media</option>
-            <option value="baja">Baja</option>
-          </select>
+          <div className="header__tittle">
+            <img className="header__image" src={isDarkMode ? beeDark : bee}  alt="Logo de WorkHive" />
+            <h1 className="header__titulo">{task.nombre}</h1>
+          </div>
+          <div className="header__menuu">
+            <MenuTask />
+            <select
+              className="header__estado"
+              name="estado"
+              id="estado"
+              value={task.estado}
+              onChange={(e) => {
+                task.estado = e.target.value;
+                fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "PUT",
+                  {
+                    estado: e.target.value,
+                  },
+                  {
+                    Authorization: `Bearer ${token}`,
+                  }
+                );
+              }}
+            >
+              <option value="pendiente">To Do</option>
+              <option value="en_proceso">In Progress</option>
+              <option value="en_revision">To Review</option>
+              <option value="completada">Done</option>
+            </select>
+            <select
+              className="header__prioridad"
+              name="prioridad"
+              id="prioridad"
+              value={task.prioridad}
+              onChange={(e) => {
+                task.prioridad = e.target.value;
+                fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "PUT",
+                  {
+                    prioridad: e.target.value,
+                  },
+                  {
+                    Authorization: `Bearer ${token}`,
+                  }
+                );
+              }}
+            >
+              <option value="alta">Alta</option>
+              <option value="media">Media</option>
+              <option value="baja">Baja</option>
+            </select>
+          </div>
         </header>
 
         <section className="info__proyecto">
