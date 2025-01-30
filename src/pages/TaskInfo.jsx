@@ -254,53 +254,7 @@ const TaskInfo = () => {
             alt="Logo de WorkHive"
           />
           <h1 className="header__titulo">{task.nombre}</h1>
-          <MenuTask
-            id={idTarea}
-            onEditTask={async (values) => {
-              try {
-                const editResponse = await fetch(
-                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
-                  "PUT",
-                  {
-                    nombre: values.name,
-                    descripcion: values.description,
-                    prioridad: values.priority,
-                    fechaLimite: values.dateEnd,
-                    asignadoA: values.asigned,
-                  },
-                  {
-                    Authorization: `Bearer ${token}`,
-                  }
-                );
-
-                if (editResponse.error) throw editResponse.error;
-
-                setTaskEdited(true);
-              } catch (error) {
-                console.log("Error al editar la tarea:", error.error.message);
-                setEditTaskError(error.error.message);
-              }
-            }}
-            onDeleteTask={async () => {
-              try {
-                const deleteResponse = await fetch(
-                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
-                  "DELETE",
-                  null,
-                  { Authorization: `Bearer ${token}` }
-                );
-
-                if (deleteResponse.error) throw deleteResponse.error;
-
-                navigate(`/usuario/tablero/${idTablero}`);
-              } catch (error) {
-                console.error(
-                  "Error al eliminar la tarea:",
-                  error.error.message
-                );
-              }
-            }}
-          />
+          <MenuTask />
           <select
             className="header__estado"
             name="estado"
@@ -373,20 +327,23 @@ const TaskInfo = () => {
           <h1 className="comentarios__titulo">COMENTARIOS</h1>
 
           <ul className="comentarios__lista">
-            {task.comentarios.map((comentario) => (
-              <li key={comentario._id} className="lista__item">
-                <article className="item__section">
-                  <h1 className="section__titulo">
-                    {comentario.usuarioNombre}
-                  </h1>
-                  <p className="section__mensaje">{comentario.mensaje}</p>
-                  <p className="section__fecha">
-                    {new Date(comentario.fecha).toLocaleDateString()}{" "}
-                    {new Date(comentario.fecha).toLocaleTimeString()}
-                  </p>
-                </article>
-              </li>
-            ))}
+            {task.comentarios
+              .slice()
+              .reverse()
+              .map((comentario) => (
+                <li key={comentario._id} className="lista__item">
+                  <article className="item__section">
+                    <h1 className="section__titulo">
+                      {comentario.usuarioNombre}
+                    </h1>
+                    <p className="section__mensaje">{comentario.mensaje}</p>
+                    <p className="section__fecha">
+                      {new Date(comentario.fecha).toLocaleDateString()}{" "}
+                      {new Date(comentario.fecha).toLocaleTimeString()}
+                    </p>
+                  </article>
+                </li>
+              ))}
           </ul>
           <article className="item__agregar">
             <p className="agregar__titulo">Agregar comentario</p>
