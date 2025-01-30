@@ -31,7 +31,7 @@
     height: auto;
 }
 
-.header__titulo {
+.header-proyecto__titulo {
     @include title-text(800);
     color: var(--black-text);
 }

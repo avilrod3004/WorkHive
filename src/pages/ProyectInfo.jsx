@@ -212,7 +212,7 @@ const ProyectInfo = () => {
               src={isDarkMode ? beeDark : bee}
               alt="Logo de WorkHive"
             />
-            <h1 className="header__titulo">{project.nombre}</h1>
+            <h1 className="header-proyecto__titulo">{project.nombre}</h1>
           </div>
           <TeamMenu
             teamMembers={[project.administrador, ...project.colaboradores]}

@@ -101,7 +101,7 @@ const TaskInfo = () => {
       <div className="contenedor__info">
         <header className="info__header">
           <img className="header__image" src={isDarkMode ? beeDark : bee}  alt="Logo de WorkHive" />
-          <h1 className="header__titulo">{task.nombre}</h1>
+          <h1 className="header-proyecto__titulo">{task.nombre}</h1>
           <MenuTask />
           <select
             className="header__estado"
