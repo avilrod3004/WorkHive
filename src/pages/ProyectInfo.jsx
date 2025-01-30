@@ -383,7 +383,7 @@ const ProyectInfo = () => {
 
               navigate("/usuario");
             } catch (error) {
-              console.error("Error al eliminar proyecto:", error);
+              console.error("Error al eliminar proyecto:", error.error.message);
             }
           }}
         />
