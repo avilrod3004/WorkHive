@@ -387,7 +387,7 @@ const TaskInfo = () => {
               .reverse()
               .map((comentario) => (
                 <li key={comentario._id} className="lista__item">
-                  <h1 className="item__titulo">{comentario.usuario}</h1>
+                  <h1 className="item__titulo">{comentario.usuarioNombre}</h1>
                   <p className="item__mensaje">{comentario.mensaje}</p>
                   <p className="item__fecha">
                     {new Date(comentario.fecha).toLocaleDateString()}{" "}
