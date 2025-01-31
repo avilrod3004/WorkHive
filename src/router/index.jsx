@@ -10,6 +10,7 @@ import LayoutPrivate from "../layouts/LayoutPrivate";
 import LayoutAuth from "../layouts/LayoutAuth";
 import NotFound from "../pages/NotFound";
 import { lazy, Suspense } from "react";
+import Loading from "../components/Loading";
 
 // Lazy loading
 
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
       {
         path: "/contactUs",
         element: (
-          <Suspense fallback={<div>Loading Contact Us...</div>}>
+          <Suspense fallback={<Loading />}>
             <ContactUs />
           </Suspense>
         ),
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
       {
         path: "/auth/login",
         element: (
-          <Suspense fallback={<div>Loading Login...</div>}>
+          <Suspense fallback={<Loading />}>
             <Login />
           </Suspense>
         ),
@@ -70,7 +71,7 @@ export const router = createBrowserRouter([
       {
         path: "/auth/register",
         element: (
-          <Suspense fallback={<div>Loading Register...</div>}>
+          <Suspense fallback={<Loading />}>
             <Register />
           </Suspense>
         ),
@@ -89,7 +90,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<div>Loading User Profile...</div>}>
+          <Suspense fallback={<Loading />}>
             <User />
           </Suspense>
         ),
@@ -97,7 +98,7 @@ export const router = createBrowserRouter([
       {
         path: "/usuario/tablero/:id",
         element: (
-          <Suspense fallback={<div>Loading User Profile...</div>}>
+          <Suspense fallback={<Loading />}>
             <ProyectInfo />
           </Suspense>
         ),
@@ -105,7 +106,7 @@ export const router = createBrowserRouter([
       {
         path: "/usuario/tablero/:idTablero/tarea/:idTarea",
         element: (
-          <Suspense fallback={<div>Loading Task Info...</div>}>
+          <Suspense fallback={<Loading />}>
             <TaskInfo />
           </Suspense>
         ),
