@@ -94,7 +94,7 @@ const Register = () => {
         }
       );
 
-      if (!(loginResponse.error.status === 201)) {
+      if (loginResponse.error) {
         throw loginResponse.error;
       }
 
