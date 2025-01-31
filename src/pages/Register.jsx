@@ -16,11 +16,11 @@ import { useTheme } from "../context/ThemeContext";
 /**
  * @page
  * Componente Register
- * 
+ *
  * Este componente renderiza un formulario de registro de usuario.
  * Utiliza Formik para el manejo del estado del formulario, Yup para la validación,
  * y hooks personalizados para el manejo del estado global y peticiones HTTP.
- * 
+ *
  * @returns {JSX.Element} Formulario de registro de usuario
  */
 const Register = () => {
@@ -54,7 +54,7 @@ const Register = () => {
   });
 
   //Función que se ejecuta al enviar el formulario de registro
-  
+
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     delete values.repeatPassword;
     values.role = "usuario";
@@ -113,8 +113,6 @@ const Register = () => {
           "El servidor no se encuentra operativo en estos momentos, inténtelo más tarde..."
         );
       }
-
-      console.error(error.message);
       setSubmitting(false);
     }
   };

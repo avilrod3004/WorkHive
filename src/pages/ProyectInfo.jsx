@@ -9,7 +9,7 @@ import beeDark from "../assets/beedark.png";
 import EditMenuProject from "../components/EditMenuProject";
 import TeamMenu from "../components/TeamMenu";
 import { useProjectStore } from "../config/projectStore";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosStore from "../hooks/useAxios";
 import BoardTask from "../components/BoardTask";
 import { useTheme } from "../context/ThemeContext";
@@ -36,7 +36,6 @@ const ProyectInfo = () => {
     project,
     setProject,
     loading,
-    errorEdit,
     setLoading,
     setTodoTasks,
     setInProgressTasks,
@@ -301,7 +300,6 @@ const ProyectInfo = () => {
                 setTodoTasks([...todoTasks, response.data]);
                 setTaskAdded(true);
               }
-            } catch (error) {
             } finally {
               setLoading(false);
             }
@@ -344,7 +342,6 @@ const ProyectInfo = () => {
                 setError("El usuario no está registrado");
                 throw "El usuario no está registrado";
               }
-            } catch (error) {
             } finally {
               setLoading(false);
             }
@@ -371,7 +368,6 @@ const ProyectInfo = () => {
                 setProjectEdited(true);
               }
             } catch (error) {
-              console.error("Error al editar proyecto:", error.error.message);
               setErrorEdit(error.error.message);
             } finally {
               setLoading(false);
@@ -379,6 +375,7 @@ const ProyectInfo = () => {
           }}
           onDeleteProject={async () => {
             try {
+              setLoading(true);
               const response = await newFetch(
                 import.meta.env.VITE_BASE_API + `tableros/${id}`,
                 "DELETE",
@@ -391,7 +388,9 @@ const ProyectInfo = () => {
               clearProject();
 
               navigate("/usuario");
-            } catch (error) {}
+            } finally {
+              setLoading(false);
+            }
           }}
         />
       </div>

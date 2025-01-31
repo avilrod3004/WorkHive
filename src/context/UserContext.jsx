@@ -53,7 +53,6 @@ export const UserProvider = ({ children }) => {
           clearUser();
         }
       } catch (error) {
-        console.error("Error verifying token:", error);
         localStorage.removeItem("token");
         clearUser();
       }

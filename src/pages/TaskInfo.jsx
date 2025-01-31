@@ -19,6 +19,7 @@ import { useUsersStore } from "../config/usersStore";
 import { useProjectStore } from "../config/projectStore";
 import { useUserStore } from "../config/userStore";
 import Loading from "../components/Loading.jsx";
+import { useFetchErrorStore } from "../config/errorStore.jsx";
 
 const TaskInfo = () => {
   const { idTarea, idTablero } = useParams(); // `idTarea` para la tarea específica
@@ -27,6 +28,7 @@ const TaskInfo = () => {
   const { setTaskEdited, setEditTaskError, taskEdited } = useEditTaskStore();
   const { setUsers } = useUsersStore();
   const { user } = useUserStore();
+  const { setFetchError } = useFetchErrorStore();
   const {
     setProject,
     loading,
@@ -65,7 +67,7 @@ const TaskInfo = () => {
         if (projectResponse.error) throw new Error(projectResponse.error);
         return projectResponse.data;
       } catch (error) {
-        console.error("Error al obtener el proyecto:", error);
+        setFetchError("Error al obtener el proyecto");
         throw error;
       }
     }
@@ -82,7 +84,7 @@ const TaskInfo = () => {
         if (userResponse.error) throw new Error(userResponse.error);
         return userResponse.data;
       } catch (error) {
-        console.error(`Error al obtener datos del usuario ${userId}:`, error);
+        setFetchError(`Error al obtener datos del usuario ${userId}`);
         throw error;
       }
     }
@@ -100,7 +102,7 @@ const TaskInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        console.error(`Error al obtener tareas de estado ${estado}:`, error);
+        setFetchError(`Error al obtener tareas de estado ${estado}`);
         return [];
       }
     }
@@ -142,10 +144,8 @@ const TaskInfo = () => {
         setToReviewTasks(toReview);
         setDoneTasks(done);
       } catch (error) {
-        console.error(
-          "Error al cargar los datos del proyecto y tareas:",
-          error
-        );
+        setFetchError("Error al cargar los datos del proyecto y tareas");
+        navigate("/not-found");
       }
     }
 
@@ -160,7 +160,7 @@ const TaskInfo = () => {
         if (response.error) throw new Error(response.error);
         return response.data;
       } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+        setFetchError("Error al obtener los usuarios");
       }
     }
 
@@ -169,7 +169,8 @@ const TaskInfo = () => {
         const usersData = await fetchUsers();
         setUsers(usersData);
       } catch (error) {
-        console.error("Error al obtener los usuarios:", error);
+        setFetchError("Error al obtener los usuarios");
+        navigate("/not-found");
       }
     }
     // Función para obtener los datos de la tarea y sus detalles asociados
@@ -220,7 +221,8 @@ const TaskInfo = () => {
           comentarios: comentariosUsuarios,
         });
       } catch (error) {
-        console.error("Error al cargar la tarea:", error);
+        setFetchError("Error al cargar la tarea");
+        navigate("/not-found");
       } finally {
         setLoading(false);
       }
@@ -277,12 +279,12 @@ const TaskInfo = () => {
 
                 setTaskEdited(true);
               } catch (error) {
-                console.log("Error al editar la tarea:", error.error.message);
                 setEditTaskError(error.error.message);
               }
             }}
             onDeleteTask={async () => {
               try {
+                setLoading(true);
                 const deleteResponse = await fetch(
                   `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
                   "DELETE",
@@ -293,11 +295,8 @@ const TaskInfo = () => {
                 if (deleteResponse.error) throw deleteResponse.error;
 
                 navigate(`/usuario/tablero/${idTablero}`);
-              } catch (error) {
-                console.error(
-                  "Error al eliminar la tarea:",
-                  error.error.message
-                );
+              } finally {
+                setLoading(false);
               }
             }}
           />
@@ -307,17 +306,22 @@ const TaskInfo = () => {
             id="estado"
             value={task.estado}
             onChange={(e) => {
-              task.estado = e.target.value;
-              fetch(
-                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
-                "PUT",
-                {
-                  estado: e.target.value,
-                },
-                {
-                  Authorization: `Bearer ${token}`,
-                }
-              );
+              try {
+                setLoading(true);
+                task.estado = e.target.value;
+                fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "PUT",
+                  {
+                    estado: e.target.value,
+                  },
+                  {
+                    Authorization: `Bearer ${token}`,
+                  }
+                );
+              } finally {
+                setLoading(false);
+              }
             }}
           >
             <option value="pendiente">To Do</option>
@@ -331,17 +335,22 @@ const TaskInfo = () => {
             id="prioridad"
             value={task.prioridad}
             onChange={(e) => {
-              task.prioridad = e.target.value;
-              fetch(
-                `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
-                "PUT",
-                {
-                  prioridad: e.target.value,
-                },
-                {
-                  Authorization: `Bearer ${token}`,
-                }
-              );
+              try {
+                setLoading(true);
+                task.prioridad = e.target.value;
+                fetch(
+                  `${import.meta.env.VITE_BASE_API}tareas/${idTarea}`,
+                  "PUT",
+                  {
+                    prioridad: e.target.value,
+                  },
+                  {
+                    Authorization: `Bearer ${token}`,
+                  }
+                );
+              } finally {
+                setLoading(false);
+              }
             }}
           >
             <option value="alta">Alta</option>
