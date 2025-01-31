@@ -36,7 +36,8 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
   const validationSchemaEditTask = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .required("El campo 'Nombre proyecto' es obligatorio"),
+      .required("El campo 'Nombre proyecto' es obligatorio")
+      .min(3, "El nombre del proyecto debe tener mínimo 3 caracteres"),
     asigned: Yup.string()
       .trim()
       .required("El campo 'Asignado a' es obligatorio"),
@@ -45,7 +46,8 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
       .min(new Date(), "La fecha debe ser posterior a la actual"),
     description: Yup.string()
       .trim()
-      .required("El campo 'Descripción' es obligatorio."),
+      .required("El campo 'Descripción' es obligatorio.")
+      .min(3, "La descripción debe tener mínimo 3 caracteres"),
   });
 
   return (

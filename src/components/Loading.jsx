@@ -17,7 +17,7 @@ const Loading = () => {
     <div className="loading">
       <img
         src={isDarkMode ? DarkFlower : Flower}
-        alt="Flor"
+        alt=""
         className="loading__flor"
       />
       <p className="loading__texto">Cargando...</p>

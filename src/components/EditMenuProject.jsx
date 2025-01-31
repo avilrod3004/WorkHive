@@ -13,6 +13,7 @@ import ConfirmModal from "../modals/ConfirmModal.jsx";
 import { useAddCollaboratorStore } from "../config/addCollaboratorStore.jsx";
 import { useProjectStore } from "../config/projectStore.jsx";
 import { useAddTaskStore } from "../config/addTaskStore.jsx";
+import { useUserStore } from "../config/userStore.jsx";
 
 /**
  * Componente de menú de edición para proyectos.
@@ -49,11 +50,13 @@ const EditMenuProject = ({
     projectEdited,
     setProjectEdited,
   } = useProjectStore();
+  const { user } = useUserStore();
 
   const validationSchemaNewTask = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .required("El campo 'Nombre proyecto' es obligatorio"),
+      .required("El campo 'Nombre proyecto' es obligatorio")
+      .min(3, "El nombre debe tener mínimo 3 caracteres"),
     asigned: Yup.string()
       .trim()
       .required("El campo 'Asignado a' es obligatorio"),
@@ -62,7 +65,8 @@ const EditMenuProject = ({
       .min(new Date(), "La fecha debe ser posterior a la actual"),
     description: Yup.string()
       .trim()
-      .required("El campo 'Descripción' es obligatorio."),
+      .required("El campo 'Descripción' es obligatorio.")
+      .min(3, "La descripción debe tener mínimo 3 caracteres"),
   });
 
   const validationSchemaAddColaborator = Yup.object().shape({
@@ -72,10 +76,12 @@ const EditMenuProject = ({
   const validationSchemaEditProject = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .required("El campo 'Nombre proyecto' es obligatorio"),
+      .required("El campo 'Nombre proyecto' es obligatorio")
+      .min(3, "El nombre del proyecto debe tener mínimo 3 caracteres"),
     description: Yup.string()
       .trim()
-      .required("El campo 'Descripción' es obligatorio."),
+      .required("El campo 'Descripción' es obligatorio.")
+      .min(3, "La descripción debe tener mínimo 3 caracteres"),
     dateIni: Yup.date().required("El campo 'Fecha' es obligatorio"),
     dateEnd: Yup.date()
       .required("El campo 'Fecha' es obligatorio")
@@ -123,13 +129,16 @@ const EditMenuProject = ({
       >
         <BorderColorIcon />
       </button>
-      <button
-        className="menu__button"
-        title="Eliminar Proyecto"
-        onClick={() => setmodalDeleteProjectOpen(true)}
-      >
-        <DeleteForeverIcon />
-      </button>
+      {user.id === project.administrador._id ||
+        (user._id === project.administrador._id && (
+          <button
+            className="menu__button"
+            title="Eliminar Proyecto"
+            onClick={() => setmodalDeleteProjectOpen(true)}
+          >
+            <DeleteForeverIcon />
+          </button>
+        ))}
 
       {/* Modal para añadir tareas al proyecto */}
       <FormModal

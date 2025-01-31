@@ -364,7 +364,13 @@ const ProyectInfo = () => {
               if (updatedProject.error) throw updatedProject.error;
 
               if (updatedProject.data !== null) {
-                setProject(updatedProject.data);
+                setProject({
+                  ...project,
+                  nombre: values.name,
+                  descripcion: values.description,
+                  fechaInicio: values.dateIni,
+                  fechaFin: values.dateEnd,
+                });
                 setProjectEdited(true);
               }
             } catch (error) {
