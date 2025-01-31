@@ -44,10 +44,12 @@ const NotFound = () => {
         />
         <p className='notFound__number'>4</p>
       </div>
+      <div className='contenedor__mensaje'>
       <p className='notFound'>NOT FOUND</p>
         {
-            error != null && <p>{error}</p>
+            error != null && <p className='mensaje__error'>{error}</p>
         }
+      </div>
       <div className='bee-container'>
         <img 
           className='bee' 

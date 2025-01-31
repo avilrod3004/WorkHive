@@ -19,6 +19,16 @@
     min-height: 50vh;
 }
 
+.contenedor__mensaje{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mensaje__error {
+    @include title-text(700);
+    color: var(--black-text);
+}
+
 .notFound__number {
     @include title-text(1000);
     color: var(--black-text);
