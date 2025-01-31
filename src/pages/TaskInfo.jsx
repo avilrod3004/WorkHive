@@ -455,9 +455,7 @@ const TaskInfo = () => {
                 ],
               });
               setCommentAdded(true);
-            } catch (error) {
-              console.error("Error al crear el comentario:", error);
-            }
+            } catch (error) {}
           }}
           title="Añadir comentario"
         >
