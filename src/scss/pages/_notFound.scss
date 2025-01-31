@@ -6,6 +6,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .error__notFound {
@@ -84,23 +85,19 @@
 
 @keyframes fly {
     0% {
-        transform: translate(0, -200%) scaleX(1); 
+        transform: translate(0, -20vh) scaleX(1); 
         opacity: 0;
     }
     20% {
         opacity: 1;
-        transform: translate(100%, -400%) scaleX(1);
+        transform: translate(20vw, -40vh) scaleX(1);
     }
     50% {
-        transform: translate(600%, -700%) scaleX(1); 
+        transform: translate(60vw, -70vh) scaleX(1); 
     }
 
-    70% {
-        transform: translate(900%, -1100%) scaleX(1); 
-    }
-    
     100% {
-        transform: translate(4500%, -2500%) scaleX(1);
+        transform: translate(180vw, -100vh) scaleX(1);
         opacity: 1;
     }
 }
