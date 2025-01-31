@@ -21,6 +21,37 @@ WorkHive es una herramienta digital para organizar, crear y colaborar en proyect
 - React
 - Node.js
 
+## 📥 Instalación
+
+1. **Clona el repositorio:**
+
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   ```
+
+2. **Instala las dependencias:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configura las variables de entorno:**
+   - Copia el archivo `.env.template` a `.env` y completa los valores necesarios.
+
+---
+
+## 🔧 Uso
+
+### Desarrollo
+
+Para iniciar el servidor en modo desarrollo, utiliza el siguiente comando:
+
+```bash
+npm run dev
+```
+
+Devuelve un link a tu localhost, púlsalo con CTRL + click.
+
 ## 👥 Desarrolladores
 
 - Aitana Villate Rodríguez
