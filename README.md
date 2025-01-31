@@ -54,9 +54,9 @@ Devuelve un link a tu localhost, púlsalo con CTRL + click.
 
 ## 👥 Desarrolladores
 
-- Aitana Villate Rodríguez
-- Ángel Manuel Pereira Rodríguez
-- Marta Sánchez Lubián
+- Aitana 
+- Ángel Manuel 
+- Marta
 
 ## 📄 Documentación
 
