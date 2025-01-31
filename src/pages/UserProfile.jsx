@@ -20,6 +20,8 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { brown } from "@mui/material/colors";
 import fotoCambiar from "../assets/margarita.png";
 import Loading from "../components/Loading.jsx";
+import { useFetchErrorStore } from "../config/errorStore.jsx";
+import { useNavigate } from "react-router-dom";
 
 /**
  * @page
@@ -44,6 +46,8 @@ const UserProfile = () => {
 
   const { user, setUser } = useUserStore();
   const { fetch: newFetch } = useAxiosStore();
+  const { setFetchError } = useFetchErrorStore();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const { isDarkMode } = useTheme();
   const [modalNewProjectOpen, setmodalNewProjectOpen] = useState(false);
@@ -96,7 +100,8 @@ const UserProfile = () => {
         setUser(userData);
       }
     } catch (error) {
-      console.error("Error al obtener los datos del usuario:", error);
+      setFetchError("Error al obtener los datos del usuario");
+      navigate("/not-found");
     }
   }
 
@@ -156,7 +161,8 @@ const UserProfile = () => {
         setCompletedProjects(newCompletedProjects);
       }
     } catch (error) {
-      console.error("Error al cargar los proyectos", error);
+      setFetchError("Error al obtener los proyectos");
+      navigate("/not-found");
     } finally {
       setIsLoading(false);
     }
@@ -213,8 +219,6 @@ const UserProfile = () => {
         formData.append("nombre", values.name);
         formData.append("email", values.email);
 
-        console.log(selectedImage);
-
         if (selectedImage.file) {
           formData.append("fotoPerfil", selectedImage.file);
         }
@@ -235,10 +239,7 @@ const UserProfile = () => {
 
         const updatedUser = await response.data;
         setUser(updatedUser);
-        console.log("Perfil actualizado exitosamente:", updatedUser);
       }
-    } catch (error) {
-      console.error("Error al actualizar el perfil:", error);
     } finally {
       setmodalEditProfileOpen(false);
       setIsLoading(false);
@@ -246,7 +247,7 @@ const UserProfile = () => {
   };
 
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
@@ -360,10 +361,7 @@ const UserProfile = () => {
               throw new Error(data.message || "Error al crear el tablero");
             }
 
-            console.log("Tablero creado exitosamente:", data);
             getProjects();
-          } catch (error) {
-            console.error("Error al crear el proyecto:", error);
           } finally {
             setmodalNewProjectOpen(false);
           }

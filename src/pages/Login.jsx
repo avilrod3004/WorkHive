@@ -3,7 +3,6 @@
  * @category Routes
  */
 
-
 import React from "react";
 import { Formik } from "formik";
 import { useUserStore } from "../config/userStore";
@@ -16,11 +15,11 @@ import { useTheme } from "../context/ThemeContext";
 /**
  * @page
  * Componente Login
- * 
+ *
  * Este componente renderiza un formulario de inicio de sesión.
  * Utiliza Formik para el manejo del estado del formulario, Zustand para el manejo del estado global del usuario,
  * y un hook personalizado para las peticiones HTTP.
- * 
+ *
  * @returns {JSX.Element} Formulario de inicio de sesión
  */
 const Login = () => {
@@ -31,7 +30,7 @@ const Login = () => {
 
   /**
    * Función que se ejecuta al enviar el formulario de inicio de sesión
-   * 
+   *
    * @param {Object} values - Valores del formulario
    * @param {string} values.email - Email del usuario
    * @param {string} values.password - Contraseña del usuario
@@ -74,8 +73,6 @@ const Login = () => {
           "El servidor no se encuentra operativo en estos momentos, inténtelo más tarde..."
         );
       }
-
-      console.error(error.message);
       setSubmitting(false);
     }
   };
