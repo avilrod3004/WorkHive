@@ -29,4 +29,4 @@ WorkHive es una herramienta digital para organizar, crear y colaborar en proyect
 
 ## 📄 Documentación
 
-Consulta nuestra documentación completa generada con JSDoc [aquí](./docs/index.html)
+Consulta nuestra documentación completa generada con JSDoc [aquí](https://avilrod3004.github.io/WorkHive/docs)
