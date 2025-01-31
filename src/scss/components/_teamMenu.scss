@@ -12,6 +12,7 @@
   padding: 0.5rem;
   gap: 1rem;
   position: relative;
+  cursor: pointer;
 }
 
 .menu__titulo {
@@ -22,7 +23,6 @@
 
 .menu__icono {
   color: var(--black-text);
-  cursor: pointer;
 }
 
 .menu__tabla {

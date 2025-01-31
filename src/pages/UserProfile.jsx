@@ -336,6 +336,7 @@ const UserProfile = () => {
         validationSchema={validationSchemaNewProject}
         onSubmit={async (values) => {
           try {
+            setIsLoading(true);
             const body = {
               nombre: values.name,
               descripcion: values.description,
@@ -364,6 +365,7 @@ const UserProfile = () => {
             getProjects();
           } finally {
             setmodalNewProjectOpen(false);
+            setIsLoading(false);
           }
         }}
         title="Añadir proyecto"
