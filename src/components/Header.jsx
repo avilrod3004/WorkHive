@@ -43,42 +43,45 @@ const Header = () => {
       <NavLink to="/" className="header__titulo">
         workhive
       </NavLink>
-      <ul className="header__menu">
-        {!user && (
-          <li className="menu__opcion">
-            <NavLink to="/auth/login" onClick={() => setError(null)}>
-              Iniciar sesión
-            </NavLink>
-          </li>
-        )}
-        {user && (
-          <li className="menu__opcion">
-            <NavLink to="/usuario">Usuario</NavLink>
-          </li>
-        )}
-        {!user && (
-          <li className="menu__opcion">
-            <NavLink to="/auth/register" onClick={() => setError(null)}>
-              Registrarse
-            </NavLink>
-          </li>
-        )}
-        {user && (
-          <li className="menu__opcion">
-            <NavLink onClick={handleLogout} to="/auth/login">
-              Cerrar sesión
-            </NavLink>
-          </li>
-        )}
-      </ul>
-      <div
-        onClick={toggleTheme}
-        className={`theme-icon ${
-          isDarkMode ? "theme-icon--dark" : "theme-icon--light"
-        }`}
-      >
-        {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+      <div className="contenedor__header">
+        <ul className="header__menu">
+          {!user && (
+            <li className="menu__opcion">
+              <NavLink to="/auth/login" onClick={() => setError(null)}>
+                Iniciar sesión
+              </NavLink>
+            </li>
+          )}
+          {user && (
+            <li className="menu__opcion">
+              <NavLink to="/usuario">Usuario</NavLink>
+            </li>
+          )}
+          {!user && (
+            <li className="menu__opcion">
+              <NavLink to="/auth/register" onClick={() => setError(null)}>
+                Registrarse
+              </NavLink>
+            </li>
+          )}
+          {user && (
+            <li className="menu__opcion">
+              <NavLink onClick={handleLogout} to="/auth/login">
+                Cerrar sesión
+              </NavLink>
+            </li>
+          )}
+        </ul>
+        <div
+          onClick={toggleTheme}
+          className={`theme-icon ${
+            isDarkMode ? "theme-icon--dark" : "theme-icon--light"
+          }`}
+        >
+          {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+        </div>
       </div>
+      
     </header>
   );
 };
