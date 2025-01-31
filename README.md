@@ -52,11 +52,6 @@ npm run dev
 
 Devuelve un link a tu localhost, púlsalo con CTRL + click.
 
-## 👥 Desarrolladores
-
-- Aitana 
-- Ángel Manuel 
-- Marta
 
 ## 📄 Documentación
 
