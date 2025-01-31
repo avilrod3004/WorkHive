@@ -181,14 +181,12 @@ const TaskInfo = () => {
           <ul className="comentarios__lista">
             {task.comentarios.slice().reverse().map((comentario) => (
               <li key={comentario._id} className="lista__item">
-                <article className="item__section">
-                  <h1 className="section__titulo">{comentario.usuario}</h1>
-                  <p className="section__mensaje">{comentario.mensaje}</p>
-                  <p className="section__fecha">
+                  <h1 className="item__titulo">{comentario.usuario}</h1>
+                  <p className="item__mensaje">{comentario.mensaje}</p>
+                  <p className="item__fecha">
                     {new Date(comentario.fecha).toLocaleDateString()}{" "}
                     {new Date(comentario.fecha).toLocaleTimeString()}
                   </p>
-                </article>
               </li>
             ))}
           </ul>
