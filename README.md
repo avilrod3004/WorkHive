@@ -59,3 +59,5 @@ Para poder ver el proyecto desplegado en producción accede a la página [https:
 ## 📄 Documentación
 
 Consulta nuestra documentación completa generada con JSDoc [aquí](https://avilrod3004.github.io/WorkHive/docs)
+
+También puedes consultar [la guia de usuario](https://github.com/avilrod3004/WorkHive/wiki/Gu%C3%ADa-de-usuario) para disfrutar al máximo de WorkHive.
