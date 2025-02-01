@@ -52,6 +52,9 @@ npm run dev
 
 Devuelve un link a tu localhost, púlsalo con CTRL + click.
 
+### Producción
+
+Para poder ver el proyecto desplegado en producción accede a la página [https://workhive-ama.netlify.app/](https://workhive-ama.netlify.app/)
 
 ## 📄 Documentación
 
