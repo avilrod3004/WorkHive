@@ -14,11 +14,10 @@ import { Helmet } from "react-helmet";
  * @page
  * Home Component
  *
- * Este componente representa la página de inicio de la aplicación WorkHive.
- * Muestra el menu de navegación, logo y eslogan y
- * una sección con tres artículos que describen las características principales.
+ * Página de inicio de WorkHive, una plataforma de gestión de proyectos colaborativos.
+ * Aquí se presentan las principales funcionalidades para optimizar la productividad y el trabajo en equipo.
  *
- * @return {JSX.Element} Página de inicio de la aplicación WorkHive.
+ * @return {JSX.Element} Página de inicio optimizada para SEO.
  */
 const Home = () => {
   const { isDarkMode } = useTheme();
@@ -26,47 +25,67 @@ const Home = () => {
   return (
     <div className="contenedor__home">
       <Helmet>
-        <title>WorkHive - Home</title>
+        <title>WorkHive - Gestión de Proyectos y Productividad</title>
         <meta
           name="description"
-          content="WorkHive, la herramienta para organizar y controlar tus proyectos"
+          content="Aumenta la productividad y mejora la colaboración con WorkHive, la plataforma ideal para gestionar proyectos en equipo de forma eficiente."
+        />
+        <meta
+          name="keywords"
+          content="gestión de proyectos, productividad, colaboración en equipo, planificación, organización de tareas, éxito empresarial"
         />
       </Helmet>
       <section className="home__logo">
         <img
           className="logo__imagen"
           src={isDarkMode ? logoDark : logo}
-          alt="logoWH"
+          alt="Logo de WorkHive - Plataforma de gestión de proyectos"
         />
-        <h3 className="logo__frase">Organiza,colabora y controla tu éxito</h3>
+        <h3 className="logo__frase">
+          Organiza, colabora y alcanza el éxito en tus proyectos
+        </h3>
       </section>
       <section className="home__frases">
         <article className="frases__eslogan">
-          <img className="eslogan__imagen" src={organiza} alt="organiza" />
+          <img
+            className="eslogan__imagen"
+            src={organiza}
+            alt="Organiza tus proyectos con eficiencia"
+          />
           <div className="eslogan__frase">
-            <h1 className="frase__titulo">ORGANIZA</h1>
+            <h1 className="frase__titulo">ORGANIZA TUS PROYECTOS</h1>
             <p className="frase__parrafo">
-              "La clave de un futuro brillante es la organización de tus ideas”
+              Planifica y gestiona cada tarea con precisión. Una organización
+              efectiva es la clave del éxito en cualquier equipo.
             </p>
           </div>
         </article>
         <article className="frases__eslogan1">
-          <img className="eslogan__imagen" src={colabora} alt="colabora" />
+          <img
+            className="eslogan__imagen"
+            src={colabora}
+            alt="Colabora en equipo con WorkHive"
+          />
           <div className="eslogan__frase1">
-            <h1 className="frase__titulo1">COLABORA</h1>
+            <h1 className="frase__titulo1">TRABAJA EN EQUIPO</h1>
             <p className="frase__parrafo1">
-              "El trabajo en equipo transforma sueños individuales en logros
-              colectivos."
+              Fomenta la colaboración y la comunicación en tiempo real. Un
+              equipo bien conectado logra grandes resultados.
             </p>
           </div>
         </article>
         <article className="frases__eslogan">
-          <img className="eslogan__imagen" src={exito} alt="exito" />
+          <img
+            className="eslogan__imagen"
+            src={exito}
+            alt="Alcanza el éxito con una gestión eficiente"
+          />
           <div className="eslogan__frase">
-            <h1 className="frase__titulo">ÉXITO</h1>
+            <h1 className="frase__titulo">ALCANZA EL ÉXITO</h1>
             <p className="frase__parrafo">
-              "El éxito no es solo un destino, sino el resultado de la
-              dedicación y la estrategia."
+              Con herramientas avanzadas de planificación y seguimiento, lleva
+              tus proyectos al siguiente nivel y obtén resultados
+              extraordinarios.
             </p>
           </div>
         </article>
