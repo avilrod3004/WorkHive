@@ -3,7 +3,7 @@
  * @category UI
  */
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 /**
  * Componente Panel que muestra el nombre de tarea o proyecto como contenido.
@@ -16,14 +16,23 @@ import { NavLink } from "react-router-dom";
  * @returns {JSX.Element} Componente Panel renderizado
  */
 const PanelTarea = ({ name, type, id , tareaId}) => {
-  return (
-    <div className={`panelTask__${type}`}>
-      <div className="inside">
+    const navigate = useNavigate();
 
-          <NavLink to={`/usuario/tablero/${id}/tarea/${tareaId}`}>
-              <div className="panelTask__content">{name}</div>
-          </NavLink>
-      </div>
+    return (
+    <div tabIndex="0"
+         onKeyDown={(evento) => {
+             if(evento.key === 'Enter')
+                 navigate(`/usuario/tablero/${id}/tarea/${tareaId}`)
+         }}
+         className="panelTask__tabIndex">
+        <div className={`panelTask__${type}`}>
+            <div className="inside">
+
+                <NavLink to={`/usuario/tablero/${id}/tarea/${tareaId}`} tabIndex="-1">
+                    <div className="panelTask__content">{name}</div>
+                </NavLink>
+            </div>
+        </div>
     </div>
   );
 };

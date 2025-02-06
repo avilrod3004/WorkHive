@@ -91,6 +91,7 @@ const ContactUs = () => {
                   Nombre *
                   <input
                     type="text"
+                    id="name"
                     name="name"
                     value={values.name}
                     onBlur={handleBlur}
@@ -108,6 +109,7 @@ const ContactUs = () => {
                   Email *
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     value={values.email}
                     onBlur={handleBlur}
@@ -125,6 +127,7 @@ const ContactUs = () => {
                   Asunto *
                   <input
                     type="text"
+                    id="subject"
                     name="subject"
                     value={values.subject}
                     onBlur={handleBlur}
@@ -160,6 +163,7 @@ const ContactUs = () => {
                 <label htmlFor="accept" className="formulario__label-checkbox">
                   <input
                     type="checkbox"
+                    id="accept"
                     name="accept"
                     checked={values.accept}
                     onBlur={handleBlur}

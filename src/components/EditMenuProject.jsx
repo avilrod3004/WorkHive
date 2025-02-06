@@ -184,6 +184,7 @@ const EditMenuProject = ({
                 Nombre tarea
                 <input
                   type="text"
+                  id="name"
                   name="name"
                   value={values.name}
                   onChange={handleChange}
@@ -249,6 +250,7 @@ const EditMenuProject = ({
                 Fecha limite
                 <input
                   type="date"
+                  id="dateEnd"
                   name="dateEnd"
                   value={values.dateEnd}
                   onChange={handleChange}
@@ -264,6 +266,7 @@ const EditMenuProject = ({
                 Descripción
                 <textarea
                   name="description"
+                  id="description"
                   value={values.description}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -321,6 +324,7 @@ const EditMenuProject = ({
                 Email
                 <input
                   type="text"
+                  id="email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
@@ -380,6 +384,7 @@ const EditMenuProject = ({
                 Nombre proyecto
                 <input
                   type="text"
+                  id="name"
                   name="name"
                   value={values.name}
                   onChange={handleChange}
@@ -395,6 +400,7 @@ const EditMenuProject = ({
                 Fecha inicio
                 <input
                   type="date"
+                  id="dateIni"
                   name="dateIni"
                   value={values.dateIni}
                   onChange={handleChange}
@@ -410,6 +416,7 @@ const EditMenuProject = ({
                 Fecha fin
                 <input
                   type="date"
+                  id="dateEnd"
                   name="dateEnd"
                   value={values.dateEnd}
                   onChange={handleChange}
@@ -424,6 +431,7 @@ const EditMenuProject = ({
               <label htmlFor="description" className="formulario__label">
                 Descripción
                 <textarea
+                  id="description"
                   name="description"
                   value={values.description}
                   onChange={handleChange}
@@ -459,45 +467,3 @@ const EditMenuProject = ({
 
 export default EditMenuProject;
 
-/**
- * Ejemplo de uso del componente EditMenuProject:
- *
- * import React from 'react'
- * import EditMenuProject from './EditMenuProject'
- *
- * const App = () => {
- *   const handleAddProject = (id) => {
- *     console.log(`Añadir proyecto ${id}`);
- *     // Lógica para añadir proyecto
- *   }
- *
- *   const handleAddPerson = (id) => {
- *     console.log(`Añadir persona al proyecto ${id}`);
- *     // Lógica para añadir persona
- *   }
- *
- *   const handleEditProject = (id) => {
- *     console.log(`Editar proyecto ${id}`);
- *     // Lógica para editar proyecto
- *   }
- *
- *   const handleDeleteProject = (id) => {
- *     console.log(`Eliminar proyecto ${id}`);
- *     // Lógica para eliminar proyecto
- *   }
- *
- *   return (
- *     <div>
- *       <EditMenuProject
- *         id="proyecto1"
- *         onAddProject={handleAddProject}
- *         onAddPerson={handleAddPerson}
- *         onEditProject={handleEditProject}
- *         onDeleteProject={handleDeleteProject}
- *       />
- *     </div>
- *   )
- * }
- *
- * export default App
- */

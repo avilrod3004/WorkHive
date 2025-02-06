@@ -167,6 +167,7 @@ const Register = () => {
                     Nombre de usuario
                     <input
                       type="text"
+                      id="nombre"
                       name="nombre"
                       value={values.nombre}
                       onBlur={handleBlur}
@@ -182,6 +183,7 @@ const Register = () => {
                     Email
                     <input
                       type="email"
+                      id="email"
                       name="email"
                       value={values.email}
                       onBlur={handleBlur}
@@ -197,6 +199,7 @@ const Register = () => {
                     Contraseña
                     <input
                       type="password"
+                      id="password"
                       name="password"
                       value={values.password}
                       onBlur={handleBlur}
@@ -212,6 +215,7 @@ const Register = () => {
                     Repetir contraseña
                     <input
                       type="password"
+                      id="repeatPassword"
                       name="repeatPassword"
                       value={values.repeatPassword}
                       onBlur={handleBlur}

@@ -72,14 +72,20 @@ const Header = () => {
             </li>
           )}
         </ul>
-        <div
+        <button
           onClick={toggleTheme}
+          onKeyDown={(evento) => {
+            if(evento.key === 'Enter')
+              toggleTheme()
+          }}
           className={`theme-icon ${
             isDarkMode ? "theme-icon--dark" : "theme-icon--light"
           }`}
+          tabIndex="0"
+          role="button"
         >
           {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-        </div>
+        </button>
       </div>
       
     </header>

@@ -128,6 +128,7 @@ const Login = () => {
                     Email
                     <input
                       type="text"
+                      id="email"
                       name="email"
                       value={values.email}
                       onChange={handleChange}
@@ -143,6 +144,7 @@ const Login = () => {
                     Contraseña
                     <input
                       type="password"
+                      id="password"
                       name="password"
                       value={values.password}
                       onChange={handleChange}

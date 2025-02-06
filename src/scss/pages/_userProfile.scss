@@ -16,16 +16,18 @@
     border-bottom: 1px solid var(--icono-menu);
 }
 
-.lista__opcion {
+
+button {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+    background-color: var(--fondo-color);
     @include middle-text(600);
     color: var(--black-text);
     padding: 2rem;
-}
-
-a {
-    display:flex;
-    justify-content: space-around;
-    gap: 1rem;
+    cursor: pointer;
 }
 
 
