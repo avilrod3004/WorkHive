@@ -255,7 +255,7 @@ const UserProfile = () => {
       <nav className="menu__usuario">
         <ul className="usuario__lista">
           <li className="lista__opcion">
-            <a href="#" onClick={() => setmodalNewProjectOpen(true)}>
+            <button href="#" onClick={() => setmodalNewProjectOpen(true)}>
               <AddIcon
                 sx={{
                   "&:hover": {
@@ -266,10 +266,10 @@ const UserProfile = () => {
                 }}
               />
               CREAR NUEVO PROYECTO
-            </a>
+            </button>
           </li>
           <li className="lista__opcion">
-            <a href="#" onClick={() => setmodalEditProfileOpen(true)}>
+            <button href="#" onClick={() => setmodalEditProfileOpen(true)}>
               <SettingsIcon
                 sx={{
                   "&:hover": {
@@ -280,7 +280,7 @@ const UserProfile = () => {
                 }}
               />
               CONFIGURACIÓN USUARIO
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
@@ -376,6 +376,7 @@ const UserProfile = () => {
               Nombre proyecto
               <input
                 type="text"
+                id="name"
                 name="name"
                 value={values.name}
                 onChange={handleChange}
@@ -391,6 +392,7 @@ const UserProfile = () => {
               Fecha inicio
               <input
                 type="date"
+                id="dateIni"
                 name="dateIni"
                 value={values.dateIni}
                 onChange={handleChange}
@@ -406,6 +408,7 @@ const UserProfile = () => {
               Fecha fin
               <input
                 type="date"
+                id="dateEnd"
                 name="dateEnd"
                 value={values.dateEnd}
                 onChange={handleChange}
@@ -420,6 +423,7 @@ const UserProfile = () => {
             <label htmlFor="description" className="formulario__label">
               Descripción
               <textarea
+                id="description"
                 name="description"
                 value={values.description}
                 onChange={handleChange}
@@ -472,6 +476,7 @@ const UserProfile = () => {
               Nombre
               <input
                 type="text"
+                id="name"
                 name="name"
                 value={values.name}
                 onChange={handleChange}
@@ -487,6 +492,7 @@ const UserProfile = () => {
               Email
               <input
                 type="text"
+                id="email"
                 name="email"
                 value={values.email}
                 onChange={handleChange}

@@ -72,14 +72,14 @@ const Header = () => {
             </li>
           )}
         </ul>
-        <div
+        <button
           onClick={toggleTheme}
           className={`theme-icon ${
             isDarkMode ? "theme-icon--dark" : "theme-icon--light"
           }`}
         >
           {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-        </div>
+        </button>
       </div>
       
     </header>

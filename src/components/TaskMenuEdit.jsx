@@ -113,6 +113,7 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
                 Nombre tarea
                 <input
                   type="text"
+                  id="name"
                   name="name"
                   value={values.name}
                   onChange={handleChange}
@@ -187,6 +188,7 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
                 Fecha limite
                 <input
                   type="date"
+                  id="dateEnd"
                   name="dateEnd"
                   value={values.dateEnd}
                   onChange={handleChange}
@@ -201,6 +203,7 @@ const TaskMenuEdit = ({ onEditTask, onDeleteTask, id }) => {
               <label htmlFor="description" className="formulario__label">
                 Descripción
                 <textarea
+                  id="description"
                   name="description"
                   value={values.description}
                   onChange={handleChange}

@@ -398,13 +398,13 @@ const TaskInfo = () => {
           </ul>
           <article className="item__agregar">
             <p className="agregar__titulo">Agregar comentario</p>
-            <a
+            <button
               className="agregar__enlace"
               href="#"
               onClick={() => setModalCommentOpen(true)}
             >
               <AddIcon />
-            </a>
+            </button>
           </article>
         </section>
 
@@ -461,6 +461,7 @@ const TaskInfo = () => {
                 Comentario
                 <textarea
                   name="message"
+                  id="message"
                   value={values.message}
                   onChange={handleChange}
                   onBlur={handleBlur}
