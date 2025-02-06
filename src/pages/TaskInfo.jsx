@@ -255,12 +255,14 @@ const TaskInfo = () => {
           <meta name="description" content={task.descripcion} />
         </Helmet>
         <header className="info__header">
-          <img
-            className="header__image"
-            src={isDarkMode ? beeDark : bee}
-            alt="Logo de WorkHive"
-          />
-          <h1 className="header-proyecto__titulo">{task.nombre}</h1>
+          <div className="header__titulo">
+            <img
+              className="header__image"
+              src={isDarkMode ? beeDark : bee}
+              alt="Logo de WorkHive"
+            />
+            <h1 className="header-proyecto__titulo">{task.nombre}</h1>
+          </div>
           <MenuTask
             id={idTarea}
             onEditTask={async (values) => {
