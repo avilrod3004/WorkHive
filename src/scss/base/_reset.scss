@@ -25,9 +25,13 @@ a {
 }
 
 a:hover {
-    color: #9D6F3A;
+    color: var(--link-color);
 }
 
 a:active{
     font-size:clamp(1rem, 1.2vw, 1.5rem)
+}
+
+button:hover {
+    color: var(--buttom-color);
 }
