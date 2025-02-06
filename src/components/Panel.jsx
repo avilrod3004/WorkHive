@@ -19,7 +19,12 @@ const Panel = ({ name, type, id }) => {
     const navigate = useNavigate();
 
   return (
-    <div tabIndex="0" onKeyDown={() => navigate(`/usuario/tablero/${id}`)} className="panel__tabIndex">
+    <div tabIndex="0"
+         onKeyDown={(evento) => {
+             if(evento.key === 'Enter')
+                navigate(`/usuario/tablero/${id}`)
+         }}
+         className="panel__tabIndex">
         <div className={`panel__${type}`}>
             <div className="inside">
 

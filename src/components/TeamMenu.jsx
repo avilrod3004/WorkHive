@@ -22,7 +22,13 @@ const TeamMenu = ({ teamMembers }) => {
 
   return (
     <div className="team__menu">
-      <div className="menu__header" onClick={toggleMenu} tabIndex="0" onKeyDown={toggleMenu}>
+      <div className="menu__header"
+           onClick={toggleMenu}
+           tabIndex="0"
+           onKeyDown={(evento) => {
+             if(evento.key === 'Enter')
+               toggleMenu()
+           }}>
         <h2 className="menu__titulo">EQUIPO</h2>
         <KeyboardArrowDownIcon className="menu__icono" />
       </div>
