@@ -52,6 +52,7 @@ const FormUserProfile = () => {
                                 Nombre:
                                 <input
                                     type="text"
+                                    id='name'
                                     name="name"
                                     value={values.name}
                                     onBlur={handleBlur}
@@ -66,6 +67,7 @@ const FormUserProfile = () => {
                                 Email:
                                 <input
                                     type="email"
+                                    id='email'
                                     name="email"
                                     value={values.email}
                                     onBlur={handleBlur}
