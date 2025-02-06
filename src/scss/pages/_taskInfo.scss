@@ -7,6 +7,11 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.header__titulo {
+    display:flex;
+    flex-direction: row;
+    gap:2rem;
+}
 
 .header__tittle {
     display: flex;
@@ -130,7 +135,7 @@
 }
 
 button {
-    background-color: var(--primary-color);
+    background-color: var(--fondo-color);
     border: none;
 }
 
