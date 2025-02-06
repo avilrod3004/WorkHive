@@ -19,7 +19,7 @@ const PanelTarea = ({ name, type, id , tareaId}) => {
     const navigate = useNavigate();
 
     return (
-    <div tabIndex="0" onKeyPress={() => navigate(`/usuario/tablero/${id}/tarea/${tareaId}`)}>
+    <div tabIndex="0" onKeyDown={() => navigate(`/usuario/tablero/${id}/tarea/${tareaId}`)}>
         <div className={`panelTask__${type}`}>
             <div className="inside">
 

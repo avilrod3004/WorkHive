@@ -74,7 +74,7 @@ const Header = () => {
         </ul>
         <div
           onClick={toggleTheme}
-          onKeyPress={toggleTheme}
+          onKeyDown={toggleTheme}
           className={`theme-icon ${
             isDarkMode ? "theme-icon--dark" : "theme-icon--light"
           }`}
