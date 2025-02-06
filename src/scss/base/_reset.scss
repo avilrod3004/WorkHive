@@ -24,6 +24,11 @@ a {
     color: var(--black-text);
 }
 
+button {
+    @include middle-text(200);
+    color: var(--black-text);
+}
+
 a:hover {
     color: var(--link-color);
 }
