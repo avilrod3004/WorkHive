@@ -18,6 +18,7 @@ import { useAddCollaboratorStore } from "../config/addCollaboratorStore";
 import Loading from "../components/Loading.jsx";
 import { useAddTaskStore } from "../config/addTaskStore";
 import { useFetchErrorStore } from "../config/errorStore.jsx";
+import { Helmet } from "react-helmet";
 
 /**
  * @page
@@ -206,6 +207,10 @@ const ProyectInfo = () => {
   return (
     project && (
       <div className="contenedor__info">
+        <Helmet>
+          <title>WorkHive - {project.nombre}</title>
+          <meta name="description" content={project.descripcion} />
+        </Helmet>
         <header className="info__header">
           <div className="contenedor__image">
             <img

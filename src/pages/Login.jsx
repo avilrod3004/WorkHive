@@ -11,6 +11,7 @@ import LogoWorkHive from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import logoDark from "../assets/logodark.png";
 import { useTheme } from "../context/ThemeContext";
+import { Helmet } from "react-helmet";
 
 /**
  * @page
@@ -80,6 +81,13 @@ const Login = () => {
   return (
     <>
       <main className="formulario-cuenta">
+        <Helmet>
+          <title>WorkHive - Inicio de sesión</title>
+          <meta
+            name="description"
+            content="Página de inicio de sesión de WorkHive"
+          />
+        </Helmet>
         <aside className="formulario-cuenta__lateral">
           <img
             src={isDarkMode ? logoDark : LogoWorkHive}

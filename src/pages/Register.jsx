@@ -12,6 +12,7 @@ import LogoWorkHive from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import logoDark from "../assets/logodark.png";
 import { useTheme } from "../context/ThemeContext";
+import { Helmet } from "react-helmet";
 
 /**
  * @page
@@ -120,6 +121,9 @@ const Register = () => {
   return (
     <>
       <main className="formulario-cuenta">
+        <Helmet>
+          <title>WorkHive - Registro</title>
+        </Helmet>
         <aside className="formulario-cuenta__lateral">
           <img
             src={isDarkMode ? logoDark : LogoWorkHive}
