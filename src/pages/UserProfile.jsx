@@ -260,7 +260,7 @@ const UserProfile = () => {
       <nav className="menu__usuario">
         <ul className="usuario__lista">
           <li className="lista__opcion">
-            <button href="#" onClick={() => setmodalNewProjectOpen(true)}>
+            <button className='opcion__button' href="#" onClick={() => setmodalNewProjectOpen(true)}>
               <AddIcon
                 sx={{
                   "&:hover": {
@@ -274,7 +274,7 @@ const UserProfile = () => {
             </button>
           </li>
           <li className="lista__opcion">
-            <button href="#" onClick={() => setmodalEditProfileOpen(true)}>
+            <button className='opcion__button' href="#" onClick={() => setmodalEditProfileOpen(true)}>
               <SettingsIcon
                 sx={{
                   "&:hover": {

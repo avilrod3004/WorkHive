@@ -79,6 +79,10 @@ button {
     background-color: var(--fondo-color);
 }
 
+.opcion__button{
+    background-color: var(--fondo-color);
+}
+
 @media (max-width: 900px){
     .contenedor__proyectos{
           flex-direction: column;
