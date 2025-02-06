@@ -7,7 +7,8 @@ import logoDark from "../assets/logoHomeDark.png";
 import organiza from "../assets/home/4.png";
 import colabora from "../assets/home/5.png";
 import exito from "../assets/home/exito.png";
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
+import { Helmet } from "react-helmet";
 
 /**
  * @page
@@ -16,20 +17,26 @@ import { useTheme } from '../context/ThemeContext'
  * Este componente representa la página de inicio de la aplicación WorkHive.
  * Muestra el menu de navegación, logo y eslogan y
  * una sección con tres artículos que describen las características principales.
- * 
+ *
  * @return {JSX.Element} Página de inicio de la aplicación WorkHive.
  */
 const Home = () => {
-
   const { isDarkMode } = useTheme();
 
   return (
     <div className="contenedor__home">
+      <Helmet>
+        <title>WorkHive - Home</title>
+        <meta
+          name="description"
+          content="WorkHive, la herramienta para organizar y controlar tus proyectos"
+        />
+      </Helmet>
       <section className="home__logo">
-        <img 
-          className="logo__imagen" 
-          src={isDarkMode ? logoDark : logo} 
-          alt="logoWH" 
+        <img
+          className="logo__imagen"
+          src={isDarkMode ? logoDark : logo}
+          alt="logoWH"
         />
         <h3 className="logo__frase">Organiza,colabora y controla tu éxito</h3>
       </section>
@@ -58,8 +65,8 @@ const Home = () => {
           <div className="eslogan__frase">
             <h1 className="frase__titulo">ÉXITO</h1>
             <p className="frase__parrafo">
-              "El éxito no es solo un destino, sino el resultado de la dedicación
-              y la estrategia."
+              "El éxito no es solo un destino, sino el resultado de la
+              dedicación y la estrategia."
             </p>
           </div>
         </article>

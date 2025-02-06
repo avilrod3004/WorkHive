@@ -22,6 +22,7 @@ import fotoCambiar from "../assets/margarita.png";
 import Loading from "../components/Loading.jsx";
 import { useFetchErrorStore } from "../config/errorStore.jsx";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 /**
  * @page
@@ -252,6 +253,10 @@ const UserProfile = () => {
 
   return (
     <div className="contenedor__usuario">
+      <Helmet>
+        <title>WorkHive - Mi Perfil</title>
+        <meta name="description" content="Mi Perfil de usuario" />
+      </Helmet>
       <nav className="menu__usuario">
         <ul className="usuario__lista">
           <li className="lista__opcion">

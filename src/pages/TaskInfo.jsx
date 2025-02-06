@@ -20,6 +20,7 @@ import { useProjectStore } from "../config/projectStore";
 import { useUserStore } from "../config/userStore";
 import Loading from "../components/Loading.jsx";
 import { useFetchErrorStore } from "../config/errorStore.jsx";
+import { Helmet } from "react-helmet";
 
 const TaskInfo = () => {
   const { idTarea, idTablero } = useParams(); // `idTarea` para la tarea específica
@@ -249,6 +250,10 @@ const TaskInfo = () => {
   return (
     task && (
       <div className="contenedor__info">
+        <Helmet>
+          <title>WorkHive - Tarea {task.nombre}</title>
+          <meta name="description" content={task.descripcion} />
+        </Helmet>
         <header className="info__header">
           <img
             className="header__image"
