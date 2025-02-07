@@ -330,6 +330,8 @@ const TaskInfo = () => {
                 setLoading(false);
               }
             }}
+            aria-label="Estado de la tarea"
+            aria-describedby="Consultar el estado de la tarea o cambiarlo"
           >
             <option value="pendiente">To Do</option>
             <option value="en_proceso">In Progress</option>
@@ -359,6 +361,8 @@ const TaskInfo = () => {
                 setLoading(false);
               }
             }}
+            aria-label="Prioridad de la tarea"
+            aria-describedby="Consultar la prioridad de la tarea o cambiarlo"
           >
             <option value="alta">Alta</option>
             <option value="media">Media</option>
